@@ -477,7 +477,7 @@
             <div><div class="metric-num" style="color:var(--pass)">12/12</div><div class="metric-label">Cross-browser E2E runs passing</div></div>
             <div><div class="metric-num" style="color:var(--pass)">80/80</div><div class="metric-label">Unit tests in Prakan (AI app)</div></div>
             <div><div class="metric-num">NSC</div><div class="metric-label">2025 national award (game Z.O.O)</div></div>
-            <div><div class="metric-num" style="color:var(--accent)">6</div><div class="metric-label">Competitions &amp; game jams since 2025</div></div>
+            <div><div class="metric-num" style="color:var(--accent)">7</div><div class="metric-label">Competitions &amp; game jams since 2025</div></div>
           </div>
         </div>
 
@@ -651,7 +651,8 @@
               <span class="ev-score" style="color:var(--ink)">3<small>games on itch.io</small></span>
             </div>
             <h3>Playtesting the games I ship</h3>
-            <div class="sub">Unity / C# · Z.O.O, Dream Frogs Hunt, GamejamX</div>
+            <div class="sub">Unity / C# · Z.O.O, Dream Frogs Hunt, Try not to chip!</div>
+            <img src="assets/projects/try-not-to-chip-unity-test.jpg" alt="Testing a fire-grill trap inside the Unity editor for Try not to chip!" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:16/9;object-fit:cover;width:100%" />
             <ul class="checks">
               <li>Built separate test scenes (<code>Player Test</code>, <code>Trap test</code>) to check each mechanic in isolation before merging it into the main level.</li>
               <li>Released early builds on itch.io to get feedback from real players, not just the team.</li>
@@ -683,11 +684,11 @@
               <span class="ev-score" style="color:var(--ink)">3:02 → 2:36<small>walk time</small></span>
             </div>
             <h3>Obstacle alert for visually impaired people</h3>
-            <div class="sub">ESP32 + IR distance + motion sensor · my role: system testing &amp; sensor tuning</div>
+            <div class="sub">ESP32 + IR distance + motion sensor · team project · my role: soldering, assembly &amp; presenting the results</div>
             <ul class="checks">
-              <li>Tested still and moving objects at 25, 50, 75 and 100 cm.</li>
-              <li>Found the limit: nothing past 100 cm, traced to the ADC threshold (500) in code.</li>
-              <li>Ran a blindfolded walk on an unknown route: cane only 3:02, cane + device 2:36.</li>
+              <li>Our team tested still and moving objects at 25, 50, 75 and 100 cm.</li>
+              <li>Found the limit: nothing past 100 cm, traced to the ADC threshold (500) in the code.</li>
+              <li>Blindfolded walk on an unknown route: cane only 3:02, cane + device 2:36. I presented these results to the judges.</li>
               <li>Wrote down the known gaps: fast objects can be missed, and the device can't detect steps or level changes.</li>
             </ul>
             <div class="ev-foot">Measure → find the limit → document it</div>
@@ -820,6 +821,15 @@
             <ul>
               <li><b>Dream Frogs Hunt</b>: I built the enemy wave spawner that scales with difficulty.</li>
               <li>We reworked gameplay, UI and code structure in a second version based on player feedback.</li>
+            </ul>
+          </article>
+
+          <article class="card exp reveal">
+            <div class="exp-top"><span class="tag tag-gray">72-hour game jam</span><span class="mono c-mute">2026</span></div>
+            <div><h3>Hamster Hub GameJam X</h3><div class="org">Theme: “Hot, Chapter of the Lost Ship” · team of 5 · developer</div></div>
+            <ul>
+              <li><b>Try not to chip!</b>: a 3D third-person obby where you steer a potato man out of a crisp factory before it becomes chips.</li>
+              <li>Top committer on the team repo (44 commits). Traps were built and checked in separate test scenes, then the game was released on itch.io.</li>
             </ul>
           </article>
         </div>
@@ -976,6 +986,7 @@
       visibility: 'NSC 2025 award',
       description: '3D investigation RPG where villagers answer you through the ChatGPT API. I led the team and built the player controller, the camera and the NPC data model.',
       tags: ['Unity', 'C#', 'ChatGPT API'],
+      image: 'assets/projects/zoo-cover.jpg',
       links: [{ label: 'Play on itch.io', href: 'https://1jjjay.itch.io/zoo', primary: true }],
     },
     {
@@ -984,7 +995,29 @@
       visibility: 'Game jam → v2',
       description: 'Built in 48 hours at Nuutor Cup, then reworked from player feedback. I wrote the enemy wave spawning system.',
       tags: ['Unity', 'C#', 'Wave spawner'],
+      image: 'assets/projects/dream-frogs-hunt-cover.jpg',
       links: [{ label: 'Play on itch.io', href: 'https://phonlakitz.itch.io/dream-frogs-hunt', primary: true }],
+    },
+    {
+      title: 'Try not to chip!',
+      category: 'games',
+      visibility: 'GameJam X · 72 h',
+      description: 'A 3D third-person obby: guide a walking pile of potatoes out of a crisp factory, past grills and crushers, before you are turned into chips.',
+      tags: ['Unity', 'C#', '3D obby'],
+      image: 'assets/projects/try-not-to-chip-cover.jpg',
+      links: [
+        { label: 'Play on itch.io', href: 'https://prapathomsit123.itch.io/try-not-to-chip', primary: true },
+        { label: 'Watch clip', href: 'https://www.tiktok.com/@alittledeveloper/video/7633425075022187777' },
+      ],
+    },
+    {
+      title: 'CENTORIS',
+      category: 'games',
+      visibility: 'In development',
+      description: '2D platformer: an alien courier must deliver an energy core across planets full of random traps. Started at a game camp with a team of two, and still in development.',
+      tags: ['Unity', 'C#', '2D platformer'],
+      image: 'assets/projects/centoris-cover.jpg',
+      links: [{ label: 'Watch clip', href: 'https://www.tiktok.com/@alittledeveloper/video/7584871320115006721', primary: true }],
     },
     {
       title: 'JOBSY',
@@ -1017,8 +1050,8 @@
       title: 'Obstacle alert for the visually impaired',
       category: 'hw',
       visibility: 'School project',
-      description: 'ESP32 with distance and motion sensors that beeps before obstacles. I tested and tuned the sensors, found the 100 cm detection limit and measured walk times.',
-      tags: ['ESP32', 'Sensors', 'Test & calibration'],
+      description: 'ESP32 with distance and motion sensors that beeps before obstacles. I soldered and assembled the hardware and presented the team\'s test results.',
+      tags: ['ESP32', 'Soldering', 'Sensors'],
       links: [{ label: 'Test results', href: '#testing', primary: true }],
     },
     {
