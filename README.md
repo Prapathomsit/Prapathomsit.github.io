@@ -2,6 +2,8 @@
 
 **Live site → https://prapathomsit.github.io**
 
+Year-1 CEDT student at Chulalongkorn University, applying for a QA Automation Tester internship.
+
 I built this site with an AI coding assistant (Claude Code). The AI wrote most of the code. My part was the QA part: deciding what "correct" means, then proving it.
 
 ## Why this matters for a QA role
@@ -10,6 +12,12 @@ I built this site with an AI coding assistant (Claude Code). The AI wrote most o
 - **The screenshots are reproduced, not mocked up.** Playwright scripts captured all four images from the real systems. One of them is a live reproduction of the TC-03 checkout bug.
 - **Tested like a release.** Checked with Playwright on desktop and on a 390 px phone screen: no JavaScript errors, no horizontal overflow, and every link works. The checks were run again on the live URL after deploying.
 - **AI makes the work faster. Testing keeps it honest.** That is how I'd use AI on a QA team: build quickly, then verify everything.
+
+## What's on the site
+
+- **Featured:** a Playwright + TypeScript E2E suite with CI and a live Google Sheets report
+- **How I test:** 80/80 unit tests in Prakan (AI incident-report app, Biztania 2026), database permission tests for its officer portal, and a negative test plan for a pilot
+- **Competitions:** NSC 2025 national award (Z.O.O), Biztania 2026 finalist, JUMP Thailand Hackathon 2026, UniHack 2026, KMITL Game Jam (top 20 of 300+), Nuutor Cup
 
 ## Featured project
 

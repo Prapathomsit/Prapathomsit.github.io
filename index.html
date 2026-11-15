@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prapathomsit Attapakkanon · QA Automation & Software Engineering</title>
-  <meta name="description" content="Chulalongkorn University engineering student building Playwright + TypeScript test automation, CI/CD pipelines and live test reporting. Open to QA Automation / SWE internships." />
+  <title>Prapathomsit Attapakkanon · QA Automation Tester</title>
+  <meta name="description" content="Year-1 CEDT student at Chulalongkorn University. Playwright + TypeScript test automation, CI/CD reporting, and tested projects from national competitions. Open to a QA Automation Tester internship." />
   <meta name="theme-color" content="#FFFFFF" />
 
   <!-- Social preview (LinkedIn / Line / Facebook). After deploying, change og:url to your real URL. -->
@@ -361,6 +361,26 @@
     .footer-bar nav { display: flex; flex-wrap: wrap; gap: 20px; }
     .footer-bar a:hover { color: var(--ink); }
 
+    /* ---------- testing evidence ---------- */
+    .name-th { font-size: 17px; color: var(--subtle); margin: 8px 0 0; font-weight: 500; }
+    .ev-grid { display: grid; gap: 20px; }
+    @media (min-width: 900px) { .ev-grid { grid-template-columns: repeat(2, 1fr); } }
+    .ev { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .ev-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .ev h3 { font-family: var(--font-display); font-size: 18px; margin: 0; letter-spacing: -.01em; }
+    .ev .sub { font-size: 13px; color: var(--subtle); margin-top: -6px; }
+    .ev p { margin: 0; font-size: 14px; color: var(--muted); }
+    .ev-score { font-family: var(--font-display); font-weight: 800; font-size: 26px; color: var(--pass); line-height: 1; }
+    .ev-score small { font-family: var(--font-sans); font-size: 12px; font-weight: 500; color: var(--subtle); margin-left: 6px; }
+    .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+    .checks li { position: relative; padding-left: 24px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+    .checks li::before { content: ''; position: absolute; left: 0; top: 3px; width: 15px; height: 15px; border-radius: 50%; background: var(--pass-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23059669' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5 10 16.5 18 8'/%3E%3C/svg%3E") center / 11px no-repeat; border: 1px solid var(--pass-line); }
+    .checks code { font-family: var(--font-mono); font-size: 12px; background: var(--surface); padding: 1px 5px; border-radius: 4px; color: var(--ink); }
+    .ev-foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--subtle); font-family: var(--font-mono); }
+    .exp-grid.three { grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .exp-grid.three { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1040px) { .exp-grid.three { grid-template-columns: repeat(3, 1fr); } }
+
     /* ---------- lightbox ---------- */
     dialog.lightbox { border: 0; padding: 0; background: transparent; max-width: min(1200px, 94vw); max-height: 92vh; }
     dialog.lightbox::backdrop { background: rgba(15, 23, 42, .72); backdrop-filter: blur(4px); }
@@ -407,9 +427,9 @@
 
       <nav class="nav" aria-label="Sections">
         <a href="#featured">Featured</a>
+        <a href="#testing">Testing</a>
         <a href="#projects">Projects</a>
-        <a href="#gamedev">Game Dev → QA</a>
-        <a href="#experience">Experience</a>
+        <a href="#experience">Competitions</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -435,14 +455,16 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <span class="tag tag-pass reveal"><span class="dot live"></span> Open to QA Automation / SWE Internship</span>
+          <span class="tag tag-pass reveal"><span class="dot live"></span> Open to a QA Automation Tester internship</span>
 
           <h1 class="reveal" data-delay="1">Prapathomsit Attapakkanon</h1>
-          <p class="hero-role reveal" data-delay="1">QA Automation &amp; Software Engineering</p>
+          <p class="name-th reveal" data-delay="1" lang="th">ประปฐมสิทธิ อัตถ์ภาคนนท์ · Ice</p>
+          <p class="hero-role reveal" data-delay="1">QA Automation Tester · Year 1, CEDT</p>
           <p class="intro reveal" data-delay="2">
-            Engineering student at <strong>Chulalongkorn University</strong>. I build end-to-end test suites in
-            <strong>Playwright + TypeScript</strong>, run them on <strong>GitHub Actions</strong>, and stream the
-            results to a live report that non-engineers can read.
+            First-year <strong>Computer Engineering &amp; Digital Technology (CEDT)</strong> student at
+            <strong>Chulalongkorn University</strong>. I write automated tests in <strong>Playwright + TypeScript</strong>,
+            run them on <strong>GitHub Actions</strong>, and test what I build, from AI web apps to a
+            national-award-winning game.
           </p>
 
           <div class="hero-ctas reveal" data-delay="2">
@@ -452,10 +474,10 @@
 
           <!-- Hero metrics: keep these numbers in sync with your latest CI run -->
           <div class="metrics reveal" data-delay="3">
-            <div><div class="metric-num" style="color:var(--pass)">12/12</div><div class="metric-label">Cross-browser runs passing</div></div>
-            <div><div class="metric-num">3</div><div class="metric-label">Engines: Chromium, Firefox, WebKit</div></div>
-            <div><div class="metric-num">4</div><div class="metric-label">Test cases in 3 modules</div></div>
-            <div><div class="metric-num" style="color:var(--accent)">Daily</div><div class="metric-label">CI on every push + cron</div></div>
+            <div><div class="metric-num" style="color:var(--pass)">12/12</div><div class="metric-label">Cross-browser E2E runs passing</div></div>
+            <div><div class="metric-num" style="color:var(--pass)">82/82</div><div class="metric-label">Unit &amp; security tests in Prakan</div></div>
+            <div><div class="metric-num">NSC</div><div class="metric-label">2025 national award (game Z.O.O)</div></div>
+            <div><div class="metric-num" style="color:var(--accent)">6</div><div class="metric-label">Competitions &amp; game jams since 2025</div></div>
           </div>
         </div>
 
@@ -466,7 +488,7 @@
           <div class="portrait-meta">
             <div>
               <b>Chulalongkorn University</b>
-              <span class="sub">Faculty of Engineering · Bangkok</span>
+              <span class="sub">CEDT · Faculty of Engineering</span>
             </div>
             <span class="cu-badge">CU</span>
           </div>
@@ -594,12 +616,93 @@
     </section>
 
     <!-- ==========================================================
+         HOW I TEST — evidence from other projects.
+         Numbers come from re-running each suite (16 Nov 2026).
+    =========================================================== -->
+    <section class="section tint" id="testing">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Beyond the featured suite</div>
+          <h2 class="h2">How I test what I build</h2>
+          <p class="lead">Most of my projects come from hackathons, where a demo that breaks on stage loses. So I test the unhappy paths first: bad input, missing permissions, double submits, and AI output that tries to make things up.</p>
+        </div>
+
+        <div class="ev-grid">
+          <article class="card ev reveal">
+            <div class="ev-top">
+              <span class="tag tag-blue">Biztania 2026 · Web &amp; AI</span>
+              <span class="ev-score">80/80<small>passing</small></span>
+            </div>
+            <h3>Prakan (พร้อมยื่น): AI incident-report assistant</h3>
+            <div class="sub">Citizen web app · Node built-in test runner, zero dependencies</div>
+            <ul class="checks">
+              <li>AI output that is fabricated, spoofed or malformed <b>fails closed</b>. Nothing reaches the report unchecked.</li>
+              <li>A hostile statement is treated as evidence only and <b>cannot trigger an action</b> (prompt-injection guard).</li>
+              <li>The model gets the reviewed text only: <b>no ID, contact, address or photos</b>.</li>
+              <li>Uploads reject missing, duplicate, oversized and spoofed photos. Claim settlement is <b>idempotent</b>.</li>
+              <li>Malformed, swapped and out-of-range GPS coordinates are rejected. The nearest of 88 Bangkok police stations is picked offline.</li>
+            </ul>
+            <div class="ev-foot">node --test tests/*.test.mjs · 80 tests · ~0.14 s</div>
+          </article>
+
+          <article class="card ev reveal" data-delay="1">
+            <div class="ev-top">
+              <span class="tag tag-blue">Biztania 2026 · Security</span>
+              <span class="ev-score">2/2<small>suites passing</small></span>
+            </div>
+            <h3>Officer portal: database permission tests</h3>
+            <div class="sub">React + Supabase · tested against real Postgres (PGlite)</div>
+            <ul class="checks">
+              <li>Anonymous users reading cases get <code>permission denied</code>.</li>
+              <li>An officer asking for another station's cases is refused (row-level security).</li>
+              <li>Submitting the same case twice returns <b>the same case ID</b>, not a duplicate.</li>
+              <li>A wrong tracking code is rejected. The right one shows status but <b>hides personal data</b>.</li>
+            </ul>
+            <div class="ev-foot">Checks the rules in supabase/schema.sql, not just the UI</div>
+          </article>
+
+          <article class="card ev reveal">
+            <div class="ev-top">
+              <span class="tag tag-gray">Test planning</span>
+              <span class="mono c-mute" style="font-size:12px">pilot plan, week 3</span>
+            </div>
+            <h3>Negative test plan before a pilot</h3>
+            <div class="sub">From the Biztania engineering deck</div>
+            <ul class="checks">
+              <li>Refusal cases: location permission denied, user never confirms, documents missing.</li>
+              <li>Conflict cases: photo contradicts the user's statement, edits that collide across revisions.</li>
+              <li>AI cases: the draft must not add facts the user never said.</li>
+              <li>Every case has an expected result, and each bug found becomes a fix item.</li>
+            </ul>
+            <div class="ev-foot">Exit rule: every claim in the letter traces back to its source</div>
+          </article>
+
+          <article class="card ev reveal" data-delay="1">
+            <div class="ev-top">
+              <span class="tag tag-amber">Hardware · School project</span>
+              <span class="ev-score" style="color:var(--ink)">3:02 → 2:36<small>walk time</small></span>
+            </div>
+            <h3>Obstacle alert for visually impaired people</h3>
+            <div class="sub">ESP32 + IR distance + motion sensor · my role: system testing &amp; sensor tuning</div>
+            <ul class="checks">
+              <li>Tested still and moving objects at 25, 50, 75 and 100 cm.</li>
+              <li>Found the limit: nothing past 100 cm, traced to the ADC threshold (500) in code.</li>
+              <li>Ran a blindfolded walk on an unknown route: cane only 3:02, cane + device 2:36.</li>
+              <li>Wrote down the known gaps: fast objects can be missed, and the device can't detect steps or level changes.</li>
+            </ul>
+            <div class="ev-foot">Measure → find the limit → document it</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
          ALL PROJECTS
          Cards are generated from the PROJECTS array in the script
          at the bottom. To add a project, add one object there.
          Filter buttons are created automatically from categories.
     =========================================================== -->
-    <section class="section tint" id="projects">
+    <section class="section" id="projects">
       <div class="wrap">
         <div class="proj-head reveal">
           <div>
@@ -615,12 +718,12 @@
     <!-- ==========================================================
          GAME DEV → QA
     =========================================================== -->
-    <section class="section" id="gamedev">
+    <section class="section tint" id="gamedev">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Background</div>
           <h2 class="h2">What building games taught me about testing</h2>
-          <p class="lead">I've shipped several game projects (private repos, coursework and team work). Games break in interesting ways, and finding out why is most of the job. Four habits carried over to QA:</p>
+          <p class="lead">I've shipped games that real players download, including <b>Z.O.O</b> (NSC 2025 award) and <b>Dream Frogs Hunt</b> on itch.io. Games break in interesting ways, and finding out why is most of the job. Four habits carried over to QA:</p>
         </div>
 
         <div class="gd-grid">
@@ -656,43 +759,67 @@
          HACKATHONS & EXPERIENCE
          Copy one <article class="card exp"> block to add more.
     =========================================================== -->
-    <section class="section tint" id="experience">
+    <section class="section" id="experience">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Competitions &amp; teamwork</div>
-          <h2 class="h2">Hackathons</h2>
+          <h2 class="h2">Competitions &amp; awards</h2>
         </div>
 
-        <div class="exp-grid">
+        <div class="exp-grid three">
           <article class="card exp reveal">
-            <div class="exp-top">
-              <span class="tag tag-rose">Finalist · Engineering Track</span>
-              <span class="mono c-mute">2026</span>
-            </div>
-            <div>
-              <h3>CU-TU Biztania Camp 2026</h3>
-              <div class="org">Representing Chulalongkorn · Team “ส่งใจในแอร์ดรอป”</div>
-            </div>
+            <div class="exp-top"><span class="tag tag-rose">National award · Honorable mention</span><span class="mono c-mute">2025</span></div>
+            <div><h3>National Software Contest (NSC 2025)</h3><div class="org">Entertainment software · Team leader · 20,000 THB grant</div></div>
             <ul>
-              <li>Reached the finals in the Engineering Track.</li>
-              <li>Paired with business team “Cold BrewTech” to turn their product idea into a working prototype.</li>
-              <li>Kept the demo stable under a tight deadline and a live judging session.</li>
+              <li><b>Z.O.O</b>: 3D investigation RPG where NPCs answer the player through the ChatGPT API.</li>
+              <li>Designed the JSON NPC data (backstory, personality, trust) and built the player controller and camera.</li>
+              <li>Released on itch.io for player feedback. Top committer on the repo (238 commits).</li>
             </ul>
           </article>
 
           <article class="card exp reveal" data-delay="1">
-            <div class="exp-top">
-              <span class="tag tag-blue">Participant · Prototype &amp; Pitch</span>
-              <span class="mono c-mute">2026</span>
-            </div>
-            <div>
-              <h3>UniHack 2026</h3>
-              <div class="org">Organized by Chula Tech Startup · Team “อ่านยังไงวะเนี่ย”</div>
-            </div>
+            <div class="exp-top"><span class="tag tag-rose">Finalist · Engineering Track</span><span class="mono c-mute">2026</span></div>
+            <div><h3>CU-TU Biztania Camp 2026</h3><div class="org">Representing Chulalongkorn · Team “ส่งใจในแอร์ดรอป”</div></div>
             <ul>
-              <li>Built a user-facing web prototype with fellow student developers.</li>
-              <li>Tested the main user journey and edge cases before the live demo.</li>
-              <li>Pitched the product to judges.</li>
+              <li>Built <b>Prakan (พร้อมยื่น)</b>: AI that turns an accident story into a police report, plus an officer portal.</li>
+              <li>Partnered with business team “Cold BrewTech”, whose pitch was an AI cash-flow assistant for insurers.</li>
+              <li>Backed the demo with 82 automated tests and a written negative test plan.</li>
+            </ul>
+          </article>
+
+          <article class="card exp reveal" data-delay="2">
+            <div class="exp-top"><span class="tag tag-blue">Team leader</span><span class="mono c-mute">2026</span></div>
+            <div><h3>JUMP Thailand Hackathon 2026</h3><div class="org">Team “เน็ตก็แรงขึ้นแดงได้ไง” · Game design &amp; management</div></div>
+            <ul>
+              <li><b>JOBSY</b>: teens try a career through story mini-games, and AI reflects their choices back.</li>
+              <li>Matched behaviour to O*NET skill profiles. Backed by a survey of 100 students aged 13–18.</li>
+            </ul>
+          </article>
+
+          <article class="card exp reveal">
+            <div class="exp-top"><span class="tag tag-blue">Participant · Prototype &amp; Pitch</span><span class="mono c-mute">2026</span></div>
+            <div><h3>UniHack 2026</h3><div class="org">Chula Tech Startup · Team “อ่านยังไงวะเนี่ย”</div></div>
+            <ul>
+              <li><b>KonKlang</b>: holds payment for chat-based online shopping until the buyer confirms delivery.</li>
+              <li>Each package gets a unique QR code and a packing video, so any dispute ends with evidence.</li>
+            </ul>
+          </article>
+
+          <article class="card exp reveal" data-delay="1">
+            <div class="exp-top"><span class="tag tag-pass">Top 20 of 300+</span><span class="mono c-mute">2025</span></div>
+            <div><h3>KMITL Game Jam Reality Show</h3><div class="org">Education category · onsite round</div></div>
+            <ul>
+              <li><b>ECOVEST+</b>: a community website for sharing investing knowledge, built in 48 hours.</li>
+              <li>Planned the system architecture, built Firebase login and profiles, and presented both rounds.</li>
+            </ul>
+          </article>
+
+          <article class="card exp reveal" data-delay="2">
+            <div class="exp-top"><span class="tag tag-gray">48-hour game jam</span><span class="mono c-mute">2025</span></div>
+            <div><h3>Nuutor Cup</h3><div class="org">Team game · later published on itch.io</div></div>
+            <ul>
+              <li><b>Dream Frogs Hunt</b>: I built the enemy wave spawner that scales with difficulty.</li>
+              <li>We reworked gameplay, UI and code structure in a second version based on player feedback.</li>
             </ul>
           </article>
         </div>
@@ -717,6 +844,8 @@
               <span class="chip">E2E testing</span><span class="chip">Regression testing</span>
               <span class="chip">Cross-browser matrix</span><span class="chip">Negative testing</span>
               <span class="chip">Bug reproduction &amp; reporting</span><span class="chip">Trace Viewer</span>
+              <span class="chip">Node test runner</span><span class="chip">Security / permission tests</span>
+              <span class="chip">Idempotency checks</span><span class="chip">Playtesting</span>
             </div>
           </div>
           <div class="card skill reveal" data-delay="1">
@@ -724,7 +853,8 @@
             <div class="chips">
               <span class="chip">TypeScript</span><span class="chip">JavaScript (ES6+)</span>
               <span class="chip">Python</span><span class="chip">C++</span>
-              <span class="chip">HTML &amp; CSS</span><span class="chip">Tailwind CSS</span>
+              <span class="chip">HTML &amp; CSS</span><span class="chip">C# (Unity)</span>
+              <span class="chip">React</span><span class="chip">SQL / PostgreSQL</span>
             </div>
           </div>
           <div class="card skill reveal" data-delay="2">
@@ -732,7 +862,8 @@
             <div class="chips">
               <span class="chip">Git &amp; GitHub</span><span class="chip">GitHub Actions (CI + cron)</span>
               <span class="chip">Google Apps Script</span><span class="chip">Webhooks / REST</span>
-              <span class="chip">VS Code</span><span class="chip">Playwright Codegen</span>
+              <span class="chip">Supabase</span><span class="chip">Firebase</span>
+              <span class="chip">Unity</span><span class="chip">ESP32 / micro:bit</span>
             </div>
           </div>
         </div>
@@ -807,9 +938,10 @@
           onClickId      → scroll to a section on this page.
   ============================================================ */
   const CATEGORIES = {
-    qa:      { label: 'QA & Automation',    tag: 'tag-pass' },
-    gamedev: { label: 'Game Dev & Systems', tag: 'tag-blue' },
-    // web:  { label: 'Web Apps',           tag: 'tag-amber' },
+    qa:    { label: 'QA & Automation', tag: 'tag-pass' },
+    web:   { label: 'Web & AI',        tag: 'tag-blue' },
+    games: { label: 'Games',           tag: 'tag-amber' },
+    hw:    { label: 'Hardware',        tag: 'tag-gray' },
   };
 
   const PROJECTS = [
@@ -826,12 +958,63 @@
       ],
     },
     {
-      title: 'Game Development & Interactive Systems',
-      category: 'gamedev',
-      visibility: 'Private repos',
-      description: 'Several games with real-time physics, collision logic and state machines. Debugging them taught me to hunt edge cases and timing bugs, which I now do as a tester.',
-      tags: ['State machines', 'Game loops', 'Profiling'],
-      links: [{ label: 'What it taught me about QA', href: '#gamedev', primary: true }],
+      title: 'Prakan (พร้อมยื่น)',
+      category: 'web',
+      visibility: 'Private repo',
+      description: 'Tell the AI what happened in an accident, and it drafts a police report, checks your documents and picks the nearest station. Runs Qwen in the browser, so personal data stays on the device.',
+      tags: ['WebLLM / Qwen', 'Supabase', '82 tests'],
+      links: [{ label: 'See how it is tested', href: '#testing', primary: true }],
+    },
+    {
+      title: 'Z.O.O',
+      category: 'games',
+      visibility: 'NSC 2025 award',
+      description: '3D investigation RPG where villagers answer you through the ChatGPT API. I led the team and built the player controller, the camera and the NPC data model.',
+      tags: ['Unity', 'C#', 'ChatGPT API'],
+      links: [{ label: 'Play on itch.io', href: 'https://1jjjay.itch.io/zoo', primary: true }],
+    },
+    {
+      title: 'Dream Frogs Hunt',
+      category: 'games',
+      visibility: 'Game jam → v2',
+      description: 'Built in 48 hours at Nuutor Cup, then reworked from player feedback. I wrote the enemy wave spawning system.',
+      tags: ['Unity', 'C#', 'Wave spawner'],
+      links: [{ label: 'Play on itch.io', href: 'https://phonlakitz.itch.io/dream-frogs-hunt', primary: true }],
+    },
+    {
+      title: 'JOBSY',
+      category: 'web',
+      visibility: 'Hackathon prototype',
+      description: 'Career try-outs for teens: story mini-games simulate a real job, then AI reflects the player\'s choices against O*NET skill profiles.',
+      tags: ['Game design', 'O*NET', 'LLM'],
+      links: [],
+      foot: ['JUMP Thailand Hackathon 2026', 'Team leader'],
+    },
+    {
+      title: 'KonKlang',
+      category: 'web',
+      visibility: 'Hackathon prototype',
+      description: 'Escrow for chat-based online shopping. The money waits until delivery is confirmed, and packing videos tied to QR codes settle any dispute.',
+      tags: ['Escrow flow', 'Audit trail', 'AI checks'],
+      links: [],
+      foot: ['UniHack 2026', 'Prototype & pitch'],
+    },
+    {
+      title: 'ECOVEST+',
+      category: 'web',
+      visibility: 'Private repo',
+      description: 'Community site for sharing investing knowledge, built in 48 hours. It got the team into the KMITL Game Jam onsite round (top 20 of 300+).',
+      tags: ['HTML / CSS / JS', 'Firebase Auth'],
+      links: [],
+      foot: ['KMITL Game Jam 2025', 'Architecture & pitch'],
+    },
+    {
+      title: 'Obstacle alert for the visually impaired',
+      category: 'hw',
+      visibility: 'School project',
+      description: 'ESP32 with distance and motion sensors that beeps before obstacles. I tested and tuned the sensors, found the 100 cm detection limit and measured walk times.',
+      tags: ['ESP32', 'Sensors', 'Test & calibration'],
+      links: [{ label: 'Test results', href: '#testing', primary: true }],
     },
     {
       title: 'REST API & Contract Testing Lab',
@@ -841,6 +1024,7 @@
       description: 'Next step: extending coverage from the UI to the API layer, with endpoint validation, auth token lifecycle and JSON schema assertions using Playwright APIRequestContext.',
       tags: ['Playwright API', 'REST / JSON', 'CI/CD'],
       links: [],
+      foot: ['github.com/Prapathomsit', 'Coming soon'],
     },
   ];
 
@@ -978,7 +1162,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
       navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['featured', 'projects', 'gamedev', 'experience', 'skills', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
+  ['featured', 'testing', 'projects', 'gamedev', 'experience', 'skills', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
 
   /* ---------- Pipeline + run log ---------- */
   const check = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg>';
@@ -1125,7 +1309,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
           const ext = /^https?:/.test(l.href);
           return `<a class="btn btn-sm ${l.primary ? 'btn-dark' : 'btn-ghost'}" href="${l.href}"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(l.label)}${ext ? ' <span class="arrow">↗</span>' : ' →'}</a>`;
         }).join('')}</div>`
-      : `<div class="proj-foot"><span>github.com/Prapathomsit</span><span>Coming soon</span></div>`;
+      : `<div class="proj-foot"><span>${esc((p.foot || [])[0] || '')}</span><span>${esc((p.foot || [])[1] || '')}</span></div>`;
     return `
       <article class="card proj reveal${p.planned ? ' planned' : ''}" data-category="${p.category}" data-delay="${i % 3}">
         <div class="proj-top">
