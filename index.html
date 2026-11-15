@@ -642,7 +642,7 @@
               <li>Uploads reject missing, duplicate, oversized and spoofed photos. Claim settlement is <b>idempotent</b>.</li>
               <li>Malformed, swapped and out-of-range GPS coordinates are rejected. The nearest of 88 Bangkok police stations is picked offline.</li>
             </ul>
-            <div class="ev-foot">node --test tests/*.test.mjs · 80 tests · ~0.14 s · main committer (45 of 73 commits)</div>
+            <div class="ev-foot">node --test tests/*.test.mjs · 80 tests · ~0.14 s · main committer (45 of 73 commits) · <a data-link="prakanRepo" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">code ↗</a> · <a data-link="prakan" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">demo ↗</a></div>
           </article>
 
           <article class="card ev reveal" data-delay="1">
@@ -924,6 +924,8 @@
     repo:   'https://github.com/Prapathomsit/playwright-ecommerce-e2e',
     sheet:  'https://docs.google.com/spreadsheets/d/19KROjkgRaDWTIVBfifGJpQjuhYWc4qtKpqVOdnpXm80/edit?gid=0#gid=0',
     run:    'https://github.com/Prapathomsit/playwright-ecommerce-e2e/actions/runs/43747756321',
+    prakan:      'https://prapathomsit.github.io/promptyuen-demo/',
+    prakanRepo:  'https://github.com/Prapathomsit/promptyuen-demo',
   };
 
   /* ============================================================
@@ -960,10 +962,13 @@
     {
       title: 'Prakan (พร้อมยื่น)',
       category: 'web',
-      visibility: 'Private repo',
-      description: 'Tell the AI what happened in an accident, and it drafts a police report, checks your documents and picks the nearest station. Runs Qwen in the browser, so personal data stays on the device.',
+      visibility: 'Public repo',
+      description: 'For car and home insurance customers: tell the AI what happened, and it drafts the incident report, checks your documents and picks the nearest police station. Runs Qwen in the browser, so personal data stays on the device.',
       tags: ['WebLLM / Qwen', 'node:test', '80 tests'],
-      links: [{ label: 'See how it is tested', href: '#testing', primary: true }],
+      links: [
+        { label: 'Try the demo', href: LINKS.prakan, primary: true },
+        { label: 'Code & tests', href: LINKS.prakanRepo },
+      ],
     },
     {
       title: 'Z.O.O',
