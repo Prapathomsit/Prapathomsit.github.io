@@ -475,7 +475,7 @@
           <!-- Hero metrics: keep these numbers in sync with your latest CI run -->
           <div class="metrics reveal" data-delay="3">
             <div><div class="metric-num" style="color:var(--pass)">12/12</div><div class="metric-label">Cross-browser E2E runs passing</div></div>
-            <div><div class="metric-num" style="color:var(--pass)">82/82</div><div class="metric-label">Unit &amp; security tests in Prakan</div></div>
+            <div><div class="metric-num" style="color:var(--pass)">80/80</div><div class="metric-label">Unit tests in Prakan (AI app)</div></div>
             <div><div class="metric-num">NSC</div><div class="metric-label">2025 national award (game Z.O.O)</div></div>
             <div><div class="metric-num" style="color:var(--accent)">6</div><div class="metric-label">Competitions &amp; game jams since 2025</div></div>
           </div>
@@ -642,23 +642,23 @@
               <li>Uploads reject missing, duplicate, oversized and spoofed photos. Claim settlement is <b>idempotent</b>.</li>
               <li>Malformed, swapped and out-of-range GPS coordinates are rejected. The nearest of 88 Bangkok police stations is picked offline.</li>
             </ul>
-            <div class="ev-foot">node --test tests/*.test.mjs · 80 tests · ~0.14 s</div>
+            <div class="ev-foot">node --test tests/*.test.mjs · 80 tests · ~0.14 s · main committer (45 of 73 commits)</div>
           </article>
 
           <article class="card ev reveal" data-delay="1">
             <div class="ev-top">
-              <span class="tag tag-blue">Biztania 2026 · Security</span>
-              <span class="ev-score">2/2<small>suites passing</small></span>
+              <span class="tag tag-amber">Games · Playtesting</span>
+              <span class="ev-score" style="color:var(--ink)">3<small>games on itch.io</small></span>
             </div>
-            <h3>Officer portal: database permission tests</h3>
-            <div class="sub">React + Supabase · tested against real Postgres (PGlite)</div>
+            <h3>Playtesting the games I ship</h3>
+            <div class="sub">Unity / C# · Z.O.O, Dream Frogs Hunt, GamejamX</div>
             <ul class="checks">
-              <li>Anonymous users reading cases get <code>permission denied</code>.</li>
-              <li>An officer asking for another station's cases is refused (row-level security).</li>
-              <li>Submitting the same case twice returns <b>the same case ID</b>, not a duplicate.</li>
-              <li>A wrong tracking code is rejected. The right one shows status but <b>hides personal data</b>.</li>
+              <li>Built separate test scenes (<code>Player Test</code>, <code>Trap test</code>) to check each mechanic in isolation before merging it into the main level.</li>
+              <li>Released early builds on itch.io to get feedback from real players, not just the team.</li>
+              <li>Dream Frogs Hunt v2 reworked gameplay, UI and code structure based on that feedback.</li>
+              <li>Worked on shared Unity repos with 5–6 people, so changes had to be checked before they broke someone else's scene.</li>
             </ul>
-            <div class="ev-foot">Checks the rules in supabase/schema.sql, not just the UI</div>
+            <div class="ev-foot">Isolate → reproduce → fix → re-test with players</div>
           </article>
 
           <article class="card ev reveal">
@@ -781,14 +781,14 @@
             <div class="exp-top"><span class="tag tag-rose">Finalist · Engineering Track</span><span class="mono c-mute">2026</span></div>
             <div><h3>CU-TU Biztania Camp 2026</h3><div class="org">Representing Chulalongkorn · Team “ส่งใจในแอร์ดรอป”</div></div>
             <ul>
-              <li>Built <b>Prakan (พร้อมยื่น)</b>: AI that turns an accident story into a police report, plus an officer portal.</li>
+              <li>Our team built <b>Prakan (พร้อมยื่น)</b>: AI that turns an accident story into a police report, plus an officer portal. I was the main committer on the citizen app.</li>
               <li>Partnered with business team “Cold BrewTech”, whose pitch was an AI cash-flow assistant for insurers.</li>
-              <li>Backed the demo with 82 automated tests and a written negative test plan.</li>
+              <li>Backed the demo with 80 automated tests and a written negative test plan.</li>
             </ul>
           </article>
 
           <article class="card exp reveal" data-delay="2">
-            <div class="exp-top"><span class="tag tag-blue">Team leader</span><span class="mono c-mute">2026</span></div>
+            <div class="exp-top"><span class="tag tag-blue">Bootcamp · Team leader</span><span class="mono c-mute">2026</span></div>
             <div><h3>JUMP Thailand Hackathon 2026</h3><div class="org">Team “เน็ตก็แรงขึ้นแดงได้ไง” · Game design &amp; management</div></div>
             <ul>
               <li><b>JOBSY</b>: teens try a career through story mini-games, and AI reflects their choices back.</li>
@@ -797,7 +797,7 @@
           </article>
 
           <article class="card exp reveal">
-            <div class="exp-top"><span class="tag tag-blue">Participant · Prototype &amp; Pitch</span><span class="mono c-mute">2026</span></div>
+            <div class="exp-top"><span class="tag tag-blue">Bootcamp participant</span><span class="mono c-mute">2026</span></div>
             <div><h3>UniHack 2026</h3><div class="org">Chula Tech Startup · Team “อ่านยังไงวะเนี่ย”</div></div>
             <ul>
               <li><b>KonKlang</b>: holds payment for chat-based online shopping until the buyer confirms delivery.</li>
@@ -962,7 +962,7 @@
       category: 'web',
       visibility: 'Private repo',
       description: 'Tell the AI what happened in an accident, and it drafts a police report, checks your documents and picks the nearest station. Runs Qwen in the browser, so personal data stays on the device.',
-      tags: ['WebLLM / Qwen', 'Supabase', '82 tests'],
+      tags: ['WebLLM / Qwen', 'node:test', '80 tests'],
       links: [{ label: 'See how it is tested', href: '#testing', primary: true }],
     },
     {
@@ -984,20 +984,20 @@
     {
       title: 'JOBSY',
       category: 'web',
-      visibility: 'Hackathon prototype',
+      visibility: 'Bootcamp concept',
       description: 'Career try-outs for teens: story mini-games simulate a real job, then AI reflects the player\'s choices against O*NET skill profiles.',
       tags: ['Game design', 'O*NET', 'LLM'],
       links: [],
-      foot: ['JUMP Thailand Hackathon 2026', 'Team leader'],
+      foot: ['JUMP Thailand 2026 bootcamp', 'Team leader'],
     },
     {
       title: 'KonKlang',
       category: 'web',
-      visibility: 'Hackathon prototype',
+      visibility: 'Bootcamp concept',
       description: 'Escrow for chat-based online shopping. The money waits until delivery is confirmed, and packing videos tied to QR codes settle any dispute.',
       tags: ['Escrow flow', 'Audit trail', 'AI checks'],
       links: [],
-      foot: ['UniHack 2026', 'Prototype & pitch'],
+      foot: ['UniHack 2026', 'Bootcamp'],
     },
     {
       title: 'ECOVEST+',

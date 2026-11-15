@@ -16,8 +16,8 @@ I built this site with an AI coding assistant (Claude Code). The AI wrote most o
 ## What's on the site
 
 - **Featured:** a Playwright + TypeScript E2E suite with CI and a live Google Sheets report
-- **How I test:** 80/80 unit tests in Prakan (AI incident-report app, Biztania 2026), database permission tests for its officer portal, and a negative test plan for a pilot
-- **Competitions:** NSC 2025 national award (Z.O.O), Biztania 2026 finalist, JUMP Thailand Hackathon 2026, UniHack 2026, KMITL Game Jam (top 20 of 300+), Nuutor Cup
+- **How I test:** 80/80 unit tests in Prakan (AI incident-report app, Biztania 2026), a negative test plan for a pilot, and playtesting for the games I ship
+- **Competitions:** NSC 2025 national award (Z.O.O), Biztania 2026 finalist, JUMP Thailand Hackathon and UniHack 2026 bootcamps, KMITL Game Jam (top 20 of 300+), Nuutor Cup
 
 ## Featured project
 
