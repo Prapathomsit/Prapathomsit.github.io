@@ -442,6 +442,19 @@
       .js .split .w > span { transform: none; }
     }
 
+    /* ---------- certificates ---------- */
+    .cert-grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1040px) { .cert-grid { grid-template-columns: repeat(4, 1fr); } }
+    .cert { padding: 12px; display: flex; flex-direction: column; gap: 10px; transition: transform .3s var(--ease), box-shadow .3s; }
+    .cert:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+    .cert button { padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); cursor: zoom-in; aspect-ratio: 4 / 3; }
+    .cert img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s var(--ease); }
+    .cert button:hover img { transform: scale(1.04); }
+    .cert h3 { font-size: 14.5px; margin: 2px 4px 0; font-family: var(--font-display); line-height: 1.35; }
+    .cert p { margin: 0 4px; font-size: 12.5px; color: var(--subtle); }
+    .cert a { margin: 0 4px 4px; font-size: 12.5px; color: var(--accent); font-weight: 600; }
+
     /* ---------- lightbox ---------- */
     dialog.lightbox { border: 0; padding: 0; background: transparent; max-width: min(1200px, 94vw); max-height: 92vh; }
     dialog.lightbox::backdrop { background: rgba(15, 23, 42, .72); backdrop-filter: blur(4px); }
@@ -876,7 +889,7 @@
 
           <article class="card exp reveal" data-delay="2">
             <div class="exp-top"><span class="tag tag-blue">Bootcamp · Team leader</span><span class="mono c-mute">2026</span></div>
-            <div><h3>JUMP Thailand Hackathon 2026</h3><div class="org">Team “เน็ตก็แรงขึ้นแดงได้ไง” · Game design &amp; management</div></div>
+            <div><h3>JUMP Thailand Hackathon 2026</h3><div class="org">Central Regional Bootcamp, Chulalongkorn · Team “เน็ตก็แรงขึ้นแดงได้ไง”</div></div>
             <ul>
               <li><b>JOBSY</b>: teens try a career through story mini-games, and AI reflects their choices back.</li>
               <li>Matched behaviour to O*NET skill profiles. Backed by a survey of 100 students aged 13–18.</li>
@@ -884,8 +897,8 @@
           </article>
 
           <article class="card exp reveal">
-            <div class="exp-top"><span class="tag tag-blue">Bootcamp participant</span><span class="mono c-mute">2026</span></div>
-            <div><h3>UniHack 2026</h3><div class="org">Chula Tech Startup · Team “อ่านยังไงวะเนี่ย”</div></div>
+            <div class="exp-top"><span class="tag tag-blue">Participant · 48-hour hackathon</span><span class="mono c-mute">2026</span></div>
+            <div><h3>UniHack 2026</h3><div class="org">Chula Tech Startup &amp; CSII · Team “อ่านยังไงวะเนี่ย”</div></div>
             <ul>
               <li><b>KonKlang</b>: holds payment for chat-based online shopping until the buyer confirms delivery.</li>
               <li>Each package gets a unique QR code and a packing video, so any dispute ends with evidence.</li>
@@ -923,9 +936,23 @@
     </section>
 
     <!-- ==========================================================
+         CERTIFICATES — data in the CERTS array (script). Images in assets/certs/.
+    =========================================================== -->
+    <section class="section" id="certificates">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Proof</div>
+          <h2 class="h2 big"><span class="o">Certificates</span></h2>
+          <p class="lead">Click any certificate to see it full size.</p>
+        </div>
+        <div class="cert-grid" id="cert-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
          SKILLS
     =========================================================== -->
-    <section class="section" id="skills">
+    <section class="section tint" id="skills">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Toolbox</div>
@@ -1127,7 +1154,7 @@
       tags: ['Escrow flow', 'Audit trail', 'AI checks'],
       image: 'assets/projects/konklang-cover.jpg',
       links: [],
-      foot: ['UniHack 2026', 'Bootcamp'],
+      foot: ['UniHack 2026', '48-hour hackathon'],
     },
     {
       title: 'ECOVEST+',
@@ -1503,6 +1530,22 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
   if (reduceMotion) setReel(false);
   reelBtn.addEventListener('click', () => setReel(reelVideo.paused));
   new IntersectionObserver(([e]) => { if (!reduceMotion && reelBtn.textContent === 'Pause') e.isIntersecting ? reelVideo.play().catch(() => {}) : reelVideo.pause(); }).observe(reelVideo);
+
+  /* ---------- Certificates ★ add new ones here ---------- */
+  const CERTS = [
+    { src: 'assets/certs/nsc-2025.jpg', title: 'NSC 2025 · Honorable Mention', issuer: 'NSTDA & NRCT · 25 Aug 2025 · Z.O.O, entertainment software' },
+    { src: 'assets/certs/jump-thailand-2026.jpg', title: 'JUMP THAILAND Hackathon 2026', issuer: 'Central Regional Bootcamp · AIS Academy · 15 Aug 2026' },
+    { src: 'assets/certs/unihack-2026.jpg', title: 'UniHack 2026 · Certificate of Appreciation', issuer: 'Chula Tech Startup & CSII · 48-hour hackathon · Aug 2026' },
+    { src: 'assets/certs/google-prompting-essentials.jpg', title: 'Google Prompting Essentials', issuer: 'Google · Coursera specialization (4 courses) · 26 Aug 2026', verify: 'https://coursera.org/verify/specialization/EOMJU7TEPI2A' },
+  ];
+  $('#cert-grid').innerHTML = CERTS.map((c, i) => `
+    <article class="card cert reveal" data-delay="${i % 4}">
+      <button type="button" data-cert="${i}" aria-label="Enlarge ${esc(c.title)}"><img src="${c.src}" alt="${esc(c.title)}" loading="lazy" /></button>
+      <h3>${esc(c.title)}</h3>
+      <p>${esc(c.issuer)}</p>
+      ${c.verify ? `<a href="${c.verify}" target="_blank" rel="noopener noreferrer">Verify on Coursera ↗</a>` : ''}
+    </article>`).join('');
+  $('#cert-grid').addEventListener('click', e => { const b = e.target.closest('[data-cert]'); if (!b) return; const c = CERTS[+b.dataset.cert]; openLightbox({ src: c.src, title: c.title, caption: c.issuer }); });
 
   /* ---------- Big outlined numbers on competition cards ---------- */
   $$('#experience .exp').forEach((card, i) => card.insertAdjacentHTML('beforeend', `<span class="exp-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>`));
