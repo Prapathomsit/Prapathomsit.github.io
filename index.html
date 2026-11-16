@@ -1589,13 +1589,10 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
         ${actions}
       </article>`;
   };
-  $('#proj-groups').innerHTML = Object.keys(CATEGORIES).map(k => {
-    const items = PROJECTS.filter(p => p.category === k); if (!items.length) return '';
-    return `<div class="proj-group" data-category="${k}">
-      <div class="proj-group-head reveal"><h3>${esc(CATEGORIES[k].label)}</h3><span class="count">${items.length}</span><p>${esc(GROUP_NOTES[k] || '')}</p></div>
-      <div class="proj-grid">${items.map(cardHTML).join('')}</div>
-    </div>`;
-  }).join('');
+  // One combined grid, ordered QA → Web & AI → Games → Hardware, planned work last.
+  const order = Object.keys(CATEGORIES);
+  const sorted = [...PROJECTS].sort((x, y) => (!!x.planned - !!y.planned) || (order.indexOf(x.category) - order.indexOf(y.category)));
+  $('#proj-groups').innerHTML = `<div class="proj-grid">${sorted.map(cardHTML).join('')}</div>`;
 
   const counts = PROJECTS.reduce((m, p) => (m[p.category] = (m[p.category] || 0) + 1, m), {});
   const filterKeys = ['all', ...Object.keys(CATEGORIES).filter(k => counts[k])];
@@ -1607,7 +1604,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
     const b = e.target.closest('.filter'); if (!b) return;
     const cat = b.dataset.cat;
     $$('.filter').forEach(f => f.setAttribute('aria-pressed', f === b));
-    $$('.proj-group').forEach(g => g.classList.toggle('is-hidden', cat !== 'all' && g.dataset.category !== cat));
+    $$('.proj').forEach(card => card.classList.toggle('is-hidden', cat !== 'all' && card.dataset.category !== cat));
   });
 
   /* ---------- Copy GitHub URL ---------- */
