@@ -381,6 +381,67 @@
     @media (min-width: 720px) { .exp-grid.three { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1040px) { .exp-grid.three { grid-template-columns: repeat(3, 1fr); } }
 
+    /* ---------- Hamster-Hub-style motion ---------- */
+    .o { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+    .h2.big { font-size: clamp(34px, 5.6vw, 64px); line-height: 1.04; letter-spacing: -.035em; }
+    .dark { background: #0A0E17; color: #E2E8F0; position: relative; overflow: hidden; isolation: isolate; }
+    .dark::before { content: ''; position: absolute; inset: -20% -10% auto auto; width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; background: radial-gradient(circle, rgba(249, 115, 22, .22), transparent 62%); z-index: -1; pointer-events: none; }
+    .dark::after { content: ''; position: absolute; inset: auto auto -30% -15%; width: 60vw; height: 60vw; max-width: 760px; max-height: 760px; background: radial-gradient(circle, rgba(37, 99, 235, .22), transparent 62%); z-index: -1; pointer-events: none; }
+    .dark .h2, .dark h3 { color: #fff; }
+    .dark .o { -webkit-text-stroke: 1.5px rgba(255, 255, 255, .9); }
+    .dark .eyebrow { color: #FB923C; }
+    .dark .lead, .dark .org, .dark .exp ul { color: #94A3B8; }
+    .dark .card { background: rgba(255, 255, 255, .035); border-color: rgba(255, 255, 255, .09); box-shadow: none; backdrop-filter: blur(6px); }
+    .dark .exp b { color: #fff; }
+    .dark .c-mute { color: #64748B; }
+    .exp { position: relative; overflow: hidden; }
+    .exp-num { position: absolute; right: 18px; bottom: -14px; font-family: var(--font-display); font-weight: 800; font-size: 92px; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(15, 23, 42, .08); pointer-events: none; }
+    .dark .exp-num { -webkit-text-stroke: 1.5px rgba(255, 255, 255, .07); }
+    .dark .exp:hover { border-color: rgba(251, 146, 60, .45); }
+    .dark .exp:hover .exp-num { -webkit-text-stroke-color: rgba(251, 146, 60, .5); }
+    .exp-num { transition: -webkit-text-stroke-color .4s; }
+
+    .reel { padding: 88px 0 56px; }
+    .reel-grid { display: grid; gap: 40px; align-items: center; }
+    @media (min-width: 960px) { .reel-grid { grid-template-columns: 1fr 1.25fr; gap: 56px; } }
+    .reel-facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .reel-facts span { font-family: var(--font-mono); font-size: 12px; padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .14); color: #CBD5E1; }
+    .reel-video { margin: 0; position: relative; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .12); aspect-ratio: 16 / 9; background: #000; box-shadow: 0 40px 80px -30px rgba(249, 115, 22, .35); }
+    .reel-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .reel-badge { position: absolute; top: 14px; left: 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; color: #fff; background: rgba(0, 0, 0, .55); padding: 5px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
+    .reel-badge i { width: 7px; height: 7px; border-radius: 50%; background: #EF4444; animation: blink 1.4s infinite; }
+    @keyframes blink { 50% { opacity: .25; } }
+    .reel-cap { position: absolute; left: 14px; bottom: 14px; right: 110px; font-size: 12.5px; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .6); }
+    .reel-toggle { position: absolute; right: 12px; bottom: 12px; border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 600; background: rgba(255, 255, 255, .9); color: #0F172A; }
+
+    .marquee { overflow: hidden; margin-top: 18px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+    .reel-grid + .marquee { margin-top: 56px; }
+    .marquee-track { display: flex; gap: 14px; width: max-content; animation: mq 48s linear infinite; }
+    .marquee.rev .marquee-track { animation-direction: reverse; animation-duration: 38s; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes mq { to { transform: translateX(-50%); } }
+    .mq-item { position: relative; width: 280px; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .1); flex: none; background: #111827; }
+    .mq-item img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .6s var(--ease); }
+    .mq-item:hover img { transform: scale(1.06); }
+    .mq-item span { position: absolute; left: 10px; bottom: 9px; font-size: 12px; font-weight: 600; color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .8); }
+    .mq-item::after { content: ''; position: absolute; inset: 50% 0 0; background: linear-gradient(transparent, rgba(0, 0, 0, .65)); }
+    .mq-item span { z-index: 1; }
+    .mq-chip { flex: none; font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 3vw, 34px); letter-spacing: -.02em; color: rgba(255, 255, 255, .88); padding: 0 6px; white-space: nowrap; }
+    .mq-chip.o { -webkit-text-stroke: 1.2px rgba(255, 255, 255, .55); color: transparent; }
+    .mq-chip::after { content: '✦'; margin-left: 18px; color: #FB923C; -webkit-text-stroke: 0; font-size: .6em; vertical-align: middle; }
+
+    .js .split.reveal { opacity: 1; transform: none; }
+    .split .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .06em; }
+    .js .split .w > span { display: inline-block; transform: translateY(105%); transition: transform 1s var(--ease); }
+    .js .split.visible .w > span { transform: none; }
+    .proj-thumb img { transition: transform .6s var(--ease); }
+    .proj:hover .proj-thumb img { transform: scale(1.05); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+      .js .split .w > span { transform: none; }
+    }
+
     /* ---------- lightbox ---------- */
     dialog.lightbox { border: 0; padding: 0; background: transparent; max-width: min(1200px, 94vw); max-height: 92vh; }
     dialog.lightbox::backdrop { background: rgba(15, 23, 42, .72); backdrop-filter: blur(4px); }
@@ -457,7 +518,7 @@
         <div>
           <span class="tag tag-pass reveal"><span class="dot live"></span> Open to a QA Automation Tester internship</span>
 
-          <h1 class="reveal" data-delay="1">Prapathomsit Attapakkanon</h1>
+          <h1 class="split reveal" aria-label="Prapathomsit Attapakkanon"><span class="w" aria-hidden="true"><span>Prapathomsit</span></span> <span class="w" aria-hidden="true"><span style="transition-delay:.14s">Attapakkanon</span></span></h1>
           <p class="name-th reveal" data-delay="1" lang="th">ประปฐมสิทธิ อัตถ์ภาคนนท์ · Ice</p>
           <p class="hero-role reveal" data-delay="1">Interested in QA Automation Testing · Year 1, CEDT</p>
           <p class="intro reveal" data-delay="2">
@@ -494,6 +555,31 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- ==========================================================
+         SHOWREEL (dark band, Hamster-Hub style)
+         Video: assets/reel/showreel.mp4 (cut from my TikTok clips).
+         Marquee images/labels: MARQUEE_* arrays in the script.
+    =========================================================== -->
+    <section class="dark reel" id="reel" aria-label="Showreel">
+      <div class="wrap reel-grid">
+        <div class="reveal">
+          <div class="eyebrow">Showreel</div>
+          <h2 class="h2 big">Build it.<br><span class="o">Break it.</span><br>Ship it.</h2>
+          <p class="lead">I build games and web apps for competitions, then try to break them before the judges or players do. Every clip here comes from a real build.</p>
+          <div class="reel-facts"><span>NSC 2025 award</span><span>7 competitions</span><span>3 games on itch.io</span><span>92 tests passing</span></div>
+        </div>
+        <figure class="reel-video reveal" data-delay="1">
+          <video id="reel-video" autoplay muted loop playsinline preload="metadata" poster="assets/reel/showreel-poster.jpg" aria-label="Gameplay from Z.O.O, Try not to chip! and CENTORIS">
+            <source src="assets/reel/showreel.mp4" type="video/mp4" />
+          </video>
+          <span class="reel-badge"><i></i> PLAYING</span>
+          <button class="reel-toggle" id="reel-toggle" type="button">Pause</button>
+        </figure>
+      </div>
+      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq-images"></div></div>
+      <div class="marquee rev" aria-hidden="true"><div class="marquee-track" id="mq-words"></div></div>
     </section>
 
     <!-- ==========================================================
@@ -623,7 +709,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Beyond the featured suite</div>
-          <h2 class="h2">How I test what I build</h2>
+          <h2 class="h2 big">How I <span class="o">test</span><br>what I build</h2>
           <p class="lead">Most of my projects come from hackathons, where a demo that breaks on stage loses. So I test the unhappy paths first: bad input, missing permissions, double submits, and AI output that tries to make things up.</p>
         </div>
 
@@ -708,7 +794,7 @@
         <div class="proj-head reveal">
           <div>
             <div class="eyebrow">Portfolio</div>
-            <h2 class="h2">Projects</h2>
+            <h2 class="h2 big">Selected <span class="o">Projects</span></h2>
           </div>
           <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
         </div>
@@ -723,7 +809,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Background</div>
-          <h2 class="h2">What building games taught me about testing</h2>
+          <h2 class="h2 big">What games taught me<br>about <span class="o">testing</span></h2>
           <p class="lead">I've shipped games that real players download, including <b>Z.O.O</b> (NSC 2025 award) and <b>Dream Frogs Hunt</b> on itch.io. Games break in interesting ways, and finding out why is most of the job. Four habits carried over to QA:</p>
         </div>
 
@@ -760,11 +846,11 @@
          HACKATHONS & EXPERIENCE
          Copy one <article class="card exp"> block to add more.
     =========================================================== -->
-    <section class="section" id="experience">
+    <section class="section dark" id="experience">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Competitions &amp; teamwork</div>
-          <h2 class="h2">Competitions &amp; awards</h2>
+          <h2 class="h2 big">Competitions<br>&amp; <span class="o">Awards</span></h2>
         </div>
 
         <div class="exp-grid three">
@@ -843,7 +929,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Toolbox</div>
-          <h2 class="h2">Technical skills</h2>
+          <h2 class="h2 big">Tech <span class="o">Stack</span></h2>
         </div>
 
         <div class="skills-grid">
@@ -975,6 +1061,7 @@
       visibility: 'Public repo',
       description: 'For car and home insurance customers: tell the AI what happened, and it drafts the incident report, checks your documents and picks the nearest police station. Runs Qwen in the browser, so personal data stays on the device.',
       tags: ['WebLLM / Qwen', 'node:test', '80 tests'],
+      image: 'assets/projects/prakan-cover.jpg',
       links: [
         { label: 'Try the demo', href: LINKS.prakan, primary: true },
         { label: 'Code & tests', href: LINKS.prakanRepo },
@@ -1386,6 +1473,42 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
     catch { btn.textContent = addr; }
     setTimeout(() => { btn.textContent = 'Copy email'; }, 2200);
   });
+
+  /* ---------- Showreel marquee ★ edit these lists to change what scrolls ---------- */
+  const MARQUEE_IMAGES = [
+    ['assets/screens/trace-viewer.png', 'Playwright trace'],
+    ['assets/projects/zoo-cover.jpg', 'Z.O.O · NSC 2025'],
+    ['assets/screens/sheets-report.png', 'Live test report'],
+    ['assets/projects/try-not-to-chip-cover.jpg', 'Try not to chip!'],
+    ['assets/projects/prakan-cover.jpg', 'Prakan · Biztania'],
+    ['assets/projects/centoris-cover.jpg', 'CENTORIS'],
+    ['assets/screens/checkout-bug.png', 'TC-03 bug caught'],
+    ['assets/projects/dream-frogs-hunt-cover.jpg', 'Dream Frogs Hunt'],
+  ];
+  const MARQUEE_WORDS = ['Playwright', 'NSC 2025', 'TypeScript', '80/80 tests', 'GitHub Actions', 'Unity · C#', 'Negative testing', 'Biztania finalist', 'Page Object Model', 'Top 20 / 300+'];
+  const fill = (el, html) => { el.innerHTML = html + html; };   // doubled for a seamless loop
+  fill($('#mq-images'), MARQUEE_IMAGES.map(([src, label]) => `<div class="mq-item"><img src="${src}" alt="" loading="lazy" /><span>${esc(label)}</span></div>`).join(''));
+  fill($('#mq-words'), MARQUEE_WORDS.map((w, i) => `<span class="mq-chip${i % 2 ? ' o' : ''}">${esc(w)}</span>`).join(''));
+
+  /* ---------- Showreel video: pause button, respects reduced motion ---------- */
+  const reelVideo = $('#reel-video'), reelBtn = $('#reel-toggle');
+  const setReel = play => { play ? reelVideo.play().catch(() => {}) : reelVideo.pause(); reelBtn.textContent = play ? 'Pause' : 'Play'; };
+  if (reduceMotion) setReel(false);
+  reelBtn.addEventListener('click', () => setReel(reelVideo.paused));
+  new IntersectionObserver(([e]) => { if (!reduceMotion && reelBtn.textContent === 'Pause') e.isIntersecting ? reelVideo.play().catch(() => {}) : reelVideo.pause(); }).observe(reelVideo);
+
+  /* ---------- Big outlined numbers on competition cards ---------- */
+  $$('#experience .exp').forEach((card, i) => card.insertAdjacentHTML('beforeend', `<span class="exp-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>`));
+
+  /* ---------- Count-up for hero metrics ---------- */
+  const countUp = el => {
+    const m = el.textContent.trim().match(/^(\d+)(\/(\d+))?$/); if (!m || reduceMotion) return;
+    const end = +m[1], tail = m[2] || '', t0 = performance.now(), dur = 1100;
+    const tick = now => { const k = Math.min(1, (now - t0) / dur), v = Math.round(end * (1 - Math.pow(1 - k, 3))); el.textContent = v + tail; if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  };
+  const metricObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { countUp(e.target); metricObs.unobserve(e.target); } }), { threshold: .6 });
+  $$('.metric-num').forEach(el => metricObs.observe(el));
 
   /* ---------- Scroll reveal ---------- */
   const revealObserver = new IntersectionObserver(entries => {
