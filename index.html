@@ -628,10 +628,10 @@
           <p class="name-th reveal" data-delay="1" lang="th">ประปฐมสิทธิ อัตถ์ภาคนนท์ · Ice</p>
           <p class="hero-role reveal" data-delay="1">Interested in QA Automation Testing · Year 1, CEDT</p>
           <p class="intro reveal" data-delay="2">
-            First-year <strong>Computer Engineering &amp; Digital Technology (CEDT)</strong> student at
-            <strong>Chulalongkorn University</strong>. I write automated tests in <strong>Playwright + TypeScript</strong>,
+            First-year Computer Engineering &amp; Digital Technology (CEDT) student at
+            Chulalongkorn University. I write automated tests in <strong>Playwright + TypeScript</strong>,
             run them on <strong>GitHub Actions</strong>, and test what I build, from AI web apps to a
-            national-award-winning game.
+            game that won an honorable mention at NSC 2025.
           </p>
 
           <div class="hero-ctas reveal" data-delay="2">
@@ -673,8 +673,8 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Featured project</div>
-          <h2 class="h2">SauceDemo E2E Test Automation &amp; CI/CD Reporting Pipeline</h2>
-          <p class="lead">From <span class="inline-code">git push</span> to a row in Google Sheets: every run is tested in three browsers and reported automatically.</p>
+          <h2 class="h2">SauceDemo E2E test automation and CI/CD reporting pipeline</h2>
+          <p class="lead">Each <span class="inline-code">git push</span> and a daily cron job run the suite in Chromium, Firefox and WebKit, then write every result to a Google Sheet.</p>
         </div>
 
         <article class="card feature reveal">
@@ -682,22 +682,22 @@
 
             <!-- Left: summary for recruiters + tech leads -->
             <div class="feature-left">
-              <span class="tag tag-pass" style="align-self:flex-start"><span class="dot live"></span> CI running on every push + daily cron</span>
+              <span class="tag tag-pass" style="align-self:flex-start"><span class="dot live"></span> CI runs on every push and once a day</span>
               <p>A regression suite for the SauceDemo e-commerce site. It covers login, cart, a known checkout bug and a slow-loading user, and publishes each result to a shared spreadsheet.</p>
-              <p><strong style="color:var(--ink)">Why I built it:</strong> to practise the core skills of a QA automation tester: designing test cases, writing maintainable tests with the Page Object Model, running them automatically in CI, and reporting results in a form that anyone on the team can read.</p>
+              <p><strong style="color:var(--ink)">Why I built it.</strong> I wanted to practise the daily work of a QA automation tester: design test cases, write tests with the Page Object Model, run them in CI, and report results that anyone on the team can read.</p>
 
               <dl class="kv">
                 <div>
                   <dt>Architecture</dt>
-                  <dd><strong>Playwright</strong> + <strong>TypeScript</strong> with the <strong>Page Object Model</strong> (<span class="inline-code">pages/LoginPage.ts</span>). Locators stay out of the specs, so a UI change means editing one file.</dd>
+                  <dd>Playwright + TypeScript with the Page Object Model (<span class="inline-code">pages/LoginPage.ts</span>). Locators stay out of the specs, so a UI change means editing one file.</dd>
                 </div>
                 <div>
                   <dt>Problem solved</dt>
-                  <dd><span class="inline-code">performance_glitch_user</span> takes ~5.2s to load products. On CI that raced the assertions. An explicit <span class="inline-code">waitFor({ state: 'visible' })</span> made the test stable on all three engines.</dd>
+                  <dd><span class="inline-code">performance_glitch_user</span> takes ~5.2s to load products. On CI the assertions ran before the products had loaded. An explicit <span class="inline-code">waitFor({ state: 'visible' })</span> made the test stable on all three engines.</dd>
                 </div>
                 <div>
                   <dt>Impact</dt>
-                  <dd>A custom reporter (<span class="inline-code">tests/google-sheets-reporter.ts</span>) posts results to a <strong>Google Apps Script webhook</strong>. Each row links back to its GitHub Actions run, so anyone can check a result without reading CI logs.</dd>
+                  <dd>A custom reporter (<span class="inline-code">tests/google-sheets-reporter.ts</span>) posts results to a Google Apps Script webhook. Each row links back to its GitHub Actions run, so anyone can check a result without reading CI logs.</dd>
                 </div>
               </dl>
 
@@ -768,7 +768,7 @@
                   </div>
                 </div>
                 <div class="matrix" id="matrix" aria-label="Pass matrix: 4 tests by 3 browsers"></div>
-                <p class="note">Rows are appended by the Apps Script webhook. The Run column links to the GitHub Actions run. A second tab, <b>Bug Report</b>, tracks the defects the suite catches.</p>
+                <p class="note">The Apps Script webhook appends the rows, and the Run column links to the GitHub Actions run. A second tab, <b>Bug Report</b>, lists the defects the suite catches.</p>
               </div>
 
               <!-- TAB: screenshots (files in assets/screens/) -->
@@ -805,10 +805,10 @@
             <div class="sub">Citizen web app · Node built-in test runner, zero dependencies</div>
             <ul class="checks">
               <li>AI output that is fabricated, spoofed or malformed <b>fails closed</b>. Nothing reaches the report unchecked.</li>
-              <li>A hostile statement is treated as evidence only and <b>cannot trigger an action</b> (prompt-injection guard).</li>
-              <li>The model gets the reviewed text only: <b>no ID, contact, address or photos</b>.</li>
+              <li>The app treats a hostile statement as evidence only, so it <b>cannot trigger an action</b> (prompt-injection guard).</li>
+              <li>The model only receives the reviewed text, <b>never ID, contact details, address or photos</b>.</li>
               <li>Uploads reject missing, duplicate, oversized and spoofed photos. Claim settlement is <b>idempotent</b>.</li>
-              <li>Malformed, swapped and out-of-range GPS coordinates are rejected. The nearest of 88 Bangkok police stations is picked offline.</li>
+              <li>The app rejects malformed, swapped and out-of-range GPS coordinates, and picks the nearest of 88 Bangkok police stations offline.</li>
             </ul>
             <div class="ev-foot">node --test tests/*.test.mjs · 80 tests · ~0.14 s · main committer (45 of 73 commits) · <a href="https://github.com/Prapathomsit/promptyuen-demo" data-link="prakanRepo" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">code ↗</a> · <a href="https://prapathomsit.github.io/promptyuen-demo/" data-link="prakan" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">demo ↗</a></div>
           </article>
@@ -827,7 +827,7 @@
               <li>Dream Frogs Hunt v2 reworked gameplay, UI and code structure based on that feedback.</li>
               <li>Worked on shared Unity repos with 5–6 people, so changes had to be checked before they broke someone else's scene.</li>
             </ul>
-            <div class="ev-foot">Isolate → reproduce → fix → re-test with players</div>
+            <div class="ev-foot">Isolate, reproduce, fix, then re-test with players</div>
           </article>
 
           <article class="card ev reveal">
@@ -855,21 +855,21 @@
             <div class="sub">ESP32 + IR distance + motion sensor · team project · my role: soldering, assembly &amp; presenting the results</div>
             <ul class="checks">
               <li>Our team tested still and moving objects at 25, 50, 75 and 100 cm.</li>
-              <li>Found the limit: nothing past 100 cm, traced to the ADC threshold (500) in the code.</li>
-              <li>Blindfolded walk on an unknown route: cane only 3:02, cane + device 2:36. I presented these results to the judges.</li>
+              <li>The sensor detected nothing past 100 cm. We traced that limit to the ADC threshold (500) in the code.</li>
+              <li>On a blindfolded walk over an unknown route, the cane alone took 3:02 and the cane plus the device took 2:36. I presented these results to the judges.</li>
               <li>Wrote down the known gaps: fast objects can be missed, and the device can't detect steps or level changes.</li>
             </ul>
-            <div class="ev-foot">Measure → find the limit → document it</div>
+            <div class="ev-foot">Measure, find the limit, document it</div>
           </article>
         </div>
 
         <!-- Habits carried over from game development (was its own section) -->
-        <div class="habits-head reveal" id="gamedev"><h3>Habits I brought from game development</h3><p>Games break in interesting ways, and finding out why is most of the job.</p></div>
+        <div class="habits-head reveal" id="gamedev"><h3>Habits I brought from game development</h3><p>Debugging games taught me most of the habits I now use to test apps.</p></div>
         <div class="habits">
           <div class="habit reveal" data-delay="0"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.5 8.2l4 7.6M17.5 8.2l-4 7.6"/></svg></div><div><h4>State machines</h4><p>Player and UI states only work when every transition is defined. I now map an app's flows the same way: logged out, logged in, cart, checkout.</p><span class="maps">→ test flows by state</span></div></div>
-          <div class="habit reveal" data-delay="1"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 10v5M12 18h.01"/></svg></div><div><h4>Edge cases</h4><p>Players press everything at once, in the wrong order. That habit is how TC-03 found the checkout field that drops what you type.</p><span class="maps">→ negative &amp; bug-catch tests</span></div></div>
+          <div class="habit reveal" data-delay="1"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 10v5M12 18h.01"/></svg></div><div><h4>Edge cases</h4><p>Players press everything at once, in the wrong order. That habit led me to write TC-03, which found the checkout field that drops what you type.</p><span class="maps">→ negative &amp; bug-catch tests</span></div></div>
           <div class="habit reveal" data-delay="2"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div><div><h4>Frame &amp; performance profiling</h4><p>Bugs tied to frame timing taught me not to trust a fixed sleep. Waiting for a real condition is what fixed the CI race in TC-04.</p><span class="maps">→ explicit waits, timing checks</span></div></div>
-          <div class="habit reveal" data-delay="3"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg></div><div><h4>Systematic debugging</h4><p>A glitch you can't reproduce can't be fixed. I cut bugs down to the smallest set of steps, which is exactly what a good test case is.</p><span class="maps">→ reproducible bug reports</span></div></div>
+          <div class="habit reveal" data-delay="3"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg></div><div><h4>Systematic debugging</h4><p>I reduce each bug to the smallest set of steps that reproduces it, and those steps become the test case.</p><span class="maps">→ reproducible bug reports</span></div></div>
         </div>
       </div>
     </section>
@@ -911,7 +911,7 @@
         <div class="proj-head reveal">
           <div>
             <div class="eyebrow">Portfolio</div>
-            <h2 class="h2 big">Selected <span class="o">Projects</span></h2>
+            <h2 class="h2 big">Selected <span class="o">projects</span></h2>
           </div>
           <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
         </div>
@@ -930,7 +930,7 @@
         <div class="wrap j-head">
           <div class="eyebrow">Journey</div>
           <h2 class="h2 big">From games<br>to <span class="o">QA</span></h2>
-          <p class="lead j-lead">It started with projects at school. Each one led to the next, and I still pick projects I enjoy building.</p>
+          <p class="lead j-lead">School projects led to game jams, game jams led to web and AI hackathons, and the hackathons led me to test automation.</p>
         </div>
         <div class="j-line"></div>
         <div class="j-track" id="j-track"></div>
@@ -942,7 +942,7 @@
         <div class="j-mobile-head">
           <div class="eyebrow">Journey</div>
           <h2 class="h2 big">From games<br>to <span class="o">QA</span></h2>
-          <p class="lead">It started with projects at school. Each one led to the next, and I still pick projects I enjoy building.</p>
+          <p class="lead">School projects led to game jams, game jams led to web and AI hackathons, and the hackathons led me to test automation.</p>
         </div>
         <ol class="j-list" id="j-list"></ol>
       </div>
@@ -957,7 +957,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Competitions &amp; teamwork</div>
-          <h2 class="h2 big">Competitions<br>&amp; <span class="o">Awards</span></h2>
+          <h2 class="h2 big">Competitions<br>&amp; <span class="o">awards</span></h2>
         </div>
 
         <div class="exp-grid three">
@@ -973,26 +973,26 @@
 
           <article class="card exp reveal" data-delay="1">
             <div class="exp-top"><span class="tag tag-rose">Finalist · Engineering Track</span><span class="mono c-mute">2026</span></div>
-            <div><h3>CU-TU Biztania Camp 2026</h3><div class="org">Representing Chulalongkorn · Team “ส่งใจในแอร์ดรอป”</div></div>
+            <div><h3>CU-TU Biztania Camp 2026</h3><div class="org">Representing Chulalongkorn · Team "ส่งใจในแอร์ดรอป"</div></div>
             <ul>
               <li>Our team built <b>พร้อมยื่น</b> (now <b>Prakan · ประกัน</b>): AI that turns an accident story into a police report, plus an officer portal. I was the main committer on the citizen app.</li>
-              <li>Partnered with business team “Cold BrewTech”, whose pitch was an AI cash-flow assistant for insurers.</li>
+              <li>Partnered with business team "Cold BrewTech", whose pitch was an AI cash-flow assistant for insurers.</li>
               <li>Backed the demo with 80 automated tests and a written negative test plan.</li>
             </ul>
           </article>
 
           <article class="card exp reveal" data-delay="2">
             <div class="exp-top"><span class="tag tag-blue">Bootcamp · Team leader</span><span class="mono c-mute">2026</span></div>
-            <div><h3>JUMP Thailand Hackathon 2026</h3><div class="org">Central Regional Bootcamp, Chulalongkorn · Team “เน็ตก็แรงขึ้นแดงได้ไง”</div></div>
+            <div><h3>JUMP Thailand Hackathon 2026</h3><div class="org">Central Regional Bootcamp, Chulalongkorn · Team "เน็ตก็แรงขึ้นแดงได้ไง"</div></div>
             <ul>
               <li><b>JOBSY</b>: teens try a career through story mini-games, and AI reflects their choices back.</li>
-              <li>Matched behaviour to O*NET skill profiles. Backed by a survey of 100 students aged 13–18.</li>
+              <li>We matched player behaviour to O*NET skill profiles and backed the idea with a survey of 100 students aged 13–18.</li>
             </ul>
           </article>
 
           <article class="card exp reveal">
             <div class="exp-top"><span class="tag tag-blue">Participant · 48-hour hackathon</span><span class="mono c-mute">2026</span></div>
-            <div><h3>UniHack 2026</h3><div class="org">Chula Tech Startup &amp; CSII · Team “อ่านยังไงวะเนี่ย”</div></div>
+            <div><h3>UniHack 2026</h3><div class="org">Chula Tech Startup &amp; CSII · Team "อ่านยังไงวะเนี่ย"</div></div>
             <ul>
               <li><b>KonKlang</b>: holds payment for chat-based online shopping until the buyer confirms delivery.</li>
               <li>Each package gets a unique QR code and a packing video, so any dispute ends with evidence.</li>
@@ -1019,10 +1019,10 @@
 
           <article class="card exp reveal">
             <div class="exp-top"><span class="tag tag-gray">72-hour game jam</span><span class="mono c-mute">2026</span></div>
-            <div><h3>Hamster Hub GameJam X</h3><div class="org">Theme: “Hot, Chapter of the Lost Ship” · team of 5 · developer</div></div>
+            <div><h3>Hamster Hub GameJam X</h3><div class="org">Theme: "Hot, Chapter of the Lost Ship" · team of 5 · developer</div></div>
             <ul>
               <li><b>Try not to chip!</b>: a 3D third-person obby where you steer a potato man out of a crisp factory before it becomes chips.</li>
-              <li>Top committer on the team repo (44 commits). Traps were built and checked in separate test scenes, then the game was released on itch.io.</li>
+              <li>Top committer on the team repo (44 commits). We built and checked each trap in its own test scene, then released the game on itch.io.</li>
             </ul>
           </article>
         </div>
@@ -1050,7 +1050,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">Toolbox</div>
-          <h2 class="h2 big">Tech <span class="o">Stack</span></h2>
+          <h2 class="h2 big">Tech <span class="o">stack</span></h2>
         </div>
 
         <div class="skills-grid">
@@ -1160,7 +1160,7 @@
 
   const PROJECTS = [
     {
-      title: 'Playwright E2E Testing Framework',
+      title: 'Playwright E2E testing framework',
       category: 'qa',
       visibility: 'Public repo',
       description: 'POM-based suite for SauceDemo: login, cart, a known UI bug and a slow-user timing check across Chromium, Firefox and WebKit, with automatic Google Sheets reporting.',
@@ -1199,7 +1199,7 @@
     {
       title: 'Dream Frogs Hunt',
       category: 'games',
-      visibility: 'Game jam → v2',
+      visibility: 'Game jam, then v2',
       description: 'Built in 48 hours at Nuutor Cup, then reworked from player feedback. I wrote the enemy wave spawning system.',
       tags: ['Unity', 'C#', 'Wave spawner'],
       image: 'assets/projects/dream-frogs-hunt-cover.jpg',
@@ -1275,11 +1275,11 @@
       links: [{ label: 'Test results', href: '#testing', primary: true }],
     },
     {
-      title: 'REST API & Contract Testing Lab',
+      title: 'REST API and contract testing lab',
       category: 'qa',
       visibility: 'In progress',
       planned: true,
-      description: 'Next step: extending coverage from the UI to the API layer, with endpoint validation, auth token lifecycle and JSON schema assertions using Playwright APIRequestContext.',
+      description: 'Next, I am extending coverage from the UI to the API layer with Playwright APIRequestContext: endpoint validation, auth token lifecycle and JSON schema assertions.',
       tags: ['Playwright API', 'REST / JSON', 'CI/CD'],
       links: [],
       foot: ['github.com/Prapathomsit', 'Coming soon'],
@@ -1346,7 +1346,7 @@
     {
       id: 'TC-03', module: 'Checkout & UI Integrity', kind: 'Bug catch', color: 'var(--rose)',
       title: 'Problem user: Last Name field drops input',
-      summary: 'Reproduces a real defect: on problem_user, typing into Last Name overwrites the First Name field and Last Name stays empty. The test pins the bug, so the run flags it if the behaviour ever changes.',
+      summary: 'Reproduces a real defect: on problem_user, typing into Last Name overwrites the First Name field and Last Name stays empty. The test asserts the buggy behaviour, so the run fails if that behaviour ever changes.',
       meta: ['problem_user', '1.5s chromium (local)', '0.72s firefox (CI)'],
       code:
 `<span class="k">await</span> loginPage.<span class="f">login</span>(<span class="s">'problem_user'</span>, <span class="s">'secret_sauce'</span>);
@@ -1552,7 +1552,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
   const lightbox = $('#lightbox');
   function openLightbox(s) {
     $('#lb-img').src = s.src; $('#lb-img').alt = s.title;
-    $('#lb-caption').textContent = `${s.title} — ${s.caption}`;
+    $('#lb-caption').textContent = `${s.title} · ${s.caption}`;
     lightbox.showModal();
   }
   $('#lb-close').addEventListener('click', () => lightbox.close());
@@ -1698,7 +1698,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
     { yr: 'OCT 2026', ico: '✅', title: 'Biztania finalist', sub: 'Prakan, 80 automated tests' },
     { stage: 'QA' },
     { yr: 'NOV 2026', ico: '🧪', title: 'Playwright E2E + CI', sub: '12/12 runs across 3 browsers' },
-    { yr: 'NEXT', ico: '🎯', title: 'QA Automation internship', sub: 'This is where you come in', next: true },
+    { yr: 'NEXT', ico: '🎯', title: 'QA Automation internship', sub: 'Looking for a team to join', next: true },
   ];
   (function journey() {
     const track = $('#j-track'), trail = $('#j-trail'), ship = $('#j-ship'), prog = $('#j-progress'), sec = $('#journey');
