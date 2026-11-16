@@ -129,6 +129,10 @@
       border: 2px solid currentColor; opacity: 0; animation: ping 2.2s var(--ease) infinite;
     }
     @keyframes ping { 0% { transform: scale(.5); opacity: .7; } 100% { transform: scale(1.6); opacity: 0; } }
+    /* Hero availability line: plain text, no pill */
+    .status { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: 14px; font-weight: 500; color: var(--muted); }
+    .status .dot { width: 8px; height: 8px; color: var(--pass); }
+    .status b { color: var(--ink); font-weight: 600; }
 
     .card {
       background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
@@ -622,7 +626,7 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <span class="tag tag-pass reveal"><span class="dot live"></span> Open to a QA Automation Tester internship</span>
+          <p class="status reveal"><span class="dot" aria-hidden="true"></span> <span>Open to a <b>QA Automation Tester</b> internship</span></p>
 
           <h1 class="split reveal" aria-label="Prapathomsit Attapakkanon"><span class="w" aria-hidden="true"><span>Prapathomsit</span></span> <span class="w" aria-hidden="true"><span style="transition-delay:.14s">Attapakkanon</span></span></h1>
           <p class="name-th reveal" data-delay="1" lang="th">ประปฐมสิทธิ อัตถ์ภาคนนท์ · Ice</p>
