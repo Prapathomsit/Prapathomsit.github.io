@@ -412,6 +412,7 @@
     .reel-badge i { width: 7px; height: 7px; border-radius: 50%; background: #EF4444; animation: blink 1.4s infinite; }
     @keyframes blink { 50% { opacity: .25; } }
     .reel-cap { position: absolute; left: 14px; bottom: 14px; right: 110px; font-size: 12.5px; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .6); }
+    .reel-name { position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; color: #fff; background: rgba(0, 0, 0, .55); padding: 5px 10px; border-radius: 999px; transition: opacity .25s; }
     .reel-toggle { position: absolute; right: 12px; bottom: 12px; border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 600; background: rgba(255, 255, 255, .9); color: #0F172A; }
 
     .marquee { overflow: hidden; margin-top: 18px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
@@ -660,13 +661,14 @@
           <div class="eyebrow">Showreel</div>
           <h2 class="h2 big">Build it.<br><span class="o">Break it.</span><br>Ship it.</h2>
           <p class="lead">I build games and web apps for competitions, then try to break them before the judges or players do. Every clip here comes from a real build.</p>
-          <div class="reel-facts"><span>NSC 2025 award</span><span>7 competitions</span><span>3 games on itch.io</span><span>92 tests passing</span></div>
+          <div class="reel-facts"><span>NSC 2025 award</span><span>7 competitions</span><span>6 projects in this reel</span><span>92 tests passing</span></div>
         </div>
         <figure class="reel-video reveal" data-delay="1">
-          <video id="reel-video" autoplay muted loop playsinline preload="metadata" poster="assets/reel/showreel-poster.jpg" aria-label="Gameplay from Z.O.O, Try not to chip! and CENTORIS">
+          <video id="reel-video" autoplay muted loop playsinline preload="metadata" poster="assets/reel/showreel-poster.jpg" aria-label="Clips from Z.O.O, Try not to chip!, Prakan, CENTORIS, ECOVEST+ and DICE">
             <source src="assets/reel/showreel.mp4" type="video/mp4" />
           </video>
           <span class="reel-badge"><i></i> PLAYING</span>
+          <span class="reel-name" id="reel-name" aria-live="off">Z.O.O · NSC 2025</span>
           <button class="reel-toggle" id="reel-toggle" type="button">Pause</button>
         </figure>
       </div>
@@ -1664,6 +1666,16 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
   const reelVideo = $('#reel-video'), reelBtn = $('#reel-toggle');
   const setReel = play => { play ? reelVideo.play().catch(() => {}) : reelVideo.pause(); reelBtn.textContent = play ? 'Pause' : 'Play'; };
   if (reduceMotion) setReel(false);
+  // ★ Showreel segments: each clip is 3.3 s, in this order (keep in sync with assets/reel/showreel.mp4)
+  const REEL = ['Z.O.O · NSC 2025', 'Try not to chip!', 'Prakan · Biztania', 'CENTORIS', 'ECOVEST+ · KMITL', 'DICE'];
+  const reelName = $('#reel-name'); let lastSeg = -1;
+  const syncName = () => {
+    const i = Math.min(REEL.length - 1, Math.floor(reelVideo.currentTime / 3.3));
+    if (i !== lastSeg) { lastSeg = i; reelName.style.opacity = 0; setTimeout(() => { reelName.textContent = REEL[i]; reelName.style.opacity = 1; }, 120); }
+    if (!reelVideo.paused) requestAnimationFrame(syncName);
+  };
+  reelVideo.addEventListener('play', () => requestAnimationFrame(syncName));
+  reelVideo.addEventListener('seeked', syncName);
   reelBtn.addEventListener('click', () => setReel(reelVideo.paused));
   new IntersectionObserver(([e]) => { if (!reduceMotion && reelBtn.textContent === 'Pause') e.isIntersecting ? reelVideo.play().catch(() => {}) : reelVideo.pause(); }).observe(reelVideo);
 
