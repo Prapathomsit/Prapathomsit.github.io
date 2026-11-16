@@ -61,8 +61,7 @@ main > section.section:not([data-moment="pinned-chapters"]) + section.section:no
 </style>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
-<link rel="modulepreload" href="assets/moments/moments.js"><link rel="modulepreload" href="assets/moments/lib.js">
-<link rel="modulepreload" href="assets/moments/pinned-chapters/moment.js"><link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
+<link rel="preload" as="image" href="assets/profile.webp" type="image/webp" fetchpriority="high">
 </head>
 <body>
 <!-- tasteskill deal · kind service (page-type service, site-kind other)
@@ -96,7 +95,7 @@ main > section.section:not([data-moment="pinned-chapters"]) + section.section:no
         <div class="btn-row"><a class="btn btn--primary" href="mailto:prapathomsit.work@gmail.com">Email me</a><a class="btn btn--secondary" href="#pipeline">See the test pipeline</a></div>
       </div>
       <div class="hero__media span-6 start-7">
-        <img src="assets/profile.jpg" alt="Prapathomsit Attapakkanon in a white shirt and the Chulalongkorn tie" width="924" height="1152" style="--ly-pos: 50% 30%" fetchpriority="high">
+        <img decoding="async" src="assets/profile.webp" alt="Prapathomsit Attapakkanon in a white shirt and the Chulalongkorn tie" width="924" height="1152" style="--ly-pos: 50% 30%" fetchpriority="high">
         <div class="ly-float">
           <div class="ly-float__row"><span>Last CI run</span><span>12 of 12 passed</span></div>
           <div class="ly-float__title">Run 43747756321, three browsers</div>
@@ -114,17 +113,17 @@ main > section.section:not([data-moment="pinned-chapters"]) + section.section:no
           <li class="mo-pc__step">
             <h3>A push starts 12 test runs</h3>
             <p>A git push, or the daily cron at 02:00 Bangkok time, starts GitHub Actions. Four tests run in each of three browsers.</p>
-            <figure class="mo-pc__visual"><img src="assets/screens/spec-code.png" alt="The saucedemo.spec.ts file open in the editor with the four test cases" width="2560" height="1600"></figure>
+            <figure class="mo-pc__visual"><img decoding="async" src="assets/screens/spec-code.webp" alt="The saucedemo.spec.ts file open in the editor with the four test cases" width="2560" height="1600"></figure>
           </li>
           <li class="mo-pc__step">
             <h3>TC-03 catches the checkout bug</h3>
             <p>On problem_user, typing a last name overwrites First Name. The test asserts that behaviour, so the run fails if it changes.</p>
-            <figure class="mo-pc__visual"><img src="assets/screens/checkout-bug.png" alt="The SauceDemo checkout form where the Last Name field stays empty" width="2000" height="1200"></figure>
+            <figure class="mo-pc__visual"><img decoding="async" src="assets/screens/checkout-bug.webp" alt="The SauceDemo checkout form where the Last Name field stays empty" width="2000" height="1200"></figure>
           </li>
           <li class="mo-pc__step">
             <h3>Every result becomes a sheet row</h3>
             <p>A custom reporter posts each result to an Apps Script webhook. Every row links back to its GitHub Actions run.</p>
-            <figure class="mo-pc__visual"><img src="assets/screens/sheets-report.png" alt="The Google Sheets report with twelve passed rows, one per test and browser" width="2850" height="1140"></figure>
+            <figure class="mo-pc__visual"><img decoding="async" src="assets/screens/sheets-report.webp" alt="The Google Sheets report with twelve passed rows, one per test and browser" width="2850" height="1140"></figure>
           </li>
         </ol>
       </div>
@@ -156,7 +155,7 @@ main > section.section:not([data-moment="pinned-chapters"]) + section.section:no
           <a class="link" href="https://docs.google.com/spreadsheets/d/19KROjkgRaDWTIVBfifGJpQjuhYWc4qtKpqVOdnpXm80/edit?gid=0#gid=0">Open the live report</a>
         </div>
       </div>
-      <figure class="frame frame--photo span-6 start-7" style="margin:0"><img src="assets/screens/trace-viewer.png" alt="Playwright Trace Viewer showing the 5.1 second wait for the product list in TC-04" width="2880" height="1800" loading="lazy"></figure>
+      <figure class="frame frame--photo span-6 start-7" style="margin:0"><img decoding="async" src="assets/screens/trace-viewer.webp" alt="Playwright Trace Viewer showing the 5.1 second wait for the product list in TC-04" width="2880" height="1800" loading="lazy"></figure>
     </div>
   </section>
 
@@ -168,19 +167,19 @@ main > section.section:not([data-moment="pinned-chapters"]) + section.section:no
       </div>
       <div class="grid grid--top">
           <article class="tile card span-4" aria-labelledby="tile-1">
-            <div class="tile__media"><img src="assets/projects/prakan-cover.jpg" alt="The Prakan incident-report app on a phone" width="960" height="540" loading="lazy"></div>
+            <div class="tile__media"><img decoding="async" src="assets/projects/prakan-cover.webp" alt="The Prakan incident-report app on a phone" width="960" height="540" loading="lazy"></div>
             <div class="tile__head"><h3 id="tile-1">Prakan: 80 of 80 pass</h3></div>
             <p>Node's test runner checks that made-up AI output fails closed and that no ID or address reaches the model.</p>
             <p class="tile__links"><a class="link" href="https://prapathomsit.github.io/promptyuen-demo/">Try the demo</a><a class="link" href="https://drive.google.com/file/d/19doSmxStgcnPgK3hnkh7f9miK41wFzp3/view?usp=sharing">Watch the pitch</a><a class="link" href="https://github.com/Prapathomsit/promptyuen-demo">Read the tests</a></p>
           </article>
           <article class="tile card span-4" aria-labelledby="tile-2">
-            <div class="tile__media"><img src="assets/projects/try-not-to-chip-unity-test.jpg" alt="A fire-grill trap in a Unity test scene for Try not to chip!" width="960" height="520" loading="lazy"></div>
+            <div class="tile__media"><img decoding="async" src="assets/projects/try-not-to-chip-unity-test.webp" alt="A fire-grill trap in a Unity test scene for Try not to chip!" width="960" height="520" loading="lazy"></div>
             <div class="tile__head"><h3 id="tile-2">Unity test scenes per trap</h3></div>
             <p>Player Test and Trap test scenes check each mechanic alone before it joins the main level.</p>
             <p class="tile__links"><a class="link" href="https://prapathomsit123.itch.io/try-not-to-chip">Play on itch.io</a></p>
           </article>
           <article class="tile card span-4" aria-labelledby="tile-3">
-            <div class="tile__media"><img src="assets/projects/obstacle-alert-soldering.jpg" alt="Soldering the ESP32 obstacle alert for visually impaired people" width="960" height="538" loading="lazy"></div>
+            <div class="tile__media"><img decoding="async" src="assets/projects/obstacle-alert-soldering.webp" alt="Soldering the ESP32 obstacle alert for visually impaired people" width="960" height="538" loading="lazy"></div>
             <div class="tile__head"><h3 id="tile-3">Obstacle alert: 3:02 to 2:36</h3></div>
             <p>Our team measured detection from 25 to 100 cm, then timed a blindfolded walk with and without the device.</p>
             <p class="tile__links"></p>
@@ -205,37 +204,37 @@ main > section.section:not([data-moment="pinned-chapters"]) + section.section:no
       </div>
       <div class="grid grid--top">
           <article class="tile card span-4" aria-labelledby="tile-4">
-            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/zoo.jpg" aria-label="Z.O.O gameplay: walking through the 3D village"><source src="assets/clips/zoo.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/zoo.webp" aria-label="Z.O.O gameplay: walking through the 3D village"><source src="assets/clips/zoo.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
             <div class="tile__head"><h3 id="tile-4">Z.O.O</h3><span class="tile__price">NSC 2025</span></div>
             <p>A 3D investigation RPG where villagers answer through the ChatGPT API. I led the team.</p>
             <p class="tile__links"><a class="link" href="https://1jjjay.itch.io/zoo">Play on itch.io</a><a class="link" href="https://www.tiktok.com/@alittledeveloper/video/7584868611110571281">Watch gameplay</a></p>
           </article>
           <article class="tile card span-4" aria-labelledby="tile-5">
-            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/chip.jpg" aria-label="Try not to chip! gameplay: the potato man running along the factory conveyor"><source src="assets/clips/chip.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/chip.webp" aria-label="Try not to chip! gameplay: the potato man running along the factory conveyor"><source src="assets/clips/chip.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
             <div class="tile__head"><h3 id="tile-5">Try not to chip!</h3><span class="tile__price">72 hours</span></div>
             <p>Steer a potato man out of a crisp factory. Top committer on the team repo, 44 commits.</p>
             <p class="tile__links"><a class="link" href="https://prapathomsit123.itch.io/try-not-to-chip">Play on itch.io</a><a class="link" href="https://www.tiktok.com/@alittledeveloper/video/7633425075022187777">Watch gameplay</a></p>
           </article>
           <article class="tile card span-4" aria-labelledby="tile-6">
-            <div class="tile__media"><img src="assets/projects/dream-frogs-hunt-cover.jpg" alt="The Dream Frogs Hunt title screen" width="960" height="544" loading="lazy"></div>
+            <div class="tile__media"><img decoding="async" src="assets/projects/dream-frogs-hunt-cover.webp" alt="The Dream Frogs Hunt title screen" width="960" height="544" loading="lazy"></div>
             <div class="tile__head"><h3 id="tile-6">Dream Frogs Hunt</h3><span class="tile__price">48 hours</span></div>
             <p>I wrote the enemy wave spawner. Version two reworked the game from player feedback.</p>
             <p class="tile__links"><a class="link" href="https://phonlakitz.itch.io/dream-frogs-hunt">Play on itch.io</a></p>
           </article>
           <article class="tile card span-4" aria-labelledby="tile-7">
-            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/ecovest.jpg" aria-label="ECOVEST+ demo: rolling the dice in the Escape the Paycheck board game"><source src="assets/clips/ecovest.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/ecovest.webp" aria-label="ECOVEST+ demo: rolling the dice in the Escape the Paycheck board game"><source src="assets/clips/ecovest.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
             <div class="tile__head"><h3 id="tile-7">ECOVEST+</h3><span class="tile__price">Top 20 of 300+</span></div>
             <p>A site for sharing investing knowledge, built in 48 hours. I built the Firebase login and profiles.</p>
             <p class="tile__links"><a class="link" href="https://drive.google.com/file/d/1DYxfeKvCrmWQcWPTIA4-sF4Qcj_UAe97/view?usp=sharing">Watch the demo</a></p>
           </article>
           <article class="tile card span-4" aria-labelledby="tile-8">
-            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/centoris.jpg" aria-label="CENTORIS gameplay: the alien courier crossing a planet"><source src="assets/clips/centoris.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/centoris.webp" aria-label="CENTORIS gameplay: the alien courier crossing a planet"><source src="assets/clips/centoris.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
             <div class="tile__head"><h3 id="tile-8">CENTORIS</h3><span class="tile__price">In development</span></div>
             <p>A 2D platformer: an alien courier carries an energy core across planets full of random traps.</p>
             <p class="tile__links"><a class="link" href="https://www.tiktok.com/@alittledeveloper/video/7584871320115006721">Watch gameplay</a></p>
           </article>
           <article class="tile card span-4" aria-labelledby="tile-9">
-            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/dice.jpg" aria-label="DICE gameplay: spelling a word across the letter board"><source src="assets/clips/dice.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/dice.webp" aria-label="DICE gameplay: spelling a word across the letter board"><source src="assets/clips/dice.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
             <div class="tile__head"><h3 id="tile-9">DICE</h3><span class="tile__price">Team of two</span></div>
             <p>Roll across letter tiles to spell the target word. I built the walls, colliders and tiles.</p>
             <p class="tile__links"><a class="link" href="https://drive.google.com/file/d/1JsHIW1Hc0JSSNOM6OQNpMR0MFNuXbOE1/view?usp=sharing">Watch gameplay</a></p>
@@ -245,12 +244,12 @@ main > section.section:not([data-moment="pinned-chapters"]) + section.section:no
       <p class="group-lede">Pitched at a bootcamp and a hackathon as designs and prototypes, with no public build yet.</p>
       <div class="grid grid--top">
           <article class="tile card span-6" aria-labelledby="tile-10">
-            <div class="tile__media"><img src="assets/projects/jobsy-phone.jpg" alt="JOBSY, Find your path: the app on a phone beside students running to school" width="1280" height="720" loading="lazy"></div>
+            <div class="tile__media"><img decoding="async" src="assets/projects/jobsy-phone.webp" alt="JOBSY, Find your path: the app on a phone beside students running to school" width="1280" height="720" loading="lazy"></div>
             <div class="tile__head"><h3 id="tile-10">JOBSY</h3><span class="tile__price">JUMP Thailand 2026</span></div>
             <p>Teens try a career through story mini-games, then AI matches their choices to O*NET skill profiles. I led the team; we surveyed 100 students aged 13 to 18.</p>
           </article>
           <article class="tile card span-6" aria-labelledby="tile-11">
-            <div class="tile__media"><img src="assets/projects/konklang-phone.jpg" alt="KonKlang, Shop with confidence: the app's start screen on a phone" width="1280" height="718" loading="lazy"></div>
+            <div class="tile__media"><img decoding="async" src="assets/projects/konklang-phone.webp" alt="KonKlang, Shop with confidence: the app's start screen on a phone" width="1280" height="718" loading="lazy"></div>
             <div class="tile__head"><h3 id="tile-11">KonKlang</h3><span class="tile__price">UniHack 2026</span></div>
             <p>Escrow for chat-based online shopping: the money waits until delivery is confirmed, and packing videos tied to QR codes settle disputes. Built in 48 hours.</p>
           </article>
@@ -276,7 +275,7 @@ main > section.section:not([data-moment="pinned-chapters"]) + section.section:no
           <li><span class="rows__name"><a class="link" href="assets/certs/nsc-2025.jpg">NSC honorable mention, Z.O.O</a></span><span class="rows__value">Aug 2025</span></li>
         </ul>
       </div>
-      <figure class="frame frame--photo span-6 start-7" style="margin:0;aspect-ratio:4/3"><img src="assets/certs/nsc-2025.jpg" alt="NSC 2025 honorable mention certificate for Z.O.O, issued by NSTDA and NRCT" width="1600" height="1141" loading="lazy"></figure>
+      <figure class="frame frame--photo span-6 start-7" style="margin:0;aspect-ratio:4/3"><img decoding="async" src="assets/certs/nsc-2025.webp" alt="NSC 2025 honorable mention certificate for Z.O.O, issued by NSTDA and NRCT" width="1600" height="1141" loading="lazy"></figure>
     </div>
   </section>
 </main>
