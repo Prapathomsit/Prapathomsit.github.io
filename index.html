@@ -1589,12 +1589,12 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
   // ★ Display order: test automation first, then award-winning work, other builds,
   //   bootcamp concepts, and planned work last. Titles not listed go just before concepts.
   const ORDER = [
-    'Playwright E2E Testing Framework', 'Prakan (ประกัน)',          // test automation
+    'Playwright E2E testing framework', 'Prakan (ประกัน)',          // test automation
     'Z.O.O', 'ECOVEST+',                                             // awards / top results
     'Try not to chip!', 'Dream Frogs Hunt', 'DICE', 'CENTORIS',      // other games
     'Obstacle alert for the visually impaired',                     // hardware
     'JOBSY', 'KonKlang',                                             // bootcamp concepts
-    'REST API & Contract Testing Lab',                              // planned
+    'REST API and contract testing lab',                            // planned
   ];
   const rank = t => { const i = ORDER.indexOf(t); return i === -1 ? ORDER.indexOf('JOBSY') - 0.5 : i; };
   const sorted = [...PROJECTS].sort((x, y) => rank(x.title) - rank(y.title));
