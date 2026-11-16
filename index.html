@@ -468,9 +468,9 @@
     .j-head .h2 { margin-top: 6px; }
     .j-line { position: absolute; left: 0; right: 0; top: var(--jy); height: 1px; background: rgba(255, 255, 255, .12); }
     .j-trail { position: absolute; left: 0; top: calc(var(--jy) - 1.5px); height: 3px; border-radius: 3px; background: linear-gradient(90deg, rgba(103, 232, 249, 0), #67E8F9 70%, #fff); box-shadow: 0 0 18px rgba(103, 232, 249, .7); }
-    .j-ship { position: absolute; top: var(--jy); transform: translate(-50%, -50%); width: 64px; height: 64px; z-index: 3; animation: bob 2.4s ease-in-out infinite; }
-    .j-ship img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #A5F3FC; box-shadow: 0 0 0 5px rgba(103, 232, 249, .18), 0 0 26px rgba(103, 232, 249, .75); }
-    .j-ship .snow { position: absolute; right: -6px; bottom: -4px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; color: #0A0E17; background: #A5F3FC; box-shadow: 0 0 12px rgba(103, 232, 249, .9); animation: spin 8s linear infinite; }
+    .j-ship { position: absolute; top: var(--jy); transform: translate(-50%, -50%); width: 56px; height: 56px; z-index: 3; animation: bob 2.4s ease-in-out infinite; }
+    .j-ship svg { width: 100%; height: 100%; filter: drop-shadow(0 0 10px rgba(103, 232, 249, .9)) drop-shadow(0 0 26px rgba(103, 232, 249, .5)); }
+    .j-ship .flake { transform-origin: 32px 32px; animation: spin 10s linear infinite; }
     @keyframes bob { 50% { margin-top: -6px; } }
     .j-track { position: absolute; left: 0; top: 0; bottom: 0; will-change: transform; }
     .j-stage { position: absolute; top: calc(var(--jy) + 150px); font-family: var(--font-display); font-weight: 800; font-size: 76px; letter-spacing: -.03em; line-height: 1; color: transparent; -webkit-text-stroke: 1.2px rgba(255, 255, 255, .14); white-space: nowrap; pointer-events: none; }
@@ -950,7 +950,7 @@
         <div class="j-line"></div>
         <div class="j-track" id="j-track"></div>
         <div class="j-trail" id="j-trail"></div>
-        <div class="j-ship" id="j-ship" aria-hidden="true"><img src="assets/avatar.jpg" alt="" /><span class="snow">❄</span></div>
+        <div class="j-ship" id="j-ship" aria-hidden="true"><svg viewBox="0 0 64 64"><defs><radialGradient id="orb" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#ECFEFF"/><stop offset=".45" stop-color="#67E8F9"/><stop offset="1" stop-color="#0E7490"/></radialGradient></defs><circle cx="32" cy="32" r="28" fill="url(#orb)"/><g class="flake" stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M32 14v36M16.4 23l31.2 18M16.4 41l31.2-18"/><path d="M27 16.5l5 4 5-4M27 47.5l5-4 5 4M17.8 29.6l6.2-1.9-1.4-6.3M46.2 34.4l-6.2 1.9 1.4 6.3M17.8 34.4l6.2 1.9-1.4 6.3M46.2 29.6l-6.2-1.9 1.4-6.3"/></g></svg></div>
         <div class="wrap j-progress" id="j-progress"></div>
       </div>
       <div class="wrap">
