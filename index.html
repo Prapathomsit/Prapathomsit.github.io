@@ -415,8 +415,11 @@
     .reel-toggle { position: absolute; right: 12px; bottom: 12px; border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 600; background: rgba(255, 255, 255, .9); color: #0F172A; }
 
     .marquee { overflow: hidden; margin-top: 18px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-    .reel-grid + .mq-label { margin-top: 64px; }
-    .marquee-track { display: flex; gap: 14px; width: max-content; animation: mq 48s linear infinite; }
+    .reel-grid + .marquee { margin-top: 64px; }
+    .mq-sep { flex: none; width: 170px; aspect-ratio: auto; border-radius: 14px; border: 1px dashed rgba(255, 255, 255, .18); display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 18px; font-family: var(--font-display); font-weight: 800; font-size: 20px; line-height: 1.15; color: #fff; }
+    .mq-sep i { width: 10px; height: 10px; border-radius: 50%; }
+    .mq-sep small { font-family: var(--font-mono); font-weight: 500; font-size: 11px; color: #94A3B8; letter-spacing: .06em; text-transform: uppercase; }
+    .marquee-track { display: flex; gap: 14px; width: max-content; animation: mq 70s linear infinite; }
     .marquee.rev .marquee-track { animation-direction: reverse; animation-duration: 38s; }
     .marquee:hover .marquee-track { animation-play-state: paused; }
     @keyframes mq { to { transform: translateX(-33.3333%); } }
@@ -603,10 +606,7 @@
           <button class="reel-toggle" id="reel-toggle" type="button">Pause</button>
         </figure>
       </div>
-      <div class="wrap mq-label"><i style="background:#34D399"></i> QA &amp; Web projects</div>
-      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq-web"></div></div>
-      <div class="wrap mq-label"><i style="background:#FB923C"></i> Games</div>
-      <div class="marquee rev" aria-hidden="true"><div class="marquee-track" id="mq-games"></div></div>
+      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq-all"></div></div>
     </section>
 
     <!-- ==========================================================
@@ -1543,9 +1543,11 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
     ['assets/projects/dream-frogs-hunt-cover.jpg', 'Dream Frogs Hunt'],
     ['assets/projects/try-not-to-chip-unity-test.jpg', 'Testing traps in Unity'],
   ];
-  const fill = (el, items) => { const html = items.map(([src, label]) => `<div class="mq-item"><img src="${src}" alt="" loading="lazy" /><span>${esc(label)}</span></div>`).join(''); el.innerHTML = html + html + html; };   // repeated for a seamless loop
-  fill($('#mq-web'), MARQUEE_WEB);
-  fill($('#mq-games'), MARQUEE_GAMES);
+  // One strip: all QA & Web items first, then all Games, each introduced by a label tile.
+  const tiles = items => items.map(([src, label]) => `<div class="mq-item"><img src="${src}" alt="" loading="lazy" /><span>${esc(label)}</span></div>`).join('');
+  const sep = (name, color, n) => `<div class="mq-sep"><i style="background:${color}"></i>${name}<small>${n} items →</small></div>`;
+  const strip = sep('QA &amp; Web', '#34D399', MARQUEE_WEB.length) + tiles(MARQUEE_WEB) + sep('Games', '#FB923C', MARQUEE_GAMES.length) + tiles(MARQUEE_GAMES);
+  $('#mq-all').innerHTML = strip + strip + strip;   // repeated for a seamless loop
 
   /* ---------- Showreel video: pause button, respects reduced motion ---------- */
   const reelVideo = $('#reel-video'), reelBtn = $('#reel-toggle');
