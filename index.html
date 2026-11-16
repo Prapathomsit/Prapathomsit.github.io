@@ -317,7 +317,7 @@
     .proj p { margin: 0; font-size: 14px; color: var(--muted); }
     .proj-thumb { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 9; }
     .proj-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .proj-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+    .proj-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
     .proj-actions .btn { flex: 1; }
     .proj-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 12px; color: var(--subtle); display: flex; justify-content: space-between; gap: 8px; }
     .proj.is-hidden { display: none; }
@@ -811,7 +811,7 @@
               <span class="tag tag-blue">Biztania 2026 · Web &amp; AI</span>
               <span class="ev-score">80/80<small>passing</small></span>
             </div>
-            <h3>Prakan (พร้อมยื่น): AI incident-report assistant</h3>
+            <h3>Prakan (ประกัน): AI incident-report assistant</h3>
             <div class="sub">Citizen web app · Node built-in test runner, zero dependencies</div>
             <ul class="checks">
               <li>AI output that is fabricated, spoofed or malformed <b>fails closed</b>. Nothing reaches the report unchecked.</li>
@@ -990,7 +990,7 @@
             <div class="exp-top"><span class="tag tag-rose">Finalist · Engineering Track</span><span class="mono c-mute">2026</span></div>
             <div><h3>CU-TU Biztania Camp 2026</h3><div class="org">Representing Chulalongkorn · Team “ส่งใจในแอร์ดรอป”</div></div>
             <ul>
-              <li>Our team built <b>Prakan (พร้อมยื่น)</b>: AI that turns an accident story into a police report, plus an officer portal. I was the main committer on the citizen app.</li>
+              <li>Our team built <b>พร้อมยื่น</b> (now <b>Prakan · ประกัน</b>): AI that turns an accident story into a police report, plus an officer portal. I was the main committer on the citizen app.</li>
               <li>Partnered with business team “Cold BrewTech”, whose pitch was an AI cash-flow assistant for insurers.</li>
               <li>Backed the demo with 80 automated tests and a written negative test plan.</li>
             </ul>
@@ -1187,7 +1187,7 @@
       ],
     },
     {
-      title: 'Prakan (พร้อมยื่น)',
+      title: 'Prakan (ประกัน)',
       category: 'web',
       visibility: 'Public repo',
       description: 'For car and home insurance customers: tell the AI what happened, and it drafts the incident report, checks your documents and picks the nearest police station. Runs Qwen in the browser, so personal data stays on the device.',
@@ -1196,6 +1196,7 @@
       links: [
         { label: 'Try the demo', href: LINKS.prakan, primary: true },
         { label: 'Code & tests', href: LINKS.prakanRepo },
+        { label: 'Pitch video', href: 'https://drive.google.com/file/d/19doSmxStgcnPgK3hnkh7f9miK41wFzp3/view?usp=sharing' },
       ],
     },
     {
@@ -1241,6 +1242,15 @@
       links: [{ label: 'Watch clip', href: 'https://www.tiktok.com/@alittledeveloper/video/7584871320115006721', primary: true }],
     },
     {
+      title: 'DICE',
+      category: 'games',
+      visibility: 'Puzzle game · team of two',
+      description: 'A top-down puzzle inspired by crosswords: roll across letter tiles to spell the target word on a board ringed with fire, using physics-based movement. I worked on the walls, colliders, box speed and letter tiles.',
+      tags: ['Unity', 'C#', 'Physics'],
+      image: 'assets/projects/dice-cover.jpg',
+      links: [{ label: 'Watch clip', href: 'https://drive.google.com/file/d/1JsHIW1Hc0JSSNOM6OQNpMR0MFNuXbOE1/view?usp=sharing', primary: true }],
+    },
+    {
       title: 'JOBSY',
       category: 'web',
       visibility: 'Bootcamp concept',
@@ -1268,7 +1278,7 @@
       tags: ['HTML / CSS / JS', 'Firebase Auth'],
       image: 'assets/projects/ecovest-game.jpg',
       links: [],
-      foot: ['KMITL Game Jam 2025', 'Architecture & pitch'],
+      links: [{ label: 'Watch demo', href: 'https://drive.google.com/file/d/1X7QSvlAIoZ5cM_1dcEuyqonp3Y43LRP6/view?usp=sharing', primary: true }],
     },
     {
       title: 'Obstacle alert for the visually impaired',
@@ -1633,6 +1643,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
     ['assets/projects/try-not-to-chip-cover.jpg', 'Try not to chip!'],
     ['assets/projects/centoris-cover.jpg', 'CENTORIS'],
     ['assets/projects/dream-frogs-hunt-cover.jpg', 'Dream Frogs Hunt'],
+    ['assets/projects/dice-cover.jpg', 'DICE'],
     ['assets/projects/try-not-to-chip-unity-test.jpg', 'Testing traps in Unity'],
   ];
   // One strip: all QA & Web items first, then all Games.
