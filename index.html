@@ -147,13 +147,13 @@
     .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: -.01em; }
     .brand-mark { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
     .nav { display: none; gap: 4px; }
-    .nav a { padding: 7px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--muted); transition: color .2s, background .2s; }
+    .nav a { padding: 7px 10px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--muted); transition: color .2s, background .2s; }
     .nav a:hover { color: var(--ink); background: var(--surface); }
     .nav a.active { color: var(--ink); background: var(--surface); }
     .header-cta { display: flex; gap: 8px; align-items: center; }
     .hide-sm { display: none; }
     @media (min-width: 640px) { .hide-sm { display: inline-flex; } }
-    @media (min-width: 900px) { .nav { display: flex; } }
+    @media (min-width: 1180px) { .nav { display: flex; } }
 
     /* ---------- hero ---------- */
     .hero { padding: 64px 0 72px; background: linear-gradient(180deg, var(--canvas) 0%, var(--paper) 100%); border-bottom: 1px solid var(--line); }
@@ -320,13 +320,26 @@
     .proj-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
     .proj-actions .btn { flex: 1; }
     .proj-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 12px; color: var(--subtle); display: flex; justify-content: space-between; gap: 8px; }
-    .proj.is-hidden { display: none; }
+    .proj.is-hidden, .proj-grid.collapsed .more { display: none; }
+    .show-all-wrap { text-align: center; margin-top: 28px; }
 
     /* ---------- game dev → QA ---------- */
     .gd-grid { display: grid; gap: 16px; }
     @media (min-width: 720px) { .gd-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1040px) { .gd-grid { grid-template-columns: repeat(4, 1fr); } }
     .gd { padding: 22px; }
+    .habits-head { margin: 48px 0 16px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+    .habits-head h3 { margin: 0; font-family: var(--font-display); font-size: 20px; letter-spacing: -.01em; }
+    .habits-head p { margin: 0; color: var(--subtle); font-size: 14px; }
+    .habits { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .habits { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .habits { grid-template-columns: repeat(4, 1fr); } }
+    .habit { display: flex; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
+    .habit .gd-icon { flex: none; width: 34px; height: 34px; }
+    .habit h4 { margin: 2px 0 4px; font-size: 14.5px; font-family: var(--font-display); }
+    .habit p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+    @media (max-width: 640px) { .habits { grid-template-columns: 1fr 1fr; gap: 8px; } .habit { flex-direction: column; gap: 8px; padding: 12px; } .habit p { display: none; } }
+    .habit .maps { display: block; margin-top: 6px; font-size: 11.5px; font-family: var(--font-mono); color: var(--pass); }
     .gd-icon { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
     .gd-icon svg { width: 20px; height: 20px; }
     .gd h3 { font-size: 15.5px; margin: 14px 0 6px; font-family: var(--font-display); letter-spacing: -.01em; }
@@ -583,6 +596,7 @@
         <a href="#testing">Testing</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Competitions</a>
+        <a href="#certificates">Certificates</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -647,32 +661,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ==========================================================
-         SHOWREEL (dark band, Hamster-Hub style)
-         Video: assets/reel/showreel.mp4 (cut from my TikTok clips).
-         Marquee images/labels: MARQUEE_* arrays in the script.
-    =========================================================== -->
-    <section class="dark reel" id="reel" aria-label="Showreel">
-      <div class="nebula"></div><div class="stars"></div>
-      <div class="wrap reel-grid">
-        <div class="reveal">
-          <div class="eyebrow">Showreel</div>
-          <h2 class="h2 big">Build it.<br><span class="o">Break it.</span><br>Ship it.</h2>
-          <p class="lead">I build games and web apps for competitions, then try to break them before the judges or players do. Every clip here comes from a real build.</p>
-          <div class="reel-facts"><span>NSC 2025 award</span><span>7 competitions</span><span>6 projects in this reel</span><span>92 tests passing</span></div>
-        </div>
-        <figure class="reel-video reveal" data-delay="1">
-          <video id="reel-video" autoplay muted loop playsinline preload="metadata" poster="assets/reel/showreel-poster.jpg" aria-label="Clips from Z.O.O, Try not to chip!, Prakan, CENTORIS, ECOVEST+ and DICE">
-            <source src="assets/reel/showreel.mp4" type="video/mp4" />
-          </video>
-          <span class="reel-badge"><i></i> PLAYING</span>
-          <span class="reel-name" id="reel-name" aria-live="off">Z.O.O · NSC 2025</span>
-          <button class="reel-toggle" id="reel-toggle" type="button">Pause</button>
-        </figure>
-      </div>
-      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq-all"></div></div>
     </section>
 
     <!-- ==========================================================
@@ -874,7 +862,42 @@
             <div class="ev-foot">Measure → find the limit → document it</div>
           </article>
         </div>
+
+        <!-- Habits carried over from game development (was its own section) -->
+        <div class="habits-head reveal" id="gamedev"><h3>Habits I brought from game development</h3><p>Games break in interesting ways, and finding out why is most of the job.</p></div>
+        <div class="habits">
+          <div class="habit reveal" data-delay="0"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.5 8.2l4 7.6M17.5 8.2l-4 7.6"/></svg></div><div><h4>State machines</h4><p>Player and UI states only work when every transition is defined. I now map an app's flows the same way: logged out, logged in, cart, checkout.</p><span class="maps">→ test flows by state</span></div></div>
+          <div class="habit reveal" data-delay="1"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 10v5M12 18h.01"/></svg></div><div><h4>Edge cases</h4><p>Players press everything at once, in the wrong order. That habit is how TC-03 found the checkout field that drops what you type.</p><span class="maps">→ negative &amp; bug-catch tests</span></div></div>
+          <div class="habit reveal" data-delay="2"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div><div><h4>Frame &amp; performance profiling</h4><p>Bugs tied to frame timing taught me not to trust a fixed sleep. Waiting for a real condition is what fixed the CI race in TC-04.</p><span class="maps">→ explicit waits, timing checks</span></div></div>
+          <div class="habit reveal" data-delay="3"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg></div><div><h4>Systematic debugging</h4><p>A glitch you can't reproduce can't be fixed. I cut bugs down to the smallest set of steps, which is exactly what a good test case is.</p><span class="maps">→ reproducible bug reports</span></div></div>
+        </div>
       </div>
+    </section>
+
+    <!-- ==========================================================
+         SHOWREEL (dark band, Hamster-Hub style)
+         Video: assets/reel/showreel.mp4 (cut from my TikTok clips).
+         Marquee images/labels: MARQUEE_* arrays in the script.
+    =========================================================== -->
+    <section class="dark reel" id="reel" aria-label="Showreel">
+      <div class="nebula"></div><div class="stars"></div>
+      <div class="wrap reel-grid">
+        <div class="reveal">
+          <div class="eyebrow">Showreel</div>
+          <h2 class="h2 big">Build it.<br><span class="o">Break it.</span><br>Ship it.</h2>
+          <p class="lead">I build games and web apps for competitions, then try to break them before the judges or players do. Every clip here comes from a real build.</p>
+          <div class="reel-facts"><span>NSC 2025 award</span><span>7 competitions</span><span>6 projects in this reel</span><span>92 tests passing</span></div>
+        </div>
+        <figure class="reel-video reveal" data-delay="1">
+          <video id="reel-video" autoplay muted loop playsinline preload="metadata" poster="assets/reel/showreel-poster.jpg" aria-label="Clips from Z.O.O, Try not to chip!, Prakan, CENTORIS, ECOVEST+ and DICE">
+            <source src="assets/reel/showreel.mp4" type="video/mp4" />
+          </video>
+          <span class="reel-badge"><i></i> PLAYING</span>
+          <span class="reel-name" id="reel-name" aria-live="off">Z.O.O · NSC 2025</span>
+          <button class="reel-toggle" id="reel-toggle" type="button">Pause</button>
+        </figure>
+      </div>
+      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq-all"></div></div>
     </section>
 
     <!-- ==========================================================
@@ -893,46 +916,6 @@
           <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
         </div>
         <div id="proj-groups"></div>
-      </div>
-    </section>
-
-    <!-- ==========================================================
-         GAME DEV → QA
-    =========================================================== -->
-    <section class="section tint" id="gamedev">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Background</div>
-          <h2 class="h2 big">What games taught me<br>about <span class="o">testing</span></h2>
-          <p class="lead">I've shipped games that real players download, including <b>Z.O.O</b> (NSC 2025 award) and <b>Dream Frogs Hunt</b> on itch.io. Games break in interesting ways, and finding out why is most of the job. Four habits carried over to QA:</p>
-        </div>
-
-        <div class="gd-grid">
-          <div class="card gd reveal">
-            <div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.5 8.2l4 7.6M17.5 8.2l-4 7.6"/></svg></div>
-            <h3>State machines</h3>
-            <p>Player and UI states only work when every transition is defined. I now map an app's flows the same way: logged out, logged in, cart, checkout.</p>
-            <div class="maps">→ test flows by state</div>
-          </div>
-          <div class="card gd reveal" data-delay="1">
-            <div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 10v5M12 18h.01"/></svg></div>
-            <h3>Edge cases</h3>
-            <p>Players press everything at once, in the wrong order. That habit is how TC-03 found the checkout field that drops what you type.</p>
-            <div class="maps">→ negative &amp; bug-catch tests</div>
-          </div>
-          <div class="card gd reveal" data-delay="2">
-            <div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div>
-            <h3>Frame &amp; performance profiling</h3>
-            <p>Bugs tied to frame timing taught me not to trust a fixed sleep. Waiting for a real condition is what fixed the CI race in TC-04.</p>
-            <div class="maps">→ explicit waits, timing checks</div>
-          </div>
-          <div class="card gd reveal" data-delay="3">
-            <div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg></div>
-            <h3>Systematic debugging</h3>
-            <p>A glitch you can't reproduce can't be fixed. I cut bugs down to the smallest set of steps, which is exactly what a good test case is.</p>
-            <div class="maps">→ reproducible bug reports</div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -1207,7 +1190,7 @@
       visibility: 'NSC 2025 award',
       description: '3D investigation RPG where villagers answer you through the ChatGPT API. I led the team and built the player controller, the camera and the NPC data model.',
       tags: ['Unity', 'C#', 'ChatGPT API'],
-      image: 'assets/projects/zoo-cover.jpg',
+      image: 'assets/projects/zoo-npc.jpg',
       links: [
         { label: 'Play on itch.io', href: 'https://1jjjay.itch.io/zoo', primary: true },
         { label: 'Watch clip', href: 'https://www.tiktok.com/@alittledeveloper/video/7584868611110571281' },
@@ -1437,7 +1420,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
       navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['featured', 'testing', 'projects', 'gamedev', 'experience', 'skills', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
+  ['featured', 'testing', 'projects', 'experience', 'certificates', 'skills', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
 
   /* ---------- Pipeline + run log ---------- */
   const check = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg>';
@@ -1615,7 +1598,10 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
   ];
   const rank = t => { const i = ORDER.indexOf(t); return i === -1 ? ORDER.indexOf('JOBSY') - 0.5 : i; };
   const sorted = [...PROJECTS].sort((x, y) => rank(x.title) - rank(y.title));
-  $('#proj-groups').innerHTML = `<div class="proj-grid">${sorted.map(cardHTML).join('')}</div>`;
+  const SHOW_FIRST = 6;   // ★ cards visible before "Show all"
+  $('#proj-groups').innerHTML = `<div class="proj-grid collapsed" id="proj-grid">${sorted.map((p, i) => cardHTML(p, i).replace('class="card proj', i >= SHOW_FIRST ? 'class="more card proj' : 'class="card proj')).join('')}</div>
+    <div class="show-all-wrap"><button class="btn btn-ghost" id="show-all" type="button">Show all ${sorted.length} projects</button></div>`;
+  $('#show-all').addEventListener('click', () => { $('#proj-grid').classList.remove('collapsed'); $('#show-all').parentNode.hidden = true; });
 
   const counts = PROJECTS.reduce((m, p) => (m[p.category] = (m[p.category] || 0) + 1, m), {});
   const filterKeys = ['all', ...Object.keys(CATEGORIES).filter(k => counts[k])];
@@ -1627,6 +1613,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
     const b = e.target.closest('.filter'); if (!b) return;
     const cat = b.dataset.cat;
     $$('.filter').forEach(f => f.setAttribute('aria-pressed', f === b));
+    if (cat !== 'all') { $('#proj-grid').classList.remove('collapsed'); $('#show-all').parentNode.hidden = true; }
     $$('.proj').forEach(card => card.classList.toggle('is-hidden', cat !== 'all' && card.dataset.category !== cat));
   });
 
@@ -1732,7 +1719,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
       shipX = Math.round(innerWidth * 0.36);
       startX = shipX + 220;                         // first milestone starts to the right of the ship
       endX = msItems[msItems.length - 1].x - shipX + 40;
-      sec.style.height = (innerHeight + (endX + startX) * 0.9) + 'px';
+      sec.style.height = (innerHeight + (endX + startX) * 0.5) + 'px';
       ship.style.left = shipX + 'px'; trail.style.width = shipX + 'px';
       update();
     };
