@@ -1,0 +1,42 @@
+{
+  "hook": {
+    "enabled": true,
+    "limits": {
+      "maxFindings": 5,
+      "maxChars": 8000
+    }
+  },
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T18:40:12.790Z",
+        "reason": "Claude verified in browser: no .ly-live element on the page; the rule is an unused kit rule in assets/layout/layout.css"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T18:40:12.806Z",
+        "reason": "Claude verified in browser: 0 elements render a radial-gradient; the match is an unused kit rule in assets/layout/layout.css"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-16T18:40:12.820Z",
+        "reason": "Claude measured in browser: every .rows li has 16px padding-bottom (17px text to rule), above the 12-16px guidance"
+      }
+    ]
+  }
+}
