@@ -1,1775 +1,275 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-type="service" data-radius="soft" data-buttons="solid" data-motion>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prapathomsit Attapakkanon · QA Automation Tester</title>
-  <meta name="description" content="Year-1 CEDT student at Chulalongkorn University. Playwright + TypeScript test automation, CI/CD reporting, and tested projects from national competitions. Open to a QA Automation Tester internship." />
-  <meta name="theme-color" content="#FFFFFF" />
-
-  <!-- Social preview (LinkedIn / Line / Facebook). After deploying, change og:url to your real URL. -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Prapathomsit Attapakkanon · QA Automation Portfolio" />
-  <meta property="og:description" content="Playwright E2E suite · 12/12 cross-browser runs · GitHub Actions → Google Sheets live reporting." />
-  <meta property="og:image" content="assets/profile.jpg" />
-  <meta property="og:url" content="https://prapathomsit.github.io/" />
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F172A'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%232563EB'/%3E%3C/svg%3E" />
-
-
-  <!-- ==========================================================
-       STYLES
-       Plain CSS (no Tailwind CDN) so the page has no runtime
-       build step, no console warnings, and loads fast on
-       GitHub Pages / Vercel. Change colours in :root only.
-  =========================================================== -->
-  <style>
-    :root {
-      --ink: #0F172A;          /* main text */
-      --muted: #475569;        /* body copy */
-      --subtle: #64748B;       /* captions */
-      --paper: #FFFFFF;
-      --canvas: #F8FAFC;       /* section tint */
-      --surface: #F1F5F9;      /* chips / hover */
-      --line: #E2E8F0;         /* hairlines */
-      --line-strong: #CBD5E1;
-      --accent: #2563EB;
-      --accent-hover: #1D4ED8;
-      --accent-soft: #EFF6FF;
-      --pass: #059669;
-      --pass-soft: #ECFDF5;
-      --pass-line: #A7F3D0;
-      --rose: #E11D48;
-      --rose-soft: #FFF1F2;
-      --amber: #B45309;
-      --amber-soft: #FFFBEB;
-
-      /* San Francisco on Apple devices; closest system font elsewhere */
-      --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
-      --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
-      --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
-
-      --radius: 14px;
-      --radius-lg: 20px;
-      --shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 12px 32px -14px rgba(15, 23, 42, .12);
-      --shadow-lift: 0 1px 2px rgba(15, 23, 42, .05), 0 18px 40px -16px rgba(15, 23, 42, .18);
-      --ease: cubic-bezier(.16, 1, .3, 1);
-      --wrap: 1120px;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; color: inherit; cursor: pointer; }
-    code, .mono { font-family: var(--font-mono); }
-    ::selection { background: var(--accent); color: #fff; }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-
-    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
-    .section { padding: 88px 0; }
-    .section.tint { background: var(--canvas); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .eyebrow {
-      font-family: var(--font-mono); font-size: 12px; font-weight: 600;
-      letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
-    }
-    .h2 {
-      font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em;
-      font-size: clamp(26px, 3.4vw, 34px); line-height: 1.2; margin: 6px 0 0;
-    }
-    .lead { color: var(--muted); max-width: 640px; margin: 10px 0 0; }
-    .section-head { margin-bottom: 36px; }
-
-    /* ---------- buttons & chips ---------- */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 11px 18px; border-radius: 12px; font-size: 14px; font-weight: 600;
-      border: 1px solid transparent; white-space: nowrap;
-      transition: background .2s, border-color .2s, transform .2s var(--ease), box-shadow .2s;
-    }
-    .btn:active { transform: translateY(1px); }
-    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 6px 18px -8px rgba(37, 99, 235, .6); }
-    .btn-primary:hover { background: var(--accent-hover); }
-    .btn-dark { background: var(--ink); color: #fff; }
-    .btn-dark:hover { background: #1E293B; }
-    .btn-ghost { background: var(--paper); border-color: var(--line); }
-    .btn-ghost:hover { background: var(--canvas); border-color: var(--line-strong); }
-    .btn-sm { padding: 8px 13px; font-size: 13px; border-radius: 10px; }
-    .arrow { transition: transform .2s var(--ease); display: inline-block; }
-    .btn:hover .arrow { transform: translate(2px, -2px); }
-
-    .chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 500;
-      background: var(--canvas); border: 1px solid var(--line); color: var(--ink);
-    }
-    .chip.mono { font-size: 11.5px; }
-    .tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-    .tag-pass { background: var(--pass-soft); color: var(--pass); border: 1px solid var(--pass-line); }
-    .tag-blue { background: var(--accent-soft); color: var(--accent); }
-    .tag-rose { background: var(--rose-soft); color: var(--rose); }
-    .tag-gray { background: var(--surface); color: var(--muted); }
-    .tag-amber { background: var(--amber-soft); color: var(--amber); }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
-    .dot.live { position: relative; }
-    .dot.live::after {
-      content: ''; position: absolute; inset: -4px; border-radius: 50%;
-      border: 2px solid currentColor; opacity: 0; animation: ping 2.2s var(--ease) infinite;
-    }
-    @keyframes ping { 0% { transform: scale(.5); opacity: .7; } 100% { transform: scale(1.6); opacity: 0; } }
-
-    .card {
-      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-    }
-
-    /* ---------- header ---------- */
-    .header {
-      position: sticky; top: 0; z-index: 40;
-      background: rgba(255, 255, 255, .82);
-      backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px);
-      border-bottom: 1px solid transparent; transition: border-color .25s;
-    }
-    .header.scrolled { border-bottom-color: var(--line); }
-    .header-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: -.01em; }
-    .brand-mark { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-    .nav { display: none; gap: 4px; }
-    .nav a { padding: 7px 10px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--muted); transition: color .2s, background .2s; }
-    .nav a:hover { color: var(--ink); background: var(--surface); }
-    .nav a.active { color: var(--ink); background: var(--surface); }
-    .header-cta { display: flex; gap: 8px; align-items: center; }
-    .hide-sm { display: none; }
-    @media (min-width: 640px) { .hide-sm { display: inline-flex; } }
-    @media (min-width: 1180px) { .nav { display: flex; } }
-
-    /* ---------- hero ---------- */
-    .hero { padding: 64px 0 72px; background: linear-gradient(180deg, var(--canvas) 0%, var(--paper) 100%); border-bottom: 1px solid var(--line); }
-    .hero-grid { display: grid; gap: 48px; align-items: center; }
-    @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.35fr 1fr; gap: 56px; } }
-    .hero h1 {
-      font-family: var(--font-display); font-weight: 800; letter-spacing: -.03em;
-      font-size: clamp(36px, 5.6vw, 58px); line-height: 1.05; margin: 18px 0 0;
-    }
-    .hero-role { font-family: var(--font-display); font-weight: 700; font-size: clamp(18px, 2.2vw, 22px); color: var(--accent); margin: 12px 0 0; letter-spacing: -.01em; }
-    .hero p.intro { font-size: 17px; color: var(--muted); max-width: 580px; margin: 14px 0 0; }
-    .hero p.intro strong { color: var(--ink); font-weight: 600; }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-    .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 24px; margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); max-width: 600px; }
-    @media (min-width: 560px) { .metrics { grid-template-columns: repeat(4, 1fr); } }
-    .metric-num { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; line-height: 1.1; }
-    .metric-label { font-size: 12.5px; color: var(--subtle); margin-top: 4px; line-height: 1.4; }
-
-    .portrait { width: 100%; max-width: 340px; margin: 0 auto; padding: 12px; }
-    @media (min-width: 960px) { .portrait { margin: 0 0 0 auto; } }
-    .portrait-img { position: relative; border-radius: 12px; overflow: hidden; background: var(--surface); aspect-ratio: 4 / 5; }
-    .portrait-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-    .portrait-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 6px 4px; }
-    .portrait-meta b { font-size: 14px; display: block; }
-    .portrait-meta span.sub { font-size: 12.5px; color: var(--subtle); }
-    .cu-badge { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--rose); background: var(--rose-soft); padding: 3px 8px; border-radius: 6px; }
-
-    /* ---------- featured project ---------- */
-    .feature { overflow: hidden; }
-    .feature-grid { display: grid; }
-    @media (min-width: 1000px) { .feature-grid { grid-template-columns: 5fr 7fr; } }
-    .feature-left { padding: 30px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 22px; }
-    @media (min-width: 1000px) { .feature-left { border-bottom: 0; border-right: 1px solid var(--line); } }
-    .feature-left p { margin: 0; color: var(--muted); font-size: 15px; }
-    .kv { display: grid; gap: 16px; }
-    .kv dt { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--subtle); }
-    .kv dd { margin: 4px 0 0; font-size: 14.5px; color: var(--muted); }
-    .kv dd strong { color: var(--ink); font-weight: 600; }
-    .inline-code { font-family: var(--font-mono); font-size: 12.5px; background: var(--surface); color: var(--ink); padding: 2px 6px; border-radius: 5px; white-space: nowrap; }
-    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .feature-actions { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid var(--line); margin-top: auto; }
-    .feature-actions .btn { flex: 1 1 160px; }
-
-    .feature-right { background: var(--canvas); padding: 26px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
-
-    /* pipeline diagram */
-    .pipe-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .pipe-title { font-weight: 600; font-size: 14px; }
-    .pipe-title small { display: block; font-weight: 400; color: var(--subtle); font-size: 12.5px; }
-    .pipeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(2, 1fr); counter-reset: step; }
-    @media (min-width: 640px) { .pipeline { grid-template-columns: repeat(3, 1fr); } }
-    .step {
-      position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
-      padding: 12px 12px 11px; transition: border-color .35s, box-shadow .35s, transform .35s var(--ease);
-      min-width: 0;
-    }
-    .step-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
-    .step-num { font-family: var(--font-mono); font-size: 11px; color: var(--subtle); }
-    .step-state { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line-strong); display: grid; place-items: center; transition: all .3s; flex: none; }
-    .step-state svg { width: 11px; height: 11px; opacity: 0; transition: opacity .2s; }
-    .step-name { font-weight: 600; font-size: 13.5px; margin-top: 6px; line-height: 1.3; }
-    .step-desc { font-size: 12px; color: var(--subtle); margin-top: 3px; line-height: 1.45; overflow-wrap: anywhere; }
-    .step.running { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-    .step.running .step-state { border-color: var(--accent); border-top-color: transparent; animation: spin .8s linear infinite; }
-    .step.done .step-state { background: var(--pass); border-color: var(--pass); }
-    .step.done .step-state svg { opacity: 1; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* tabs */
-    .tabs { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 4px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
-    .tab { border: 0; background: transparent; padding: 7px 12px; border-radius: 9px; font-size: 13px; font-weight: 600; color: var(--muted); transition: background .2s, color .2s, box-shadow .2s; }
-    .tab:hover { color: var(--ink); }
-    .tab[aria-selected="true"] { background: var(--paper); color: var(--ink); box-shadow: 0 1px 3px rgba(15, 23, 42, .1); }
-    .panel { animation: fadeUp .35s var(--ease); min-width: 0; }
-    .panel[hidden] { display: none; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-    /* console log */
-    .console { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-    .console-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 9px 14px; border-bottom: 1px solid var(--line); background: var(--canvas); font-size: 12px; }
-    .console-bar .lights { display: flex; gap: 6px; }
-    .console-bar .lights i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
-    .console-body { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.75; padding: 14px 16px; height: 300px; overflow: auto; color: var(--ink); }
-    .console-body .ln { white-space: pre-wrap; overflow-wrap: anywhere; animation: fadeUp .25s var(--ease); }
-    .c-mute { color: var(--subtle); }
-    .c-pass { color: var(--pass); font-weight: 600; }
-    .c-blue { color: var(--accent); }
-    .c-amber { color: var(--amber); }
-    .c-rose { color: var(--rose); }
-    .counter { font-family: var(--font-mono); font-weight: 600; color: var(--pass); }
-
-    /* test cases */
-    .tc-list { display: grid; gap: 8px; grid-template-columns: 1fr; }
-    @media (min-width: 560px) { .tc-list { grid-template-columns: 1fr 1fr; } }
-    .tc {
-      text-align: left; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
-      transition: border-color .2s, box-shadow .2s, transform .2s var(--ease);
-    }
-    .tc:hover { border-color: var(--line-strong); transform: translateY(-1px); }
-    .tc[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-    .tc-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; }
-    .tc-title { font-size: 13px; font-weight: 600; margin-top: 5px; line-height: 1.4; }
-    .tc-detail { margin-top: 10px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
-    .tc-detail h4 { font-family: var(--font-display); font-size: 16px; margin: 6px 0 6px; letter-spacing: -.01em; }
-    .tc-detail p { margin: 0; font-size: 14px; color: var(--muted); }
-    .tc-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-    pre.code {
-      margin: 14px 0 0; padding: 14px 16px; background: #0F172A; color: #E2E8F0; border-radius: 10px;
-      font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7; overflow-x: auto; tab-size: 2;
-    }
-    pre.code .k { color: #C4B5FD; } pre.code .s { color: #86EFAC; } pre.code .f { color: #93C5FD; } pre.code .cm { color: #64748B; }
-
-    /* sheet + matrix */
-    .sheet { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-    .sheet-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--canvas); font-size: 12.5px; }
-    .sheet-scroll { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-    th { text-align: left; font-weight: 600; background: var(--ink); color: #fff; padding: 9px 12px; white-space: nowrap; }
-    td { padding: 9px 12px; border-top: 1px solid var(--line); white-space: nowrap; color: var(--muted); }
-    td.mod { color: var(--ink); font-weight: 600; }
-    td.st { background: var(--pass-soft); color: var(--pass); font-weight: 700; text-align: center; }
-    td.num { text-align: right; font-family: var(--font-mono); color: var(--ink); }
-    tr.new td { animation: rowIn .7s var(--ease); }
-    @keyframes rowIn { from { background: #DBEAFE; } }
-    .matrix { display: grid; grid-template-columns: auto repeat(3, 1fr); gap: 6px; margin-top: 14px; font-size: 12px; }
-    .matrix .hd { font-family: var(--font-mono); font-weight: 600; color: var(--subtle); text-align: center; padding: 4px 0; }
-    .matrix .rh { font-family: var(--font-mono); font-weight: 600; padding: 8px 8px 8px 0; }
-    .matrix .cell { background: var(--pass-soft); color: var(--pass); border: 1px solid var(--pass-line); border-radius: 8px; text-align: center; padding: 7px 0; font-weight: 700; }
-    .note { font-size: 12.5px; color: var(--subtle); margin: 10px 0 0; }
-
-    /* screenshot gallery */
-    .gallery { display: grid; gap: 12px; }
-    @media (min-width: 640px) { .gallery { grid-template-columns: 1fr 1fr; } }
-    .shot { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-    .shot button { display: block; width: 100%; padding: 0; border: 0; background: var(--surface); cursor: zoom-in; }
-    .shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; transition: transform .5s var(--ease); }
-    .shot button:hover img { transform: scale(1.03); }
-    .shot figcaption { padding: 10px 12px; font-size: 12.5px; color: var(--muted); }
-    .shot figcaption b { color: var(--ink); display: block; font-size: 13px; }
-
-    /* ---------- projects ---------- */
-    .proj-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px; margin-bottom: 30px; }
-    .filters { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 5px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
-    .filter { border: 0; background: transparent; padding: 7px 13px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--muted); transition: background .2s, color .2s; }
-    .filter:hover { color: var(--ink); }
-    .filter[aria-pressed="true"] { background: var(--ink); color: #fff; }
-    .filter .count { opacity: .55; font-weight: 500; margin-left: 4px; }
-    .proj-grid { display: grid; gap: 20px; }
-    @media (min-width: 720px) { .proj-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1040px) { .proj-grid { grid-template-columns: repeat(3, 1fr); } }
-    .proj {
-      display: flex; flex-direction: column; gap: 14px; padding: 24px;
-      transition: transform .3s var(--ease), box-shadow .3s, border-color .3s, opacity .3s;
-    }
-    .proj:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); border-color: var(--line-strong); }
-    .proj.planned { border-style: dashed; box-shadow: none; background: transparent; }
-    .proj.planned:hover { transform: none; box-shadow: none; }
-    .proj-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; }
-    .proj-top .vis { font-family: var(--font-mono); color: var(--subtle); }
-    .proj h3 { font-family: var(--font-display); font-size: 18px; margin: 0; letter-spacing: -.01em; line-height: 1.3; }
-    .proj p { margin: 0; font-size: 14px; color: var(--muted); }
-    .proj-thumb { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); aspect-ratio: 16 / 9; }
-    .proj-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .proj-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
-    .proj-actions .btn { flex: 1; }
-    .proj-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 12px; color: var(--subtle); display: flex; justify-content: space-between; gap: 8px; }
-    .proj.is-hidden, .proj-grid.collapsed .more { display: none; }
-    .show-all-wrap { text-align: center; margin-top: 28px; }
-
-    /* ---------- game dev → QA ---------- */
-    .gd-grid { display: grid; gap: 16px; }
-    @media (min-width: 720px) { .gd-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1040px) { .gd-grid { grid-template-columns: repeat(4, 1fr); } }
-    .gd { padding: 22px; }
-    .habits-head { margin: 48px 0 16px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
-    .habits-head h3 { margin: 0; font-family: var(--font-display); font-size: 20px; letter-spacing: -.01em; }
-    .habits-head p { margin: 0; color: var(--subtle); font-size: 14px; }
-    .habits { display: grid; gap: 12px; grid-template-columns: 1fr; }
-    @media (min-width: 720px) { .habits { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1100px) { .habits { grid-template-columns: repeat(4, 1fr); } }
-    .habit { display: flex; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
-    .habit .gd-icon { flex: none; width: 34px; height: 34px; }
-    .habit h4 { margin: 2px 0 4px; font-size: 14.5px; font-family: var(--font-display); }
-    .habit p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
-    @media (max-width: 640px) { .habits { grid-template-columns: 1fr 1fr; gap: 8px; } .habit { flex-direction: column; gap: 8px; padding: 12px; } .habit p { display: none; } }
-    .habit .maps { display: block; margin-top: 6px; font-size: 11.5px; font-family: var(--font-mono); color: var(--pass); }
-    .gd-icon { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
-    .gd-icon svg { width: 20px; height: 20px; }
-    .gd h3 { font-size: 15.5px; margin: 14px 0 6px; font-family: var(--font-display); letter-spacing: -.01em; }
-    .gd p { margin: 0; font-size: 13.5px; color: var(--muted); }
-    .gd .maps { margin-top: 12px; font-size: 12px; font-family: var(--font-mono); color: var(--pass); }
-
-    /* ---------- experience ---------- */
-    .exp-grid { display: grid; gap: 20px; }
-    @media (min-width: 820px) { .exp-grid { grid-template-columns: 1fr 1fr; } }
-    .exp { padding: 26px; display: flex; flex-direction: column; gap: 12px; }
-    .exp-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; }
-    .exp h3 { font-family: var(--font-display); font-size: 19px; margin: 0; letter-spacing: -.01em; }
-    .exp .org { font-size: 13px; color: var(--subtle); margin-top: 2px; }
-    .exp ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
-    .exp li + li { margin-top: 4px; }
-
-    /* ---------- skills ---------- */
-    .skills-grid { display: grid; gap: 20px; }
-    @media (min-width: 820px) { .skills-grid { grid-template-columns: repeat(3, 1fr); } }
-    .skill { padding: 24px; }
-    .skill h3 { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 16px; margin: 0 0 16px; }
-    .skill h3 .dot { width: 9px; height: 9px; }
-    .skill .chips .chip { font-size: 12.5px; padding: 6px 11px; }
-
-    /* ---------- contact / footer ---------- */
-    .contact { padding: 40px; display: grid; gap: 24px; align-items: center; background: var(--canvas); box-shadow: none; }
-    @media (min-width: 860px) { .contact { grid-template-columns: 1fr auto; } }
-    .contact h2 { font-family: var(--font-display); font-size: clamp(24px, 3vw, 30px); margin: 8px 0 8px; letter-spacing: -.02em; line-height: 1.25; }
-    .contact p { margin: 0; color: var(--muted); font-size: 15px; }
-    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-    .footer-bar { margin-top: 36px; padding: 24px 0 40px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; font-size: 13px; color: var(--subtle); }
-    .footer-bar nav { display: flex; flex-wrap: wrap; gap: 20px; }
-    .footer-bar a:hover { color: var(--ink); }
-
-    /* ---------- testing evidence ---------- */
-    .name-th { font-size: 17px; color: var(--subtle); margin: 8px 0 0; font-weight: 500; }
-    .ev-grid { display: grid; gap: 20px; }
-    @media (min-width: 900px) { .ev-grid { grid-template-columns: repeat(2, 1fr); } }
-    .ev { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
-    .ev-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .ev h3 { font-family: var(--font-display); font-size: 18px; margin: 0; letter-spacing: -.01em; }
-    .ev .sub { font-size: 13px; color: var(--subtle); margin-top: -6px; }
-    .ev p { margin: 0; font-size: 14px; color: var(--muted); }
-    .ev-score { font-family: var(--font-display); font-weight: 800; font-size: 26px; color: var(--pass); line-height: 1; }
-    .ev-score small { font-family: var(--font-sans); font-size: 12px; font-weight: 500; color: var(--subtle); margin-left: 6px; }
-    .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
-    .checks li { position: relative; padding-left: 24px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
-    .checks li::before { content: ''; position: absolute; left: 0; top: 3px; width: 15px; height: 15px; border-radius: 50%; background: var(--pass-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23059669' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5 10 16.5 18 8'/%3E%3C/svg%3E") center / 11px no-repeat; border: 1px solid var(--pass-line); }
-    .checks code { font-family: var(--font-mono); font-size: 12px; background: var(--surface); padding: 1px 5px; border-radius: 4px; color: var(--ink); }
-    .ev-foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--subtle); font-family: var(--font-mono); }
-    .exp-grid.three { grid-template-columns: 1fr; }
-    @media (min-width: 720px) { .exp-grid.three { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1040px) { .exp-grid.three { grid-template-columns: repeat(3, 1fr); } }
-
-    /* ---------- Hamster-Hub-style motion ---------- */
-    .o { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
-    .h2.big { font-size: clamp(34px, 5.6vw, 64px); line-height: 1.04; letter-spacing: -.035em; }
-    .dark { background: #0A0E17; color: #E2E8F0; position: relative; overflow: hidden; isolation: isolate; }
-    .dark::before { content: ''; position: absolute; inset: -20% -10% auto auto; width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; background: radial-gradient(circle, rgba(249, 115, 22, .22), transparent 62%); z-index: -1; pointer-events: none; }
-    .dark::after { content: ''; position: absolute; inset: auto auto -30% -15%; width: 60vw; height: 60vw; max-width: 760px; max-height: 760px; background: radial-gradient(circle, rgba(37, 99, 235, .22), transparent 62%); z-index: -1; pointer-events: none; }
-    .dark .h2, .dark h3 { color: #fff; }
-    .dark .o { -webkit-text-stroke: 1.5px rgba(255, 255, 255, .9); }
-    .dark .eyebrow { color: #FB923C; }
-    .dark .lead, .dark .org, .dark .exp ul { color: #94A3B8; }
-    .dark .card { background: rgba(255, 255, 255, .035); border-color: rgba(255, 255, 255, .09); box-shadow: none; backdrop-filter: blur(6px); }
-    .dark .exp b { color: #fff; }
-    .dark .c-mute { color: #64748B; }
-    .exp { position: relative; overflow: hidden; }
-    .exp-num { position: absolute; right: 18px; bottom: -14px; font-family: var(--font-display); font-weight: 800; font-size: 92px; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(15, 23, 42, .08); pointer-events: none; }
-    .dark .exp-num { -webkit-text-stroke: 1.5px rgba(255, 255, 255, .07); }
-    .dark .exp:hover { border-color: rgba(251, 146, 60, .45); }
-    .dark .exp:hover .exp-num { -webkit-text-stroke-color: rgba(251, 146, 60, .5); }
-    .exp-num { transition: -webkit-text-stroke-color .4s; }
-
-    .reel { padding: 88px 0 56px; }
-    .reel-grid { display: grid; gap: 40px; align-items: center; }
-    @media (min-width: 960px) { .reel-grid { grid-template-columns: 1fr 1.25fr; gap: 56px; } }
-    .reel-facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-    .reel-facts span { font-family: var(--font-mono); font-size: 12px; padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .14); color: #CBD5E1; }
-    .reel-video { margin: 0; position: relative; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .12); aspect-ratio: 16 / 9; background: #000; box-shadow: 0 40px 80px -30px rgba(249, 115, 22, .35); }
-    .reel-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .reel-badge { position: absolute; top: 14px; left: 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; color: #fff; background: rgba(0, 0, 0, .55); padding: 5px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
-    .reel-badge i { width: 7px; height: 7px; border-radius: 50%; background: #EF4444; animation: blink 1.4s infinite; }
-    @keyframes blink { 50% { opacity: .25; } }
-    .reel-cap { position: absolute; left: 14px; bottom: 14px; right: 110px; font-size: 12.5px; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .6); }
-    .reel-name { position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; color: #fff; background: rgba(0, 0, 0, .55); padding: 5px 10px; border-radius: 999px; transition: opacity .25s; }
-    .reel-toggle { position: absolute; right: 12px; bottom: 12px; border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 600; background: rgba(255, 255, 255, .9); color: #0F172A; }
-
-    .marquee { overflow: hidden; margin-top: 18px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-    .reel-grid + .marquee { margin-top: 64px; }
-    .mq-sep { flex: none; width: 170px; aspect-ratio: auto; border-radius: 14px; border: 1px dashed rgba(255, 255, 255, .18); display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 18px; font-family: var(--font-display); font-weight: 800; font-size: 20px; line-height: 1.15; color: #fff; }
-    .mq-sep i { width: 10px; height: 10px; border-radius: 50%; }
-    .mq-sep small { font-family: var(--font-mono); font-weight: 500; font-size: 11px; color: #94A3B8; letter-spacing: .06em; text-transform: uppercase; }
-    .marquee-track { display: flex; gap: 14px; width: max-content; animation: mq 70s linear infinite; }
-    .marquee.rev .marquee-track { animation-direction: reverse; animation-duration: 38s; }
-    .marquee:hover .marquee-track { animation-play-state: paused; }
-    @keyframes mq { to { transform: translateX(-33.3333%); } }
-    .mq-item { position: relative; width: 280px; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .1); flex: none; background: #111827; }
-    .mq-item img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .6s var(--ease); }
-    .mq-item:hover img { transform: scale(1.06); }
-    .mq-item span { position: absolute; left: 10px; bottom: 9px; font-size: 12px; font-weight: 600; color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .8); }
-    .mq-item::after { content: ''; position: absolute; inset: 50% 0 0; background: linear-gradient(transparent, rgba(0, 0, 0, .65)); }
-    .mq-item span { z-index: 1; }
-    .mq-chip { flex: none; font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 3vw, 34px); letter-spacing: -.02em; color: rgba(255, 255, 255, .88); padding: 0 6px; white-space: nowrap; }
-    .mq-chip.o { -webkit-text-stroke: 1.2px rgba(255, 255, 255, .55); color: transparent; }
-    .mq-chip::after { content: '✦'; margin-left: 18px; color: #FB923C; -webkit-text-stroke: 0; font-size: .6em; vertical-align: middle; }
-
-    .js .split.reveal { opacity: 1; transform: none; }
-    .split .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .06em; }
-    .js .split .w > span { display: inline-block; transform: translateY(105%); transition: transform 1s var(--ease); }
-    .js .split.visible .w > span { transform: none; }
-    .proj-thumb img { transition: transform .6s var(--ease); }
-    .proj:hover .proj-thumb img { transform: scale(1.05); }
-
-    @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
-      .js .split .w > span { transform: none; }
-    }
-
-    /* ---------- grouped marquee + project groups ---------- */
-    .mq-label { display: flex; align-items: center; gap: 10px; margin: 40px 0 0; font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #CBD5E1; }
-    .mq-label i { width: 8px; height: 8px; border-radius: 50%; }
-    .mq-label + .marquee { margin-top: 14px; }
-    .proj-group + .proj-group { margin-top: 56px; }
-    .proj-group-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-    .proj-group-head h3 { margin: 0; font-family: var(--font-display); font-size: 22px; letter-spacing: -.01em; }
-    .proj-group-head .count { font-family: var(--font-mono); font-size: 12px; color: var(--subtle); }
-    .proj-group-head p { margin: 0 0 0 auto; font-size: 13px; color: var(--subtle); text-align: right; }
-    .proj-group.is-hidden { display: none; }
-    @media (max-width: 640px) { .proj-group-head { flex-wrap: wrap; } .proj-group-head p { margin: 0; text-align: left; width: 100%; } }
-
-    /* ---------- journey (scroll-driven flight path) ---------- */
-    .journey { padding: 0; overflow: clip; }
-    .dark .stars { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .7;
-      background-image: radial-gradient(1px 1px at 12% 22%, #fff, transparent), radial-gradient(1px 1px at 32% 68%, #cbd5e1, transparent), radial-gradient(1.5px 1.5px at 58% 34%, #fff, transparent), radial-gradient(1px 1px at 76% 78%, #e2e8f0, transparent), radial-gradient(1px 1px at 88% 18%, #fff, transparent), radial-gradient(1px 1px at 46% 88%, #94a3b8, transparent), radial-gradient(1.5px 1.5px at 22% 48%, #e2e8f0, transparent), radial-gradient(1px 1px at 68% 56%, #fff, transparent);
-      background-size: 520px 420px; animation: twinkle 6s ease-in-out infinite alternate; }
-    @keyframes twinkle { to { opacity: .35; } }
-    .j-pin { --jy: max(58%, 520px); position: sticky; top: 0; height: 100vh; overflow: hidden; }
-    .j-head { position: absolute; top: 104px; left: 0; right: 0; z-index: 2; }
-    .j-head .h2 { margin-top: 6px; }
-    .j-line { position: absolute; left: 0; right: 0; top: var(--jy); height: 1px; background: rgba(255, 255, 255, .12); }
-    .j-trail { position: absolute; left: 0; top: calc(var(--jy) - 1.5px); height: 3px; border-radius: 3px; background: linear-gradient(90deg, rgba(103, 232, 249, 0), #67E8F9 70%, #fff); box-shadow: 0 0 18px rgba(103, 232, 249, .7); }
-    .j-ship { position: absolute; top: var(--jy); transform: translate(-50%, -50%); width: 56px; height: 56px; z-index: 3; animation: bob 2.4s ease-in-out infinite; }
-    .j-ship svg { width: 100%; height: 100%; filter: drop-shadow(0 0 10px rgba(103, 232, 249, .9)) drop-shadow(0 0 26px rgba(103, 232, 249, .5)); }
-    .j-ship .flake { transform-origin: 32px 32px; animation: spin 10s linear infinite; }
-    @keyframes bob { 50% { margin-top: -6px; } }
-    .j-track { position: absolute; left: 0; top: 0; bottom: 0; will-change: transform; }
-    .j-stage { position: absolute; top: calc(var(--jy) + 150px); font-family: var(--font-display); font-weight: 800; font-size: 76px; letter-spacing: -.03em; line-height: 1; color: transparent; -webkit-text-stroke: 1.2px rgba(255, 255, 255, .14); white-space: nowrap; pointer-events: none; }
-    .j-ms { position: absolute; top: var(--jy); width: 220px; transform: translateX(-50%); }
-    .j-ms .tick { position: absolute; left: 50%; width: 1px; height: 46px; background: rgba(255, 255, 255, .25); }
-    .j-ms .node { position: absolute; left: 50%; top: 0; width: 12px; height: 12px; border-radius: 50%; transform: translate(-50%, -50%); background: #0A0E17; border: 2px solid rgba(255, 255, 255, .35); transition: all .4s var(--ease); }
-    .j-ms .body { position: absolute; left: 0; right: 0; text-align: center; transition: opacity .5s var(--ease), transform .5s var(--ease); opacity: .38; }
-    .j-ms.up .tick { bottom: 6px; } .j-ms.up .body { bottom: 56px; }
-    .j-ms.down .tick { top: 6px; } .j-ms.down .body { top: 56px; }
-    .j-ms .ico { font-size: 34px; line-height: 1; display: block; margin-bottom: 8px; filter: grayscale(.8); transition: filter .4s, transform .5s var(--ease); }
-    .j-ms .yr { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; color: #FB923C; }
-    .j-ms h4 { margin: 3px 0 2px; font-family: var(--font-display); font-size: 16px; color: #fff; line-height: 1.25; }
-    .j-ms p { margin: 0; font-size: 12.5px; color: #94A3B8; line-height: 1.45; }
-    .j-ms.on .body { opacity: 1; }
-    .j-ms.on .ico { filter: none; transform: scale(1.12); }
-    .j-ms.on .node { background: #67E8F9; border-color: #67E8F9; box-shadow: 0 0 0 6px rgba(103, 232, 249, .18), 0 0 18px rgba(103, 232, 249, .8); }
-    .j-ms.next h4 { color: #34D399; }
-    .j-progress { position: absolute; left: 0; right: 0; bottom: 36px; z-index: 2; font-family: var(--font-mono); font-size: 12px; color: #64748B; }
-    .j-progress b { color: #fff; font-weight: 600; }
-    .j-list, .j-mobile-head { display: none; }
-    .j-lead { max-width: 460px; font-size: 15px; margin-top: 10px; }
-    @media (max-width: 820px), (prefers-reduced-motion: reduce) {
-      .journey { padding: 72px 0; }
-      .j-pin { display: none; }
-      .j-mobile-head { display: block; }
-      .j-list { display: block; position: relative; margin: 28px 0 0; padding-left: 26px; list-style: none; }
-      .j-list::before { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(#FB923C, rgba(251, 146, 60, .15)); }
-      .j-list li { position: relative; margin-bottom: 22px; }
-      .j-list li::before { content: ''; position: absolute; left: -25px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: #FB923C; box-shadow: 0 0 12px rgba(251, 146, 60, .8); }
-      .j-list .yr { font-family: var(--font-mono); font-size: 11px; color: #FB923C; letter-spacing: .08em; }
-      .j-list h4 { margin: 2px 0; color: #fff; font-family: var(--font-display); font-size: 16px; }
-      .j-list p { margin: 0; color: #94A3B8; font-size: 13.5px; }
-      .j-list .stage { margin: 30px 0 14px -26px; font-family: var(--font-display); font-weight: 800; font-size: 30px; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, .45); }
-      .j-list .stage::before { display: none; }
-    }
-
-    /* ---------- nebula + hover tilt ---------- */
-    .dark .nebula { position: absolute; inset: -20%; z-index: -1; pointer-events: none; opacity: .55; filter: blur(40px);
-      background: radial-gradient(30% 40% at 20% 30%, rgba(99, 102, 241, .35), transparent 70%), radial-gradient(28% 36% at 78% 62%, rgba(249, 115, 22, .25), transparent 70%), radial-gradient(22% 30% at 50% 85%, rgba(14, 165, 233, .22), transparent 70%);
-      animation: drift 28s ease-in-out infinite alternate; }
-    @keyframes drift { to { transform: translate3d(4%, -3%, 0) rotate(6deg) scale(1.08); } }
-    .tilt { position: relative; transform-style: preserve-3d; transition: transform .5s var(--ease), opacity .7s var(--ease), box-shadow .3s, border-color .3s; }
-    .tilt.tilting { transition: transform .08s linear, box-shadow .3s, border-color .3s; }
-    .tilt::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
-      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(37, 99, 235, .10), transparent 45%); }
-    .dark .tilt::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(251, 146, 60, .14), transparent 45%); }
-    .tilt:hover::after { opacity: 1; }
-    @media (prefers-reduced-motion: reduce) { .dark .nebula, .dark .stars { animation: none; } }
-
-    /* ---------- certificates ---------- */
-    .cert-grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
-    @media (min-width: 640px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1040px) { .cert-grid { grid-template-columns: repeat(4, 1fr); } }
-    .cert { padding: 12px; display: flex; flex-direction: column; gap: 10px; transition: transform .3s var(--ease), box-shadow .3s; }
-    .cert:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
-    .cert button { padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); cursor: zoom-in; aspect-ratio: 4 / 3; }
-    .cert img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s var(--ease); }
-    .cert button:hover img { transform: scale(1.04); }
-    .cert h3 { font-size: 14.5px; margin: 2px 4px 0; font-family: var(--font-display); line-height: 1.35; }
-    .cert p { margin: 0 4px; font-size: 12.5px; color: var(--subtle); }
-    .cert a { margin: 0 4px 4px; font-size: 12.5px; color: var(--accent); font-weight: 600; }
-
-    /* ---------- lightbox ---------- */
-    dialog.lightbox { border: 0; padding: 0; background: transparent; max-width: min(1200px, 94vw); max-height: 92vh; }
-    dialog.lightbox::backdrop { background: rgba(15, 23, 42, .72); backdrop-filter: blur(4px); }
-    dialog.lightbox img { max-height: 84vh; width: auto; margin: 0 auto; border-radius: 12px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .5); }
-    dialog.lightbox .lb-bar { display: flex; justify-content: space-between; align-items: center; color: #fff; font-size: 13px; padding: 0 2px 10px; gap: 12px; }
-    dialog.lightbox .lb-close { background: rgba(255, 255, 255, .14); border: 0; color: #fff; border-radius: 8px; padding: 6px 12px; }
-
-    /* ---------- scroll reveal (only when JS runs) ---------- */
-    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-    .js .reveal.visible { opacity: 1; transform: none; }
-    .js .reveal[data-delay="1"] { transition-delay: .08s; }
-    .js .reveal[data-delay="2"] { transition-delay: .16s; }
-    .js .reveal[data-delay="3"] { transition-delay: .24s; }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-      .js .reveal { opacity: 1; transform: none; }
-    }
-
-    @media (max-width: 520px) {
-      .section { padding: 64px 0; }
-      .hero { padding: 40px 0 56px; }
-      .feature-left, .feature-right { padding: 20px; }
-      .contact { padding: 26px; }
-      .console-body { height: 260px; font-size: 11.5px; }
-    }
-  </style>
-  <script>document.documentElement.classList.add('js');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prapathomsit Attapakkanon: QA automation tester at Chulalongkorn</title>
+<meta name="description" content="First-year CEDT student who writes Playwright tests in TypeScript, runs them on GitHub Actions and reports every result to Google Sheets. Looking for a QA automation internship.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prapathomsit Attapakkanon: QA automation tester">
+<meta property="og:description" content="Playwright and TypeScript tests on GitHub Actions, 12 of 12 cross-browser runs passing, plus games and web apps tested before the judges saw them.">
+<meta property="og:image" content="https://prapathomsit.github.io/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f7f9f8">
+<link rel="canonical" href="https://prapathomsit.github.io/">
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<!-- keep this <style> after the links: layout.css resets --ly-scale -->
+<style>
+:root {
+  --p-bg: #f7f9f8; --p-surface: #ebf0ee; --p-ink: #06525c; --p-muted: #2f737d;
+  --p-accent: #06525c; --p-accent-ink: #f7f9f8; --p-action: #06525c; --p-action-ink: #f7f9f8;
+  --p-inv-bg: #06525c; --p-inv-surface: #205d66; --p-inv-ink: #f7f9f8; --p-inv-muted: #c1d0d2;
+  --p-inv-accent: #f7f9f8; --p-inv-accent-ink: #06525c; --p-inv-action: #f7f9f8; --p-inv-action-ink: #06525c;
+  /* The owner asked for San Francisco: the system stack replaces the dealt Red Hat pairing (waived, .taste-skill/waivers.json) */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+  --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.025em;
+  --display-tracking-xl: -0.035em;
+}
+/* tool icons under the test list */
+.tools { display: flex; flex-wrap: wrap; gap: var(--s-5); align-items: center; margin-top: var(--s-6); }
+.tools img { height: 32px; width: auto; }
+.links-row { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-6); margin-top: var(--s-5); }
+/* Work: six tiles two-up below 1024 so the section stays two screens; the phone keeps the names and the facts */
+@media (max-width: 1023px) { #work .grid > .tile { grid-column: span 6; --tile-ratio: 16 / 9; } }
+@media (max-width: 639px) { #work .grid > .tile, #other-tests .grid > .tile { grid-column: 1 / -1; } #work .grid > .tile > p { display: none; } #work .tile--more { display: none; } }
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js"><link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/pinned-chapters/moment.js"><link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
 </head>
-
 <body>
-  <a href="#main" class="sr-only" style="position:absolute;left:-9999px">Skip to content</a>
-
-  <!-- ==========================================================
-       HEADER
-  =========================================================== -->
-  <header class="header" id="top">
-    <div class="wrap header-inner">
-      <a href="#top" class="brand" aria-label="Back to top">
-        <span class="brand-mark"></span>
-        <span>Prapathomsit<span style="color:var(--accent)">.A</span></span>
-      </a>
-
-      <nav class="nav" aria-label="Sections">
-        <a href="#featured">Featured</a>
-        <a href="#testing">Testing</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Competitions</a>
-        <a href="#certificates">Certificates</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="header-cta">
-        <a class="btn btn-ghost btn-sm hide-sm" href="https://docs.google.com/spreadsheets/d/19KROjkgRaDWTIVBfifGJpQjuhYWc4qtKpqVOdnpXm80/edit?gid=0#gid=0" data-link="sheet" target="_blank" rel="noopener noreferrer">
-          <span class="dot live" style="color:var(--pass)"></span> Live Test Report
-        </a>
-        <a class="btn btn-ghost btn-sm hide-sm" href="mailto:prapathomsit.work@gmail.com" data-link="email">Email</a>
-        <a class="btn btn-dark btn-sm" href="https://github.com/Prapathomsit" data-link="github" target="_blank" rel="noopener noreferrer">
-          GitHub <span class="arrow">↗</span>
-        </a>
-      </div>
+<!-- tasteskill deal · kind service (page-type service, site-kind other)
+     hero split (re-dealt with --has ui: no photograph 1920 wide) · palette teal-on-paper · type: dealt red-hat, replaced by the
+     San Francisco system stack at the owner's request · nav-centre · footer-columns · close-type · rhythm space · buttons solid ·
+     mark dots · moments pinned-chapters (#pipeline), word-highlight (#approach) -->
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Prapathomsit</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#pipeline">Pipeline</a></div>
+      <div class="nav__item"><a class="nav__link" href="#tests">Tests</a></div>
+      <div class="nav__item"><a class="nav__link" href="#work">Work</a></div>
+      <div class="nav__item"><a class="nav__link" href="#awards">Awards</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="mailto:prapathomsit.work@gmail.com">Email me</a>
     </div>
-  </header>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+  </div>
+</header>
 
-  <main id="main">
-
-    <!-- ==========================================================
-         HERO
-         Photo: replace assets/profile.jpg (portrait 4:5 works best).
-    =========================================================== -->
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div>
-
-          <h1 class="split reveal" aria-label="Prapathomsit Attapakkanon"><span class="w" aria-hidden="true"><span>Prapathomsit</span></span> <span class="w" aria-hidden="true"><span style="transition-delay:.14s">Attapakkanon</span></span></h1>
-          <p class="name-th reveal" data-delay="1" lang="th">ประปฐมสิทธิ อัตถ์ภาคนนท์ · Ice</p>
-          <p class="hero-role reveal" data-delay="1">Interested in QA Automation Testing · Year 1, CEDT</p>
-          <p class="intro reveal" data-delay="2">
-            First-year Computer Engineering &amp; Digital Technology (CEDT) student at
-            Chulalongkorn University. I write automated tests in <strong>Playwright + TypeScript</strong>,
-            run them on <strong>GitHub Actions</strong>, and test what I build, from AI web apps to a
-            game that won an honorable mention at NSC 2025.
-          </p>
-
-          <div class="hero-ctas reveal" data-delay="2">
-            <a class="btn btn-primary" href="#featured">See the test pipeline</a>
-            <a class="btn btn-ghost" href="https://docs.google.com/spreadsheets/d/19KROjkgRaDWTIVBfifGJpQjuhYWc4qtKpqVOdnpXm80/edit?gid=0#gid=0" data-link="sheet" target="_blank" rel="noopener noreferrer">Live Google Sheets report <span class="arrow">↗</span></a>
-          </div>
-
-          <!-- Hero metrics: keep these numbers in sync with your latest CI run -->
-          <div class="metrics reveal" data-delay="3">
-            <div><div class="metric-num" style="color:var(--pass)">12/12</div><div class="metric-label">Cross-browser E2E runs passing</div></div>
-            <div><div class="metric-num" style="color:var(--pass)">80/80</div><div class="metric-label">Unit tests in Prakan (AI app)</div></div>
-            <div><div class="metric-num">NSC</div><div class="metric-label">2025 national award (game Z.O.O)</div></div>
-            <div><div class="metric-num" style="color:var(--accent)">7</div><div class="metric-label">Competitions &amp; game jams since 2025</div></div>
-          </div>
-        </div>
-
-        <div class="card portrait reveal" data-delay="2">
-          <div class="portrait-img">
-            <img src="assets/profile.jpg" alt="Portrait of Prapathomsit Attapakkanon" width="924" height="1152" fetchpriority="high" />
-          </div>
-          <div class="portrait-meta">
-            <div>
-              <b>Chulalongkorn University</b>
-              <span class="sub">CEDT · Faculty of Engineering</span>
-            </div>
-            <span class="cu-badge">CU</span>
-          </div>
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="hero__text span-5">
+        <p class="hero__kicker"><span>Prapathomsit Attapakkanon · <span lang="th">ประปฐมสิทธิ อัตถ์ภาคนนท์</span></span></p>
+        <h1 id="hero-h">QA automation tester, Year 1 at Chulalongkorn</h1>
+        <p class="hero__lead">I write Playwright tests in TypeScript and run them on GitHub Actions. My SauceDemo suite passes 12 of 12 runs in Chromium, Firefox and WebKit.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="mailto:prapathomsit.work@gmail.com">Email me</a><a class="btn btn--secondary" href="#pipeline">See the test pipeline</a></div>
+      </div>
+      <div class="hero__media span-6 start-7">
+        <img src="assets/profile.jpg" alt="Prapathomsit Attapakkanon in a white shirt and the Chulalongkorn tie" width="924" height="1152" style="--ly-pos: 50% 30%" fetchpriority="high">
+        <div class="ly-float">
+          <div class="ly-float__row"><span>Last CI run</span><span>12 of 12 passed</span></div>
+          <div class="ly-float__title">Run 43747756321, three browsers</div>
         </div>
       </div>
-    </section>
+    </div></div>
+  </section>
 
-    <!-- ==========================================================
-         FEATURED PROJECT
-         Text lives here in HTML; the interactive data (test cases,
-         run log, sheet rows, screenshots) lives in the
-         FEATURED DATA block inside the <script> at the bottom.
-    =========================================================== -->
-    <section class="section" id="featured">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Featured project</div>
-          <h2 class="h2">SauceDemo E2E test automation and CI/CD reporting pipeline</h2>
-          <p class="lead">Each <span class="inline-code">git push</span> and a daily cron job run the suite in Chromium, Firefox and WebKit, then write every result to a Google Sheet.</p>
-        </div>
-
-        <article class="card feature reveal">
-          <div class="feature-grid">
-
-            <!-- Left: summary for recruiters + tech leads -->
-            <div class="feature-left">
-              <span class="tag tag-pass" style="align-self:flex-start"><span class="dot live"></span> CI runs on every push and once a day</span>
-              <p>A regression suite for the SauceDemo e-commerce site. It covers login, cart, a known checkout bug and a slow-loading user, and publishes each result to a shared spreadsheet.</p>
-              <p><strong style="color:var(--ink)">Why I built it.</strong> I wanted to practise the daily work of a QA automation tester: design test cases, write tests with the Page Object Model, run them in CI, and report results that anyone on the team can read.</p>
-
-              <dl class="kv">
-                <div>
-                  <dt>Architecture</dt>
-                  <dd>Playwright + TypeScript with the Page Object Model (<span class="inline-code">pages/LoginPage.ts</span>). Locators stay out of the specs, so a UI change means editing one file.</dd>
-                </div>
-                <div>
-                  <dt>Problem solved</dt>
-                  <dd><span class="inline-code">performance_glitch_user</span> takes ~5.2s to load products. On CI the assertions ran before the products had loaded. An explicit <span class="inline-code">waitFor({ state: 'visible' })</span> made the test stable on all three engines.</dd>
-                </div>
-                <div>
-                  <dt>Impact</dt>
-                  <dd>A custom reporter (<span class="inline-code">tests/google-sheets-reporter.ts</span>) posts results to a Google Apps Script webhook. Each row links back to its GitHub Actions run, so anyone can check a result without reading CI logs.</dd>
-                </div>
-              </dl>
-
-              <div class="chips">
-                <span class="chip mono">Playwright</span>
-                <span class="chip mono">TypeScript</span>
-                <span class="chip mono">Page Object Model</span>
-                <span class="chip mono">GitHub Actions</span>
-                <span class="chip mono">Apps Script</span>
-                <span class="chip mono">Google Sheets</span>
-              </div>
-
-              <div class="feature-actions">
-                <a class="btn btn-dark" href="https://github.com/Prapathomsit/playwright-ecommerce-e2e" data-link="repo" target="_blank" rel="noopener noreferrer">View code <span class="arrow">↗</span></a>
-                <a class="btn btn-ghost" href="https://docs.google.com/spreadsheets/d/19KROjkgRaDWTIVBfifGJpQjuhYWc4qtKpqVOdnpXm80/edit?gid=0#gid=0" data-link="sheet" target="_blank" rel="noopener noreferrer">Live report <span class="arrow">↗</span></a>
-              </div>
-            </div>
-
-            <!-- Right: interactive pipeline -->
-            <div class="feature-right">
-              <div class="pipe-head">
-                <div class="pipe-title">How one run works <small>Replay of CI run #43747756321</small></div>
-                <button class="btn btn-ghost btn-sm" id="replay-btn" type="button">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-                  Replay run
-                </button>
-              </div>
-
-              <ol class="pipeline" id="pipeline"><!-- built by JS from PIPELINE_STEPS --></ol>
-
-              <div class="tabs" role="tablist" aria-label="Run details">
-                <button class="tab" role="tab" id="tab-log" aria-controls="panel-log" aria-selected="true">Run log</button>
-                <button class="tab" role="tab" id="tab-tests" aria-controls="panel-tests" aria-selected="false">Test cases</button>
-                <button class="tab" role="tab" id="tab-sheet" aria-controls="panel-sheet" aria-selected="false">Sheets report</button>
-                <button class="tab" role="tab" id="tab-shots" aria-controls="panel-shots" aria-selected="false">Screenshots</button>
-              </div>
-
-              <!-- TAB: run log -->
-              <div class="panel" role="tabpanel" id="panel-log" aria-labelledby="tab-log">
-                <div class="console">
-                  <div class="console-bar">
-                    <span class="lights"><i></i><i></i><i></i></span>
-                    <span class="mono c-mute">ubuntu-latest · npx playwright test</span>
-                    <span class="counter" id="pass-counter">0/12</span>
-                  </div>
-                  <div class="console-body" id="console" aria-live="polite"></div>
-                </div>
-              </div>
-
-              <!-- TAB: test cases -->
-              <div class="panel" role="tabpanel" id="panel-tests" aria-labelledby="tab-tests" hidden>
-                <div class="tc-list" id="tc-list"></div>
-                <div class="tc-detail" id="tc-detail"></div>
-              </div>
-
-              <!-- TAB: sheets -->
-              <div class="panel" role="tabpanel" id="panel-sheet" aria-labelledby="tab-sheet" hidden>
-                <div class="sheet">
-                  <div class="sheet-bar">
-                    <b>Saucedemo_E2E_Automated_Report</b>
-                    <span class="mono c-mute">tab 16/11/2026 · excerpt</span>
-                  </div>
-                  <div class="sheet-scroll">
-                    <table>
-                      <thead><tr><th>Run</th><th>Module</th><th>Test case</th><th>Browser</th><th>Status</th><th style="text-align:right">Sec</th></tr></thead>
-                      <tbody id="sheet-body"></tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="matrix" id="matrix" aria-label="Pass matrix: 4 tests by 3 browsers"></div>
-                <p class="note">The Apps Script webhook appends the rows, and the Run column links to the GitHub Actions run. A second tab, <b>Bug Report</b>, lists the defects the suite catches.</p>
-              </div>
-
-              <!-- TAB: screenshots (files in assets/screens/) -->
-              <div class="panel" role="tabpanel" id="panel-shots" aria-labelledby="tab-shots" hidden>
-                <div class="gallery" id="gallery"></div>
-                <p class="note" id="gallery-empty" hidden>Screenshots coming soon. In the meantime, see the <a href="https://github.com/Prapathomsit/playwright-ecommerce-e2e" data-link="repo" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">repository</a>.</p>
-              </div>
-            </div>
-
-          </div>
-        </article>
+  <!-- pinned-chapters: the section holds for two screens while the three steps of one run open in turn -->
+  <section class="section" id="pipeline" style="--h: 2" data-moment="pinned-chapters" aria-labelledby="pipeline-h">
+    <div class="wrap mo-pc__grid">
+      <div class="mo-pc__text">
+        <h2 id="pipeline-h">The pipeline from git push to sheet row</h2>
+        <ol class="mo-pc__steps">
+          <li class="mo-pc__step">
+            <h3>A push starts 12 test runs</h3>
+            <p>A git push, or the daily cron at 02:00 Bangkok time, starts GitHub Actions. Four tests run in each of three browsers.</p>
+            <figure class="mo-pc__visual"><img src="assets/screens/spec-code.png" alt="The saucedemo.spec.ts file open in the editor with the four test cases" width="2560" height="1600"></figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>TC-03 catches the checkout bug</h3>
+            <p>On problem_user, typing a last name overwrites First Name. The test asserts that behaviour, so the run fails if it changes.</p>
+            <figure class="mo-pc__visual"><img src="assets/screens/checkout-bug.png" alt="The SauceDemo checkout form where the Last Name field stays empty" width="2000" height="1200"></figure>
+          </li>
+          <li class="mo-pc__step">
+            <h3>Every result becomes a sheet row</h3>
+            <p>A custom reporter posts each result to an Apps Script webhook. Every row links back to its GitHub Actions run.</p>
+            <figure class="mo-pc__visual"><img src="assets/screens/sheets-report.png" alt="The Google Sheets report with twelve passed rows, one per test and browser" width="2850" height="1140"></figure>
+          </li>
+        </ol>
       </div>
-    </section>
+      <div class="mo-pc__visuals frame"></div>
+    </div>
+  </section>
 
-    <!-- ==========================================================
-         HOW I TEST — evidence from other projects.
-         Numbers come from re-running each suite (16 Nov 2026).
-    =========================================================== -->
-    <section class="section tint" id="testing">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Beyond the featured suite</div>
-          <h2 class="h2 big">How I <span class="o">test</span><br>what I build</h2>
-          <p class="lead">Most of my projects come from hackathons, where a demo that breaks on stage loses. So I test the unhappy paths first: bad input, missing permissions, double submits, and AI output that tries to make things up.</p>
+  <section class="section" id="tests" aria-labelledby="tests-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5">
+        <div class="section-head">
+          <h2 id="tests-h">Four tests in the SauceDemo suite</h2>
+          <p>Locators live in one Page Object, pages/LoginPage.ts, so a UI change means editing one file. Times are WebKit on CI.</p>
         </div>
-
-        <div class="ev-grid">
-          <article class="card ev reveal">
-            <div class="ev-top">
-              <span class="tag tag-blue">Biztania 2026 · Web &amp; AI</span>
-              <span class="ev-score">80/80<small>passing</small></span>
-            </div>
-            <h3>Prakan (ประกัน): AI incident-report assistant</h3>
-            <div class="sub">Citizen web app · Node built-in test runner, zero dependencies</div>
-            <ul class="checks">
-              <li>AI output that is fabricated, spoofed or malformed <b>fails closed</b>. Nothing reaches the report unchecked.</li>
-              <li>The app treats a hostile statement as evidence only, so it <b>cannot trigger an action</b> (prompt-injection guard).</li>
-              <li>The model only receives the reviewed text, <b>never ID, contact details, address or photos</b>.</li>
-              <li>Uploads reject missing, duplicate, oversized and spoofed photos. Claim settlement is <b>idempotent</b>.</li>
-              <li>The app rejects malformed, swapped and out-of-range GPS coordinates, and picks the nearest of 88 Bangkok police stations offline.</li>
-            </ul>
-            <div class="ev-foot">node --test tests/*.test.mjs · 80 tests · ~0.14 s · main committer (45 of 73 commits) · <a href="https://github.com/Prapathomsit/promptyuen-demo" data-link="prakanRepo" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">code ↗</a> · <a href="https://prapathomsit.github.io/promptyuen-demo/" data-link="prakan" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">demo ↗</a></div>
-          </article>
-
-          <article class="card ev reveal" data-delay="1">
-            <div class="ev-top">
-              <span class="tag tag-amber">Games · Playtesting</span>
-              <span class="ev-score" style="color:var(--ink)">3<small>games on itch.io</small></span>
-            </div>
-            <h3>Playtesting the games I ship</h3>
-            <div class="sub">Unity / C# · Z.O.O, Dream Frogs Hunt, Try not to chip!</div>
-            <img src="assets/projects/try-not-to-chip-unity-test.jpg" alt="Testing a fire-grill trap inside the Unity editor for Try not to chip!" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:16/9;object-fit:cover;width:100%" />
-            <ul class="checks">
-              <li>Built separate test scenes (<code>Player Test</code>, <code>Trap test</code>) to check each mechanic in isolation before merging it into the main level.</li>
-              <li>Released early builds on itch.io to get feedback from real players, not just the team.</li>
-              <li>Dream Frogs Hunt v2 reworked gameplay, UI and code structure based on that feedback.</li>
-              <li>Worked on shared Unity repos with 5–6 people, so changes had to be checked before they broke someone else's scene.</li>
-            </ul>
-            <div class="ev-foot">Isolate, reproduce, fix, then re-test with players</div>
-          </article>
-
-          <article class="card ev reveal">
-            <div class="ev-top">
-              <span class="tag tag-gray">Test planning</span>
-              <span class="mono c-mute" style="font-size:12px">pilot plan, week 3</span>
-            </div>
-            <h3>Negative test plan before a pilot</h3>
-            <div class="sub">From the Biztania engineering deck</div>
-            <ul class="checks">
-              <li>Refusal cases: location permission denied, user never confirms, documents missing.</li>
-              <li>Conflict cases: photo contradicts the user's statement, edits that collide across revisions.</li>
-              <li>AI cases: the draft must not add facts the user never said.</li>
-              <li>Every case has an expected result, and each bug found becomes a fix item.</li>
-            </ul>
-            <div class="ev-foot">Exit rule: every claim in the letter traces back to its source</div>
-          </article>
-
-          <article class="card ev reveal" data-delay="1">
-            <div class="ev-top">
-              <span class="tag tag-amber">Hardware · School project</span>
-              <span class="ev-score" style="color:var(--ink)">3:02 → 2:36<small>walk time</small></span>
-            </div>
-            <h3>Obstacle alert for visually impaired people</h3>
-            <div class="sub">ESP32 + IR distance + motion sensor · team project · my role: soldering, assembly &amp; presenting the results</div>
-            <ul class="checks">
-              <li>Our team tested still and moving objects at 25, 50, 75 and 100 cm.</li>
-              <li>The sensor detected nothing past 100 cm. We traced that limit to the ADC threshold (500) in the code.</li>
-              <li>On a blindfolded walk over an unknown route, the cane alone took 3:02 and the cane plus the device took 2:36. I presented these results to the judges.</li>
-              <li>Wrote down the known gaps: fast objects can be missed, and the device can't detect steps or level changes.</li>
-            </ul>
-            <div class="ev-foot">Measure, find the limit, document it</div>
-          </article>
+        <ul class="rows">
+          <li><span class="rows__name">TC-01 Valid login and add to cart</span><span class="rows__value">2.42 s</span></li>
+          <li><span class="rows__name">TC-02 Locked-out user sees an error</span><span class="rows__value">0.48 s</span></li>
+          <li><span class="rows__name">TC-03 Last Name field drops input</span><span class="rows__value">0.66 s</span></li>
+          <li><span class="rows__name">TC-04 Slow user waits for the list</span><span class="rows__value">5.49 s</span></li>
+        </ul>
+        <div class="tools">
+          <img class="ic" src="assets/icons/playwright.svg" alt="Playwright" width="40" height="30">
+          <img class="ic" src="assets/icons/typescript.svg" alt="TypeScript" width="40" height="40">
+          <img class="ic" src="assets/icons/github-actions.svg" alt="GitHub Actions" width="40" height="40">
+          <img class="ic" src="assets/icons/google-sheets.svg" alt="Google Sheets" width="30" height="40">
         </div>
-
-        <!-- Habits carried over from game development (was its own section) -->
-        <div class="habits-head reveal" id="gamedev"><h3>Habits I brought from game development</h3><p>Debugging games taught me most of the habits I now use to test apps.</p></div>
-        <div class="habits">
-          <div class="habit reveal" data-delay="0"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.5 8.2l4 7.6M17.5 8.2l-4 7.6"/></svg></div><div><h4>State machines</h4><p>Player and UI states only work when every transition is defined. I now map an app's flows the same way: logged out, logged in, cart, checkout.</p><span class="maps">→ test flows by state</span></div></div>
-          <div class="habit reveal" data-delay="1"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 10v5M12 18h.01"/></svg></div><div><h4>Edge cases</h4><p>Players press everything at once, in the wrong order. That habit led me to write TC-03, which found the checkout field that drops what you type.</p><span class="maps">→ negative &amp; bug-catch tests</span></div></div>
-          <div class="habit reveal" data-delay="2"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div><div><h4>Frame &amp; performance profiling</h4><p>Bugs tied to frame timing taught me not to trust a fixed sleep. Waiting for a real condition is what fixed the CI race in TC-04.</p><span class="maps">→ explicit waits, timing checks</span></div></div>
-          <div class="habit reveal" data-delay="3"><div class="gd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg></div><div><h4>Systematic debugging</h4><p>I reduce each bug to the smallest set of steps that reproduces it, and those steps become the test case.</p><span class="maps">→ reproducible bug reports</span></div></div>
+        <div class="links-row">
+          <a class="link" href="https://github.com/Prapathomsit/playwright-ecommerce-e2e">Read the code on GitHub</a>
+          <a class="link" href="https://docs.google.com/spreadsheets/d/19KROjkgRaDWTIVBfifGJpQjuhYWc4qtKpqVOdnpXm80/edit?gid=0#gid=0">Open the live report</a>
         </div>
       </div>
-    </section>
+      <figure class="frame frame--photo span-6 start-7" style="margin:0"><img src="assets/screens/trace-viewer.png" alt="Playwright Trace Viewer showing the 5.1 second wait for the product list in TC-04" width="2880" height="1800" loading="lazy"></figure>
+    </div>
+  </section>
 
-    <!-- ==========================================================
-         SHOWREEL (dark band, Hamster-Hub style)
-         Video: assets/reel/showreel.mp4 (cut from my TikTok clips).
-         Marquee images/labels: MARQUEE_* arrays in the script.
-    =========================================================== -->
-    <section class="dark reel" id="reel" aria-label="Showreel">
-      <div class="nebula"></div><div class="stars"></div>
-      <div class="wrap reel-grid">
-        <div class="reveal">
-          <div class="eyebrow">Showreel</div>
-          <h2 class="h2 big">Build it.<br><span class="o">Break it.</span><br>Ship it.</h2>
-          <p class="lead">I build games and web apps for competitions, then try to break them before the judges or players do. Every clip here comes from a real build.</p>
-          <div class="reel-facts"><span>NSC 2025 award</span><span>7 competitions</span><span>6 projects in this reel</span><span>92 tests passing</span></div>
-        </div>
-        <figure class="reel-video reveal" data-delay="1">
-          <video id="reel-video" autoplay muted loop playsinline preload="metadata" poster="assets/reel/showreel-poster.jpg" aria-label="Clips from Z.O.O, Try not to chip!, Prakan, CENTORIS, ECOVEST+ and DICE">
-            <source src="assets/reel/showreel.mp4" type="video/mp4" />
-          </video>
-          <span class="reel-badge"><i></i> PLAYING</span>
-          <span class="reel-name" id="reel-name" aria-live="off">Z.O.O · NSC 2025</span>
-          <button class="reel-toggle" id="reel-toggle" type="button">Pause</button>
-        </figure>
-      </div>
-      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq-all"></div></div>
-    </section>
-
-    <!-- ==========================================================
-         ALL PROJECTS
-         Cards are generated from the PROJECTS array in the script
-         at the bottom. To add a project, add one object there.
-         Filter buttons are created automatically from categories.
-    =========================================================== -->
-    <section class="section" id="projects">
-      <div class="wrap">
-        <div class="proj-head reveal">
-          <div>
-            <div class="eyebrow">Portfolio</div>
-            <h2 class="h2 big">Selected <span class="o">projects</span></h2>
-          </div>
-          <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
-        </div>
-        <div id="proj-groups"></div>
-      </div>
-    </section>
-
-    <!-- ==========================================================
-         JOURNEY — scroll-driven flight path (inspired by Hamster Hub Portex).
-         Data: JOURNEY array in the script. Phones / reduced motion get a
-         plain vertical timeline instead.
-    =========================================================== -->
-    <section class="dark journey" id="journey" aria-label="Journey">
-      <div class="nebula"></div><div class="stars"></div>
-      <div class="j-pin">
-        <div class="wrap j-head">
-          <div class="eyebrow">Journey</div>
-          <h2 class="h2 big">From games<br>to <span class="o">QA</span></h2>
-          <p class="lead j-lead">School projects led to game jams, game jams led to web and AI hackathons, and the hackathons led me to test automation.</p>
-        </div>
-        <div class="j-line"></div>
-        <div class="j-track" id="j-track"></div>
-        <div class="j-trail" id="j-trail"></div>
-        <div class="j-ship" id="j-ship" aria-hidden="true"><svg viewBox="0 0 64 64"><defs><radialGradient id="orb" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#ECFEFF"/><stop offset=".45" stop-color="#67E8F9"/><stop offset="1" stop-color="#0E7490"/></radialGradient></defs><circle cx="32" cy="32" r="28" fill="url(#orb)"/><g class="flake" stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M32 14v36M16.4 23l31.2 18M16.4 41l31.2-18"/><path d="M27 16.5l5 4 5-4M27 47.5l5-4 5 4M17.8 29.6l6.2-1.9-1.4-6.3M46.2 34.4l-6.2 1.9 1.4 6.3M17.8 34.4l6.2 1.9-1.4 6.3M46.2 29.6l-6.2-1.9 1.4-6.3"/></g></svg></div>
-        <div class="wrap j-progress" id="j-progress"></div>
-      </div>
-      <div class="wrap">
-        <div class="j-mobile-head">
-          <div class="eyebrow">Journey</div>
-          <h2 class="h2 big">From games<br>to <span class="o">QA</span></h2>
-          <p class="lead">School projects led to game jams, game jams led to web and AI hackathons, and the hackathons led me to test automation.</p>
-        </div>
-        <ol class="j-list" id="j-list"></ol>
-      </div>
-    </section>
-
-    <!-- ==========================================================
-         HACKATHONS & EXPERIENCE
-         Copy one <article class="card exp"> block to add more.
-    =========================================================== -->
-    <section class="section dark" id="experience">
-      <div class="nebula"></div><div class="stars"></div>
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Competitions &amp; teamwork</div>
-          <h2 class="h2 big">Competitions<br>&amp; <span class="o">awards</span></h2>
-        </div>
-
-        <div class="exp-grid three">
-          <article class="card exp reveal">
-            <div class="exp-top"><span class="tag tag-rose">National award · Honorable mention</span><span class="mono c-mute">2025</span></div>
-            <div><h3>National Software Contest (NSC 2025)</h3><div class="org">Entertainment software · Team leader · 20,000 THB grant</div></div>
-            <ul>
-              <li><b>Z.O.O</b>: 3D investigation RPG where NPCs answer the player through the ChatGPT API.</li>
-              <li>Designed the JSON NPC data (backstory, personality, trust) and built the player controller and camera.</li>
-              <li>Released on itch.io for player feedback (<a href="https://www.tiktok.com/@alittledeveloper/video/7584868611110571281" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">gameplay clip ↗</a>). Top committer on the repo (238 commits).</li>
-            </ul>
-          </article>
-
-          <article class="card exp reveal" data-delay="1">
-            <div class="exp-top"><span class="tag tag-rose">Finalist · Engineering Track</span><span class="mono c-mute">2026</span></div>
-            <div><h3>CU-TU Biztania Camp 2026</h3><div class="org">Representing Chulalongkorn · Team "ส่งใจในแอร์ดรอป"</div></div>
-            <ul>
-              <li>Our team built <b>พร้อมยื่น</b> (now <b>Prakan · ประกัน</b>): AI that turns an accident story into a police report, plus an officer portal. I was the main committer on the citizen app.</li>
-              <li>Partnered with business team "Cold BrewTech", whose pitch was an AI cash-flow assistant for insurers.</li>
-              <li>Backed the demo with 80 automated tests and a written negative test plan.</li>
-            </ul>
-          </article>
-
-          <article class="card exp reveal" data-delay="2">
-            <div class="exp-top"><span class="tag tag-blue">Bootcamp · Team leader</span><span class="mono c-mute">2026</span></div>
-            <div><h3>JUMP Thailand Hackathon 2026</h3><div class="org">Central Regional Bootcamp, Chulalongkorn · Team "เน็ตก็แรงขึ้นแดงได้ไง"</div></div>
-            <ul>
-              <li><b>JOBSY</b>: teens try a career through story mini-games, and AI reflects their choices back.</li>
-              <li>We matched player behaviour to O*NET skill profiles and backed the idea with a survey of 100 students aged 13–18.</li>
-            </ul>
-          </article>
-
-          <article class="card exp reveal">
-            <div class="exp-top"><span class="tag tag-blue">Participant · 48-hour hackathon</span><span class="mono c-mute">2026</span></div>
-            <div><h3>UniHack 2026</h3><div class="org">Chula Tech Startup &amp; CSII · Team "อ่านยังไงวะเนี่ย"</div></div>
-            <ul>
-              <li><b>KonKlang</b>: holds payment for chat-based online shopping until the buyer confirms delivery.</li>
-              <li>Each package gets a unique QR code and a packing video, so any dispute ends with evidence.</li>
-            </ul>
-          </article>
-
-          <article class="card exp reveal" data-delay="1">
-            <div class="exp-top"><span class="tag tag-pass">Top 20 of 300+</span><span class="mono c-mute">2025</span></div>
-            <div><h3>KMITL Game Jam Reality Show</h3><div class="org">Education category · onsite round</div></div>
-            <ul>
-              <li><b>ECOVEST+</b>: a community website for sharing investing knowledge, built in 48 hours.</li>
-              <li>Planned the system architecture, built Firebase login and profiles, and presented both rounds.</li>
-            </ul>
-          </article>
-
-          <article class="card exp reveal" data-delay="2">
-            <div class="exp-top"><span class="tag tag-gray">48-hour game jam</span><span class="mono c-mute">2025</span></div>
-            <div><h3>Nuutor Cup</h3><div class="org">Team game · later published on itch.io</div></div>
-            <ul>
-              <li><b>Dream Frogs Hunt</b>: I built the enemy wave spawner that scales with difficulty.</li>
-              <li>We reworked gameplay, UI and code structure in a second version based on player feedback.</li>
-            </ul>
-          </article>
-
-          <article class="card exp reveal">
-            <div class="exp-top"><span class="tag tag-gray">72-hour game jam</span><span class="mono c-mute">2026</span></div>
-            <div><h3>Hamster Hub GameJam X</h3><div class="org">Theme: "Hot, Chapter of the Lost Ship" · team of 5 · developer</div></div>
-            <ul>
-              <li><b>Try not to chip!</b>: a 3D third-person obby where you steer a potato man out of a crisp factory before it becomes chips.</li>
-              <li>Top committer on the team repo (44 commits). We built and checked each trap in its own test scene, then released the game on itch.io.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================
-         CERTIFICATES — data in the CERTS array (script). Images in assets/certs/.
-    =========================================================== -->
-    <section class="section" id="certificates">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Proof</div>
-          <h2 class="h2 big"><span class="o">Certificates</span></h2>
-          <p class="lead">Click any certificate to see it full size.</p>
-        </div>
-        <div class="cert-grid" id="cert-grid"></div>
-      </div>
-    </section>
-
-    <!-- ==========================================================
-         SKILLS
-    =========================================================== -->
-    <section class="section tint" id="skills">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Toolbox</div>
-          <h2 class="h2 big">Tech <span class="o">stack</span></h2>
-        </div>
-
-        <div class="skills-grid">
-          <div class="card skill reveal">
-            <h3><span class="dot" style="color:var(--accent)"></span> Tools I'm strongest with</h3>
-            <div class="chips">
-              <span class="chip">Unity</span><span class="chip">Playwright</span>
-              <span class="chip">GitHub Desktop</span><span class="chip">Miro</span>
-              <span class="chip">GitHub Actions</span><span class="chip">VS Code</span>
-            </div>
-          </div>
-          <div class="card skill reveal" data-delay="1">
-            <h3><span class="dot" style="color:var(--pass)"></span> Testing</h3>
-            <div class="chips">
-              <span class="chip">E2E testing</span><span class="chip">Page Object Model</span>
-              <span class="chip">Cross-browser runs</span><span class="chip">Playtesting</span>
-              <span class="chip">Bug reproduction</span>
-            </div>
-          </div>
-          <div class="card skill reveal" data-delay="2">
-            <h3><span class="dot" style="color:var(--ink)"></span> Languages</h3>
-            <div class="chips">
-              <span class="chip">C# (Unity)</span><span class="chip">TypeScript</span>
-              <span class="chip">JavaScript</span><span class="chip">HTML &amp; CSS</span>
-              <span class="chip">Python (basics)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ==========================================================
-       CONTACT & FOOTER
-       To add email / LinkedIn, copy a <a class="btn ..."> line in
-       .contact-actions, e.g.
-       <a class="btn btn-ghost" href="mailto:you@example.com">Email</a>
-  =========================================================== -->
-  <footer id="contact" class="section" style="padding-bottom:0">
+  <section class="section" id="other-tests" style="--hm: 2" aria-labelledby="other-h">
     <div class="wrap">
-      <div class="card contact reveal">
-        <div>
-          <div class="eyebrow" style="color:var(--pass)">Open to internships</div>
-          <h2>Hiring for QA Automation or Software Engineering?</h2>
-          <p>The code, the CI history and the live report are all public. Email is the fastest way to reach me.</p>
-        </div>
-        <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:prapathomsit.work@gmail.com" data-link="email">prapathomsit.work@gmail.com</a>
-          <button class="btn btn-ghost" id="copy-btn" type="button">Copy email</button>
-          <a class="btn btn-ghost" href="tel:+66952981238" data-link="phone">095-298-1238</a>
-          <a class="btn btn-ghost" href="https://github.com/Prapathomsit" data-link="github" target="_blank" rel="noopener noreferrer">GitHub <span class="arrow">↗</span></a>
-        </div>
+      <div class="section-head">
+        <h2 id="other-h">Prakan, Unity and ESP32 tests</h2>
+        <p>Three projects outside the SauceDemo suite, each tested the way its subject needed.</p>
       </div>
-
-      <div class="footer-bar">
-        <div><b style="color:var(--ink)">Prapathomsit Attapakkanon</b> · Chulalongkorn University</div>
-        <nav aria-label="Footer">
-          <a href="mailto:prapathomsit.work@gmail.com" data-link="email">Email</a>
-          <a href="tel:+66952981238" data-link="phone">095-298-1238</a>
-          <a href="https://github.com/Prapathomsit" data-link="github" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://github.com/Prapathomsit/playwright-ecommerce-e2e" data-link="repo" target="_blank" rel="noopener noreferrer">E2E repo</a>
-          <a href="https://docs.google.com/spreadsheets/d/19KROjkgRaDWTIVBfifGJpQjuhYWc4qtKpqVOdnpXm80/edit?gid=0#gid=0" data-link="sheet" target="_blank" rel="noopener noreferrer">Live report</a>
-          <a href="#top">Back to top ↑</a>
-        </nav>
+      <div class="grid grid--top">
+        <a class="tile card span-4" href="https://github.com/Prapathomsit/promptyuen-demo" aria-labelledby="tile-1">
+          <div class="tile__media"><img src="assets/projects/prakan-cover.jpg" alt="The Prakan incident-report app on a phone" width="960" height="540" loading="lazy"></div>
+          <div class="tile__head"><h3 id="tile-1">Prakan: 80 of 80 pass</h3></div>
+          <p>Node's test runner checks that made-up AI output fails closed and that no ID or address reaches the model.</p>
+        </a>
+        <a class="tile card span-4" href="https://prapathomsit123.itch.io/try-not-to-chip" aria-labelledby="tile-2">
+          <div class="tile__media"><img src="assets/projects/try-not-to-chip-unity-test.jpg" alt="A fire-grill trap in a Unity test scene for Try not to chip!" width="960" height="520" loading="lazy"></div>
+          <div class="tile__head"><h3 id="tile-2">Unity test scenes per trap</h3></div>
+          <p>Player Test and Trap test scenes check each mechanic alone before it joins the main level.</p>
+        </a>
+        <a class="tile card span-4" href="#awards" aria-labelledby="tile-3">
+          <div class="tile__media"><img src="assets/projects/obstacle-alert-soldering.jpg" alt="Soldering the ESP32 obstacle alert for visually impaired people" width="960" height="538" loading="lazy"></div>
+          <div class="tile__head"><h3 id="tile-3">Obstacle alert: 3:02 to 2:36</h3></div>
+          <p>Our team measured detection from 25 to 100 cm, then timed a blindfolded walk with and without the device.</p>
+        </a>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <dialog class="lightbox" id="lightbox" aria-label="Screenshot preview">
-    <div class="lb-bar"><span id="lb-caption"></span><button class="lb-close" id="lb-close" type="button">Close ✕</button></div>
-    <img id="lb-img" alt="" />
-  </dialog>
+  <!-- word-highlight: one statement in its own section, one strong word -->
+  <section class="section statement" id="approach" data-moment="word-highlight" aria-label="How I test">
+    <div class="wrap">
+      <p class="t-label">How I test</p>
+      <p class="mo-wh__text">Most of my projects come from hackathons, where a demo that breaks on stage loses. So I test <strong>the unhappy paths</strong> first: bad input, missing permissions, double submits and AI output that makes things up.</p>
+    </div>
+  </section>
 
-  <script>
-  /* ============================================================
-     1) LINKS — change a URL once here, every button updates.
-        Elements use data-link="github|repo|sheet".
-  ============================================================ */
-  const LINKS = {
-    email:  'mailto:prapathomsit.work@gmail.com',
-    phone:  'tel:+66952981238',
-    github: 'https://github.com/Prapathomsit',
-    repo:   'https://github.com/Prapathomsit/playwright-ecommerce-e2e',
-    sheet:  'https://docs.google.com/spreadsheets/d/19KROjkgRaDWTIVBfifGJpQjuhYWc4qtKpqVOdnpXm80/edit?gid=0#gid=0',
-    run:    'https://github.com/Prapathomsit/playwright-ecommerce-e2e/actions/runs/43747756321',
-    prakan:      'https://prapathomsit.github.io/promptyuen-demo/',
-    prakanRepo:  'https://github.com/Prapathomsit/promptyuen-demo',
-  };
-
-  /* ============================================================
-     2) PROJECTS — ★ ADD NEW PROJECTS HERE ★
-        Copy one object and edit it. Fields:
-          title, category (must match a key in CATEGORIES),
-          visibility ('Public repo' | 'Private repos' | ...),
-          description, tags[],
-          image (optional, e.g. 'assets/screens/my-app.png'),
-          links[] ({ label, href, primary? }),
-          planned: true  → dashed "coming soon" style,
-          onClickId      → scroll to a section on this page.
-  ============================================================ */
-  const CATEGORIES = {
-    qa:    { label: 'QA & Automation', tag: 'tag-pass' },
-    web:   { label: 'Web & AI',        tag: 'tag-blue' },
-    games: { label: 'Games',           tag: 'tag-amber' },
-    hw:    { label: 'Hardware',        tag: 'tag-gray' },
-  };
-
-  const PROJECTS = [
-    {
-      title: 'Playwright E2E testing framework',
-      category: 'qa',
-      visibility: 'Public repo',
-      description: 'POM-based suite for SauceDemo: login, cart, a known UI bug and a slow-user timing check across Chromium, Firefox and WebKit, with automatic Google Sheets reporting.',
-      tags: ['Playwright', 'TypeScript', 'GitHub Actions'],
-      image: 'assets/screens/trace-viewer.png',
-      links: [
-        { label: 'View code', href: LINKS.repo, primary: true },
-        { label: 'Live report', href: LINKS.sheet },
-      ],
-    },
-    {
-      title: 'Prakan (ประกัน)',
-      category: 'web',
-      visibility: 'Public repo',
-      description: 'For car and home insurance customers: tell the AI what happened, and it drafts the incident report, checks your documents and picks the nearest police station. Runs Qwen in the browser, so personal data stays on the device.',
-      tags: ['WebLLM / Qwen', 'node:test', '80 tests'],
-      image: 'assets/projects/prakan-cover.jpg',
-      links: [
-        { label: 'Try the demo', href: LINKS.prakan, primary: true },
-        { label: 'Code & tests', href: LINKS.prakanRepo },
-        { label: 'Pitch video', href: 'https://drive.google.com/file/d/19doSmxStgcnPgK3hnkh7f9miK41wFzp3/view?usp=sharing' },
-      ],
-    },
-    {
-      title: 'Z.O.O',
-      category: 'games',
-      visibility: 'NSC 2025 award',
-      description: '3D investigation RPG where villagers answer you through the ChatGPT API. I led the team and built the player controller, the camera and the NPC data model.',
-      tags: ['Unity', 'C#', 'ChatGPT API'],
-      image: 'assets/projects/zoo-npc.jpg',
-      links: [
-        { label: 'Play on itch.io', href: 'https://1jjjay.itch.io/zoo', primary: true },
-        { label: 'Watch clip', href: 'https://www.tiktok.com/@alittledeveloper/video/7584868611110571281' },
-      ],
-    },
-    {
-      title: 'Dream Frogs Hunt',
-      category: 'games',
-      visibility: 'Game jam, then v2',
-      description: 'Built in 48 hours at Nuutor Cup, then reworked from player feedback. I wrote the enemy wave spawning system.',
-      tags: ['Unity', 'C#', 'Wave spawner'],
-      image: 'assets/projects/dream-frogs-hunt-cover.jpg',
-      links: [{ label: 'Play on itch.io', href: 'https://phonlakitz.itch.io/dream-frogs-hunt', primary: true }],
-    },
-    {
-      title: 'Try not to chip!',
-      category: 'games',
-      visibility: 'GameJam X · 72 h',
-      description: 'A 3D third-person obby: guide a walking pile of potatoes out of a crisp factory, past grills and crushers, before you are turned into chips.',
-      tags: ['Unity', 'C#', '3D obby'],
-      image: 'assets/projects/try-not-to-chip-cover.jpg',
-      links: [
-        { label: 'Play on itch.io', href: 'https://prapathomsit123.itch.io/try-not-to-chip', primary: true },
-        { label: 'Watch clip', href: 'https://www.tiktok.com/@alittledeveloper/video/7633425075022187777' },
-      ],
-    },
-    {
-      title: 'CENTORIS',
-      category: 'games',
-      visibility: 'In development',
-      description: '2D platformer: an alien courier must deliver an energy core across planets full of random traps. Started at a game camp with a team of two, and still in development.',
-      tags: ['Unity', 'C#', '2D platformer'],
-      image: 'assets/projects/centoris-cover.jpg',
-      links: [{ label: 'Watch clip', href: 'https://www.tiktok.com/@alittledeveloper/video/7584871320115006721', primary: true }],
-    },
-    {
-      title: 'DICE',
-      category: 'games',
-      visibility: 'Puzzle game · team of two',
-      description: 'A top-down puzzle inspired by crosswords: roll across letter tiles to spell the target word on a board ringed with fire, using physics-based movement. I worked on the walls, colliders, box speed and letter tiles.',
-      tags: ['Unity', 'C#', 'Physics'],
-      image: 'assets/projects/dice-cover.jpg',
-      links: [{ label: 'Watch clip', href: 'https://drive.google.com/file/d/1JsHIW1Hc0JSSNOM6OQNpMR0MFNuXbOE1/view?usp=sharing', primary: true }],
-    },
-    {
-      title: 'JOBSY',
-      category: 'web',
-      visibility: 'Bootcamp concept',
-      description: 'Career try-outs for teens: story mini-games simulate a real job, then AI reflects the player\'s choices against O*NET skill profiles.',
-      tags: ['Game design', 'O*NET', 'LLM'],
-      image: 'assets/projects/jobsy-story.jpg',
-      links: [],
-      foot: ['JUMP Thailand 2026 bootcamp', 'Team leader'],
-    },
-    {
-      title: 'KonKlang',
-      category: 'web',
-      visibility: 'Bootcamp concept',
-      description: 'Escrow for chat-based online shopping. The money waits until delivery is confirmed, and packing videos tied to QR codes settle any dispute.',
-      tags: ['Escrow flow', 'Audit trail', 'AI checks'],
-      image: 'assets/projects/konklang-cover.jpg',
-      links: [],
-      foot: ['UniHack 2026', '48-hour hackathon'],
-    },
-    {
-      title: 'ECOVEST+',
-      category: 'web',
-      visibility: 'Private repo',
-      description: 'Community site for sharing investing knowledge, with a built-in board game, Escape the Paycheck, that teaches passive income. Built in 48 hours and reached the KMITL Game Jam onsite round (top 20 of 300+).',
-      tags: ['HTML / CSS / JS', 'Firebase Auth'],
-      image: 'assets/projects/ecovest-game.jpg',
-      links: [],
-      links: [{ label: 'Watch demo', href: 'https://drive.google.com/file/d/1DYxfeKvCrmWQcWPTIA4-sF4Qcj_UAe97/view?usp=sharing', primary: true }],
-    },
-    {
-      title: 'Obstacle alert for the visually impaired',
-      category: 'hw',
-      visibility: 'School project',
-      description: 'ESP32 with distance and motion sensors that beeps before obstacles. I soldered and assembled the hardware and presented the team\'s test results.',
-      tags: ['ESP32', 'Soldering', 'Sensors'],
-      image: 'assets/projects/obstacle-alert-soldering.jpg',
-      links: [{ label: 'Test results', href: '#testing', primary: true }],
-    },
-    {
-      title: 'REST API and contract testing lab',
-      category: 'qa',
-      visibility: 'In progress',
-      planned: true,
-      description: 'Next, I am extending coverage from the UI to the API layer with Playwright APIRequestContext: endpoint validation, auth token lifecycle and JSON schema assertions.',
-      tags: ['Playwright API', 'REST / JSON', 'CI/CD'],
-      links: [],
-      foot: ['github.com/Prapathomsit', 'Coming soon'],
-    },
-  ];
-
-  /* ============================================================
-     3) FEATURED DATA — pipeline, run log, tests, sheet, screenshots
-  ============================================================ */
-  const PIPELINE_STEPS = [
-    { name: 'Trigger',         desc: 'git push or daily cron' },
-    { name: 'GitHub Actions',  desc: 'playwright.yml on ubuntu' },
-    { name: 'Playwright',      desc: '4 tests × 3 browsers' },
-    { name: 'Custom reporter', desc: 'google-sheets-reporter.ts' },
-    { name: 'Apps Script',     desc: 'Webhook appends rows' },
-    { name: 'Google Sheets',   desc: 'Live report for the team' },
-  ];
-
-  // Run log. step = which pipeline box is active; pass = counts toward 12/12.
-  const LOG = [
-    { step: 0, t: '<span class="c-mute">▸ on: push · pull_request · schedule: cron \'0 19 * * *\' (02:00 Bangkok)</span>' },
-    { step: 1, t: '<span class="c-mute">▸ actions/checkout · npm ci · npx playwright install --with-deps</span>' },
-    { step: 2, t: '<span class="c-blue">$ npx playwright test</span>' },
-    { step: 2, t: 'Running 12 tests using 3 projects: chromium, firefox, webkit' },
-    ...['chromium', 'firefox', 'webkit'].flatMap(b => [
-      { step: 2, pass: true, t: `<span class="c-pass">✓</span> [${b}] › TC-01 Valid user login &amp; add to cart` },
-      { step: 2, pass: true, t: `<span class="c-pass">✓</span> [${b}] › TC-02 Locked-out user sees error` },
-      { step: 2, pass: true, t: `<span class="c-pass">✓</span> [${b}] › TC-03 Detect UI bug: broken checkout` },
-      { step: 2, pass: true, t: `<span class="c-pass">✓</span> [${b}] › TC-04 Performance glitch timing check` },
-    ]),
-    { step: 2, t: '<span class="c-amber">⏱ performance_glitch_user load time: 5.156 s</span> <span class="c-mute">(chromium)</span>' },
-    { step: 2, t: '<span class="c-pass">12 passed</span>' },
-    { step: 3, t: '<span class="c-mute">[sheets-reporter]</span> onTestEnd → collecting module, title, browser, status, duration' },
-    { step: 4, t: '<span class="c-mute">[sheets-reporter]</span> POST results → Apps Script webhook <span class="c-pass">200 OK</span>' },
-    { step: 5, t: '<span class="c-pass">✓</span> 12 rows appended to tab <b>16/11/2026</b>, each linked to run #43747756321' },
-  ];
-
-  const TESTS = [
-    {
-      id: 'TC-01', module: 'Authentication & Cart', kind: 'Happy path', color: 'var(--accent)',
-      title: 'Valid user logs in and adds a product to the cart',
-      summary: 'Logs in as standard_user through the LoginPage page object, checks the inventory URL, adds the backpack and asserts the cart badge shows 1.',
-      meta: ['standard_user', '1.3s chromium (local)', '2.42s webkit (CI)'],
-      code:
-`<span class="k">await</span> loginPage.<span class="f">goto</span>();
-<span class="k">await</span> loginPage.<span class="f">login</span>(<span class="s">'standard_user'</span>, <span class="s">'secret_sauce'</span>);
-<span class="k">await</span> <span class="f">expect</span>(page).<span class="f">toHaveURL</span>(<span class="s">'https://www.saucedemo.com/inventory.html'</span>);
-
-<span class="k">await</span> page.<span class="f">locator</span>(<span class="s">'[data-test="add-to-cart-sauce-labs-backpack"]'</span>).<span class="f">click</span>();
-<span class="k">await</span> <span class="f">expect</span>(page.<span class="f">locator</span>(<span class="s">'.shopping_cart_badge'</span>)).<span class="f">toHaveText</span>(<span class="s">'1'</span>);`,
-    },
-    {
-      id: 'TC-02', module: 'Authentication & Cart', kind: 'Negative test', color: 'var(--muted)',
-      title: 'Locked-out user sees an error message',
-      summary: 'Logs in as locked_out_user and checks that access is blocked and the error banner shows the right message.',
-      meta: ['locked_out_user', '1.3s chromium (local)', '0.48s webkit (CI)'],
-      code:
-`<span class="k">await</span> loginPage.<span class="f">goto</span>();
-<span class="k">await</span> loginPage.<span class="f">login</span>(<span class="s">'locked_out_user'</span>, <span class="s">'secret_sauce'</span>);
-
-<span class="k">await</span> <span class="f">expect</span>(loginPage.errorMessage).<span class="f">toBeVisible</span>();
-<span class="k">await</span> <span class="f">expect</span>(loginPage.errorMessage).<span class="f">toContainText</span>(<span class="s">'Sorry, this user has been locked out.'</span>);`,
-    },
-    {
-      id: 'TC-03', module: 'Checkout & UI Integrity', kind: 'Bug catch', color: 'var(--rose)',
-      title: 'Problem user: Last Name field drops input',
-      summary: 'Reproduces a real defect: on problem_user, typing into Last Name overwrites the First Name field and Last Name stays empty. The test asserts the buggy behaviour, so the run fails if that behaviour ever changes.',
-      meta: ['problem_user', '1.5s chromium (local)', '0.72s firefox (CI)'],
-      code:
-`<span class="k">await</span> loginPage.<span class="f">login</span>(<span class="s">'problem_user'</span>, <span class="s">'secret_sauce'</span>);
-<span class="k">await</span> page.<span class="f">locator</span>(<span class="s">'[data-test="add-to-cart-sauce-labs-backpack"]'</span>).<span class="f">click</span>();
-<span class="k">await</span> page.<span class="f">locator</span>(<span class="s">'.shopping_cart_link'</span>).<span class="f">click</span>();
-<span class="k">await</span> page.<span class="f">locator</span>(<span class="s">'[data-test="checkout"]'</span>).<span class="f">click</span>();
-
-<span class="k">await</span> page.<span class="f">locator</span>(<span class="s">'[data-test="firstName"]'</span>).<span class="f">fill</span>(<span class="s">'Prapathomsit'</span>);
-<span class="k">await</span> page.<span class="f">locator</span>(<span class="s">'[data-test="lastName"]'</span>).<span class="f">fill</span>(<span class="s">'Attapakkanon'</span>);
-
-<span class="k">const</span> lastNameValue = <span class="k">await</span> page.<span class="f">locator</span>(<span class="s">'[data-test="lastName"]'</span>).<span class="f">inputValue</span>();
-<span class="f">expect</span>(lastNameValue).<span class="f">toBe</span>(<span class="s">''</span>); <span class="cm">// bug confirmed: Last Name is empty</span>`,
-    },
-    {
-      id: 'TC-04', module: 'Performance & Load', kind: 'Timing', color: 'var(--amber)',
-      title: 'Performance glitch user: load timing',
-      summary: 'Measures how long products take to appear for performance_glitch_user (5.156s here). Waiting on the list being visible, not a fixed timeout, removed flaky failures on CI.',
-      meta: ['performance_glitch_user', '5.156s measured', '5.49s webkit (CI)'],
-      code:
-`<span class="k">await</span> loginPage.<span class="f">goto</span>();
-<span class="k">const</span> startTime = Date.<span class="f">now</span>();
-
-<span class="k">await</span> loginPage.<span class="f">login</span>(<span class="s">'performance_glitch_user'</span>, <span class="s">'secret_sauce'</span>);
-<span class="k">await</span> page.<span class="f">locator</span>(<span class="s">'.inventory_list'</span>).<span class="f">waitFor</span>({ state: <span class="s">'visible'</span> });
-
-<span class="k">const</span> duration = (Date.<span class="f">now</span>() - startTime) / 1000;
-console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_user: \${duration}s\`</span>);
-<span class="f">expect</span>(duration).<span class="f">toBeGreaterThan</span>(2);`,
-    },
-  ];
-
-  // Real rows copied from the sheet (run 43747756321). Add more if you like.
-  const SHEET_ROWS = [
-    ['Checkout & UI Integrity Module', 'TC-03: Detect UI Bug - Problem user sees broken checkout behavior', 'firefox', 0.72],
-    ['Performance & Load Module',      'TC-04: Performance Glitch User timing check',                       'firefox', 5.52],
-    ['Authentication & Cart Module',   'TC-01: Valid user should login and add product to cart',            'webkit',  2.42],
-    ['Authentication & Cart Module',   'TC-02: Locked out user should see an error message',                'webkit',  0.48],
-    ['Checkout & UI Integrity Module', 'TC-03: Detect UI Bug - Problem user sees broken checkout behavior', 'webkit',  0.66],
-    ['Performance & Load Module',      'TC-04: Performance Glitch User timing check',                       'webkit',  5.49],
-  ];
-
-  /* ★ SCREENSHOTS — save your captures into assets/screens/ with these names.
-     A missing file is hidden automatically, so the page never shows a broken image. */
-  const SCREENSHOTS = [
-    { src: 'assets/screens/trace-viewer.png',   title: 'Playwright Trace Viewer', caption: 'TC-04 timeline: the 5.1s wait for .inventory_list' },
-    { src: 'assets/screens/sheets-report.png',  title: 'Live Google Sheets report', caption: '12 rows (4 tests × 3 browsers), each linked to CI run #43747756321' },
-    { src: 'assets/screens/checkout-bug.png',   title: 'TC-03 bug, reproduced live', caption: 'problem_user: typing a last name overwrites First Name, Last Name stays empty' },
-    { src: 'assets/screens/spec-code.png',      title: 'saucedemo.spec.ts', caption: 'Arrange / Act / Assert with the LoginPage page object' },
-  ];
-
-  /* ============================================================
-     4) RENDERING — you shouldn't need to edit below this line.
-  ============================================================ */
-  const $ = (s, el = document) => el.querySelector(s);
-  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-
-  // Links
-  $$('[data-link]').forEach(a => { a.href = LINKS[a.dataset.link]; });
-
-  // Header border + active nav
-  const header = $('.header');
-  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
-  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
-  const navLinks = $$('.nav a');
-  const navObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  ['featured', 'testing', 'projects', 'experience', 'certificates', 'skills', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
-
-  /* ---------- Pipeline + run log ---------- */
-  const check = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg>';
-  $('#pipeline').innerHTML = PIPELINE_STEPS.map((s, i) => `
-    <li class="step" data-step="${i}">
-      <div class="step-top"><span class="step-num">0${i + 1}</span><span class="step-state">${check}</span></div>
-      <div class="step-name">${s.name}</div>
-      <div class="step-desc">${s.desc}</div>
-    </li>`).join('');
-
-  const consoleEl = $('#console');
-  const counterEl = $('#pass-counter');
-  const steps = $$('#pipeline .step');
-  let runToken = 0;
-
-  function setStep(active, finished = false) {
-    steps.forEach((el, i) => {
-      el.classList.toggle('done', finished || i < active);
-      el.classList.toggle('running', !finished && i === active);
-    });
-  }
-
-  async function playRun() {
-    const token = ++runToken;
-    const wait = ms => new Promise(r => setTimeout(r, reduceMotion ? 0 : ms));
-    consoleEl.innerHTML = '';
-    let passed = 0;
-    counterEl.textContent = '0/12';
-    for (const line of LOG) {
-      if (token !== runToken) return;           // a newer replay started
-      setStep(line.step);
-      const div = document.createElement('div');
-      div.className = 'ln';
-      div.innerHTML = line.t;
-      consoleEl.appendChild(div);
-      consoleEl.scrollTop = consoleEl.scrollHeight;
-      if (line.pass) counterEl.textContent = `${++passed}/12`;
-      await wait(line.pass ? 160 : 520);
-    }
-    if (token === runToken) setStep(PIPELINE_STEPS.length, true);
-  }
-
-  $('#replay-btn').addEventListener('click', () => { selectTab('log'); playRun(); });
-
-  // Auto-play once when the featured card scrolls into view
-  const featureObserver = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) { playRun(); featureObserver.disconnect(); }
-  }, { threshold: 0.35 });
-  featureObserver.observe($('.feature'));
-
-  /* ---------- Tabs (arrow-key accessible) ---------- */
-  const tabs = $$('.tab');
-  function selectTab(name) {
-    tabs.forEach(t => {
-      const on = t.id === 'tab-' + name;
-      t.setAttribute('aria-selected', on);
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-    });
-    if (name === 'sheet') renderSheet();
-  }
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => selectTab(t.id.slice(4)));
-    t.addEventListener('keydown', e => {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
-      next.focus(); selectTab(next.id.slice(4));
-    });
-  });
-  selectTab('log');
-
-  /* ---------- Test cases ---------- */
-  $('#tc-list').innerHTML = TESTS.map((tc, i) => `
-    <button class="tc" type="button" data-i="${i}" aria-pressed="${i === 0}">
-      <div class="tc-top"><span style="color:${tc.color}">${tc.id} · ${tc.kind}</span><span class="tag tag-pass" style="padding:2px 8px;font-size:11px">passed</span></div>
-      <div class="tc-title">${esc(tc.title)}</div>
-    </button>`).join('');
-
-  function showTest(i) {
-    const tc = TESTS[i];
-    $$('#tc-list .tc').forEach((b, j) => b.setAttribute('aria-pressed', j === i));
-    $('#tc-detail').innerHTML = `
-      <div class="mono" style="font-size:12px;font-weight:600;color:${tc.color}">${tc.id} · ${esc(tc.module)} Module</div>
-      <h4>${esc(tc.title)}</h4>
-      <p>${esc(tc.summary)}</p>
-      <div class="tc-meta">${tc.meta.map(m => `<span class="chip mono">${esc(m)}</span>`).join('')}<span class="tag tag-pass">3/3 browsers</span></div>
-      <pre class="code"><code>${tc.code}</code></pre>`;
-  }
-  $('#tc-list').addEventListener('click', e => { const b = e.target.closest('.tc'); if (b) showTest(+b.dataset.i); });
-  showTest(0);
-
-  /* ---------- Sheet + matrix ---------- */
-  let sheetRendered = false;
-  function renderSheet() {
-    if (sheetRendered) return; sheetRendered = true;
-    $('#sheet-body').innerHTML = SHEET_ROWS.map(([mod, tc, br, sec], i) => `
-      <tr class="new" style="animation-delay:${i * 90}ms">
-        <td><a href="${LINKS.run}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:underline">#…756321</a></td>
-        <td class="mod">${esc(mod)}</td><td>${esc(tc)}</td><td class="mono">${br}</td>
-        <td class="st">passed</td><td class="num">${sec.toFixed(2)}</td>
-      </tr>`).join('');
-    const browsers = ['chromium', 'firefox', 'webkit'];
-    $('#matrix').innerHTML = '<div></div>' + browsers.map(b => `<div class="hd">${b}</div>`).join('') +
-      TESTS.map(t => `<div class="rh">${t.id}</div>` + browsers.map(() => '<div class="cell" aria-label="passed">✓</div>').join('')).join('');
-  }
-
-  /* ---------- Screenshots (missing files are skipped) ---------- */
-  const gallery = $('#gallery');
-  let shotsLoaded = 0, shotsDone = 0;
-  SCREENSHOTS.forEach(s => {
-    const probe = new Image();
-    probe.onload = () => {
-      shotsLoaded++;
-      const fig = document.createElement('figure');
-      fig.className = 'shot';
-      fig.innerHTML = `<button type="button" aria-label="Enlarge ${esc(s.title)}"><img src="${s.src}" alt="${esc(s.title)}" loading="lazy" /></button>
-        <figcaption><b>${esc(s.title)}</b>${esc(s.caption)}</figcaption>`;
-      fig.querySelector('button').addEventListener('click', () => openLightbox(s));
-      gallery.appendChild(fig);
-      finish();
-    };
-    probe.onerror = finish;
-    probe.src = s.src;
-  });
-  function finish() {
-    if (++shotsDone === SCREENSHOTS.length && shotsLoaded === 0) $('#gallery-empty').hidden = false;
-  }
-
-  const lightbox = $('#lightbox');
-  function openLightbox(s) {
-    $('#lb-img').src = s.src; $('#lb-img').alt = s.title;
-    $('#lb-caption').textContent = `${s.title} · ${s.caption}`;
-    lightbox.showModal();
-  }
-  $('#lb-close').addEventListener('click', () => lightbox.close());
-  lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.close(); });
-
-  /* ---------- Projects + filters ---------- */
-  const GROUP_NOTES = {
-    qa: 'Test automation I built and run',
-    web: 'Web apps & AI prototypes from hackathons',
-    games: 'Unity games, released on itch.io',
-    hw: 'School hardware project',
-  };
-  const cardHTML = (p, i) => {
-    const cat = CATEGORIES[p.category] || { label: p.category, tag: 'tag-gray' };
-    const actions = p.links.length
-      ? `<div class="proj-actions">${p.links.map(l => {
-          const ext = /^https?:/.test(l.href);
-          return `<a class="btn btn-sm ${l.primary ? 'btn-dark' : 'btn-ghost'}" href="${l.href}"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(l.label)}${ext ? ' <span class="arrow">↗</span>' : ' →'}</a>`;
-        }).join('')}</div>`
-      : `<div class="proj-foot"><span>${esc((p.foot || [])[0] || '')}</span><span>${esc((p.foot || [])[1] || '')}</span></div>`;
-    return `
-      <article class="card proj reveal${p.planned ? ' planned' : ''}" data-category="${p.category}" data-delay="${i % 3}">
-        <div class="proj-top">
-          <span class="tag ${p.planned ? 'tag-gray' : cat.tag}">${esc(cat.label)}</span>
-          <span class="vis">${esc(p.visibility)}</span>
+  <section class="section g2" id="work" style="--h: 2" aria-labelledby="work-h">
+    <div class="wrap">
+      <div>
+        <div class="section-head">
+          <h2 id="work-h">Games and web apps I built</h2>
+          <p>Made at game jams, hackathons and school, and released where players could try them.</p>
         </div>
-        ${p.image ? `<div class="proj-thumb"><img src="${p.image}" alt="${esc(p.title)} screenshot" loading="lazy" onerror="this.parentNode.remove()" /></div>` : ''}
-        <h3>${esc(p.title)}</h3>
-        <p>${esc(p.description)}</p>
-        <div class="chips">${p.tags.map(t => `<span class="chip mono">${esc(t)}</span>`).join('')}</div>
-        ${actions}
-      </article>`;
-  };
-  // ★ Display order: test automation first, then award-winning work, other builds,
-  //   bootcamp concepts, and planned work last. Titles not listed go just before concepts.
-  const ORDER = [
-    'Playwright E2E testing framework', 'Prakan (ประกัน)',          // test automation
-    'Z.O.O', 'ECOVEST+',                                             // awards / top results
-    'Try not to chip!', 'Dream Frogs Hunt', 'DICE', 'CENTORIS',      // other games
-    'Obstacle alert for the visually impaired',                     // hardware
-    'JOBSY', 'KonKlang',                                             // bootcamp concepts
-    'REST API and contract testing lab',                            // planned
-  ];
-  const rank = t => { const i = ORDER.indexOf(t); return i === -1 ? ORDER.indexOf('JOBSY') - 0.5 : i; };
-  const sorted = [...PROJECTS].sort((x, y) => rank(x.title) - rank(y.title));
-  const SHOW_FIRST = 6;   // ★ cards visible before "Show all"
-  $('#proj-groups').innerHTML = `<div class="proj-grid collapsed" id="proj-grid">${sorted.map((p, i) => cardHTML(p, i).replace('class="card proj', i >= SHOW_FIRST ? 'class="more card proj' : 'class="card proj')).join('')}</div>
-    <div class="show-all-wrap"><button class="btn btn-ghost" id="show-all" type="button">Show all ${sorted.length} projects</button></div>`;
-  $('#show-all').addEventListener('click', () => { $('#proj-grid').classList.remove('collapsed'); $('#show-all').parentNode.hidden = true; });
+        <div class="grid grid--top">
+          <a class="tile card span-4" href="https://1jjjay.itch.io/zoo" aria-labelledby="tile-4">
+            <div class="tile__media"><img src="assets/projects/zoo-npc.jpg" alt="A villager in Z.O.O answering the player" width="960" height="540" loading="lazy"></div>
+            <div class="tile__head"><h3 id="tile-4">Z.O.O</h3><span class="tile__price">NSC 2025</span></div>
+            <p>A 3D investigation RPG where villagers answer through the ChatGPT API. I led the team.</p>
+          </a>
+          <a class="tile card span-4" href="https://prapathomsit123.itch.io/try-not-to-chip" aria-labelledby="tile-5">
+            <div class="tile__media"><img src="assets/projects/try-not-to-chip-cover.jpg" alt="A potato man running through the crisp factory in Try not to chip!" width="960" height="520" loading="lazy"></div>
+            <div class="tile__head"><h3 id="tile-5">Try not to chip!</h3><span class="tile__price">72 hours</span></div>
+            <p>Steer a potato man out of a crisp factory. Top committer on the team repo, 44 commits.</p>
+          </a>
+          <a class="tile card span-4" href="https://phonlakitz.itch.io/dream-frogs-hunt" aria-labelledby="tile-6">
+            <div class="tile__media"><img src="assets/projects/dream-frogs-hunt-cover.jpg" alt="Frogs and enemy waves in Dream Frogs Hunt" width="960" height="544" loading="lazy"></div>
+            <div class="tile__head"><h3 id="tile-6">Dream Frogs Hunt</h3><span class="tile__price">48 hours</span></div>
+            <p>I wrote the enemy wave spawner. Version two reworked the game from player feedback.</p>
+          </a>
+        </div>
+      </div>
+      <div class="grid grid--top">
+        <a class="tile card span-4" href="https://drive.google.com/file/d/1DYxfeKvCrmWQcWPTIA4-sF4Qcj_UAe97/view?usp=sharing" aria-labelledby="tile-7">
+          <div class="tile__media"><img src="assets/projects/ecovest-game.jpg" alt="The Escape the Paycheck board game inside ECOVEST+" width="1280" height="720" loading="lazy"></div>
+          <div class="tile__head"><h3 id="tile-7">ECOVEST+</h3><span class="tile__price">Top 20 of 300+</span></div>
+          <p>A site for sharing investing knowledge, built in 48 hours. I built the Firebase login and profiles.</p>
+        </a>
+        <a class="tile card span-4" href="https://www.tiktok.com/@alittledeveloper/video/7584871320115006721" aria-labelledby="tile-8">
+          <div class="tile__media"><img src="assets/projects/centoris-cover.jpg" alt="The alien courier on a trap-filled planet in CENTORIS" width="960" height="540" loading="lazy"></div>
+          <div class="tile__head"><h3 id="tile-8">CENTORIS</h3><span class="tile__price">In development</span></div>
+          <p>A 2D platformer: an alien courier carries an energy core across planets full of random traps.</p>
+        </a>
+        <a class="tile tile--more card span-4" href="https://drive.google.com/file/d/1JsHIW1Hc0JSSNOM6OQNpMR0MFNuXbOE1/view?usp=sharing" aria-labelledby="tile-9">
+          <div class="tile__media"><img src="assets/projects/dice-cover.jpg" alt="Letter tiles on a board ringed with fire in DICE" width="960" height="528" loading="lazy"></div>
+          <div class="tile__head"><h3 id="tile-9">DICE</h3><span class="tile__price">Team of two</span></div>
+          <p>Roll across letter tiles to spell the target word. I built the walls, colliders and tiles.</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  const counts = PROJECTS.reduce((m, p) => (m[p.category] = (m[p.category] || 0) + 1, m), {});
-  const filterKeys = ['all', ...Object.keys(CATEGORIES).filter(k => counts[k])];
-  $('#filters').innerHTML = filterKeys.map(k => `
-    <button class="filter" type="button" data-cat="${k}" aria-pressed="${k === 'all'}">
-      ${k === 'all' ? 'All' : esc(CATEGORIES[k].label)}<span class="count">${k === 'all' ? PROJECTS.length : counts[k]}</span>
-    </button>`).join('');
-  $('#filters').addEventListener('click', e => {
-    const b = e.target.closest('.filter'); if (!b) return;
-    const cat = b.dataset.cat;
-    $$('.filter').forEach(f => f.setAttribute('aria-pressed', f === b));
-    if (cat !== 'all') { $('#proj-grid').classList.remove('collapsed'); $('#show-all').parentNode.hidden = true; }
-    $$('.proj').forEach(card => card.classList.toggle('is-hidden', cat !== 'all' && card.dataset.category !== cat));
-  });
+  <section class="section" id="awards" aria-labelledby="awards-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5">
+        <div class="section-head">
+          <h2 id="awards-h">Seven competitions since 2025</h2>
+          <p>Game jams, hackathons and one national contest. Four of them come with a certificate you can open.</p>
+        </div>
+        <ul class="rows">
+          <li><span class="rows__name"><a class="link" href="assets/certs/nsc-2025.jpg">NSC honorable mention, Z.O.O</a></span><span class="rows__value">2025</span></li>
+          <li><span class="rows__name">KMITL Game Jam, top 20 of 300+</span><span class="rows__value">2025</span></li>
+          <li><span class="rows__name">Nuutor Cup, Dream Frogs Hunt</span><span class="rows__value">2025</span></li>
+          <li><span class="rows__name">Biztania Camp finalist, Prakan</span><span class="rows__value">2026</span></li>
+          <li><span class="rows__name"><a class="link" href="assets/certs/jump-thailand-2026.jpg">JUMP Thailand team leader, JOBSY</a></span><span class="rows__value">2026</span></li>
+          <li><span class="rows__name"><a class="link" href="assets/certs/unihack-2026.jpg">UniHack 48-hour hackathon, KonKlang</a></span><span class="rows__value">2026</span></li>
+          <li><span class="rows__name">Hamster Hub GameJam X</span><span class="rows__value">2026</span></li>
+          <li><span class="rows__name"><a class="link" href="https://coursera.org/verify/specialization/EOMJU7TEPI2A">Google Prompting Essentials</a></span><span class="rows__value">2026</span></li>
+        </ul>
+      </div>
+      <figure class="frame frame--photo span-6 start-7" style="margin:0;aspect-ratio:4/3"><img src="assets/certs/nsc-2025.jpg" alt="NSC 2025 honorable mention certificate for Z.O.O, issued by NSTDA and NRCT" width="1600" height="1141" loading="lazy"></figure>
+    </div>
+  </section>
+</main>
 
-  /* ---------- Copy GitHub URL ---------- */
-  $('#copy-btn').addEventListener('click', async e => {
-    const btn = e.currentTarget;
-    const addr = LINKS.email.replace('mailto:', '');
-    try { await navigator.clipboard.writeText(addr); btn.textContent = 'Copied ✓'; }
-    catch { btn.textContent = addr; }
-    setTimeout(() => { btn.textContent = 'Copy email'; }, 2200);
-  });
-
-  /* ---------- Showreel marquee ★ edit these lists to change what scrolls ---------- */
-  const MARQUEE_WEB = [
-    ['assets/screens/trace-viewer.png', 'Playwright trace'],
-    ['assets/screens/sheets-report.png', 'Live test report'],
-    ['assets/projects/prakan-cover.jpg', 'Prakan · Biztania'],
-    ['assets/screens/checkout-bug.png', 'TC-03 bug caught'],
-    ['assets/projects/konklang-flow.jpg', 'KonKlang · UniHack'],
-    ['assets/projects/jobsy-story.jpg', 'JOBSY · JUMP Thailand'],
-    ['assets/projects/ecovest-cover.jpg', 'ECOVEST+ · KMITL'],
-  ];
-  const MARQUEE_GAMES = [
-    ['assets/projects/zoo-cover.jpg', 'Z.O.O · NSC 2025'],
-    ['assets/projects/try-not-to-chip-cover.jpg', 'Try not to chip!'],
-    ['assets/projects/centoris-cover.jpg', 'CENTORIS'],
-    ['assets/projects/dream-frogs-hunt-cover.jpg', 'Dream Frogs Hunt'],
-    ['assets/projects/dice-cover.jpg', 'DICE'],
-    ['assets/projects/try-not-to-chip-unity-test.jpg', 'Testing traps in Unity'],
-  ];
-  // One strip: all QA & Web items first, then all Games.
-  const tiles = items => items.map(([src, label]) => `<div class="mq-item"><img src="${src}" alt="" loading="lazy" /><span>${esc(label)}</span></div>`).join('');
-  const strip = tiles(MARQUEE_WEB) + tiles(MARQUEE_GAMES);   // QA & Web first, then Games
-  $('#mq-all').innerHTML = strip + strip + strip;   // repeated for a seamless loop
-
-  /* ---------- Showreel video: pause button, respects reduced motion ---------- */
-  const reelVideo = $('#reel-video'), reelBtn = $('#reel-toggle');
-  const setReel = play => { play ? reelVideo.play().catch(() => {}) : reelVideo.pause(); reelBtn.textContent = play ? 'Pause' : 'Play'; };
-  if (reduceMotion) setReel(false);
-  // ★ Showreel segments: each clip is 3.3 s, in this order (keep in sync with assets/reel/showreel.mp4)
-  const REEL = ['Z.O.O · NSC 2025', 'Try not to chip!', 'Prakan · Biztania', 'CENTORIS', 'ECOVEST+ · KMITL', 'DICE'];
-  const reelName = $('#reel-name'); let lastSeg = -1;
-  const syncName = () => {
-    const i = Math.min(REEL.length - 1, Math.floor(reelVideo.currentTime / 3.3));
-    if (i !== lastSeg) { lastSeg = i; reelName.style.opacity = 0; setTimeout(() => { reelName.textContent = REEL[i]; reelName.style.opacity = 1; }, 120); }
-    if (!reelVideo.paused) requestAnimationFrame(syncName);
-  };
-  reelVideo.addEventListener('play', () => requestAnimationFrame(syncName));
-  reelVideo.addEventListener('seeked', syncName);
-  reelBtn.addEventListener('click', () => setReel(reelVideo.paused));
-  new IntersectionObserver(([e]) => { if (!reduceMotion && reelBtn.textContent === 'Pause') e.isIntersecting ? reelVideo.play().catch(() => {}) : reelVideo.pause(); }).observe(reelVideo);
-
-  /* ---------- Certificates ★ add new ones here ---------- */
-  const CERTS = [
-    { src: 'assets/certs/nsc-2025.jpg', title: 'NSC 2025 · Honorable Mention', issuer: 'NSTDA & NRCT · 25 Aug 2025 · Z.O.O, entertainment software' },
-    { src: 'assets/certs/jump-thailand-2026.jpg', title: 'JUMP THAILAND Hackathon 2026', issuer: 'Central Regional Bootcamp · AIS Academy · 15 Aug 2026' },
-    { src: 'assets/certs/unihack-2026.jpg', title: 'UniHack 2026 · Certificate of Appreciation', issuer: 'Chula Tech Startup & CSII · 48-hour hackathon · Aug 2026' },
-    { src: 'assets/certs/google-prompting-essentials.jpg', title: 'Google Prompting Essentials', issuer: 'Google · Coursera specialization (4 courses) · 26 Aug 2026', verify: 'https://coursera.org/verify/specialization/EOMJU7TEPI2A' },
-  ];
-  $('#cert-grid').innerHTML = CERTS.map((c, i) => `
-    <article class="card cert reveal" data-delay="${i % 4}">
-      <button type="button" data-cert="${i}" aria-label="Enlarge ${esc(c.title)}"><img src="${c.src}" alt="${esc(c.title)}" loading="lazy" /></button>
-      <h3>${esc(c.title)}</h3>
-      <p>${esc(c.issuer)}</p>
-      ${c.verify ? `<a href="${c.verify}" target="_blank" rel="noopener noreferrer">Verify on Coursera ↗</a>` : ''}
-    </article>`).join('');
-  $('#cert-grid').addEventListener('click', e => { const b = e.target.closest('[data-cert]'); if (!b) return; const c = CERTS[+b.dataset.cert]; openLightbox({ src: c.src, title: c.title, caption: c.issuer }); });
-
-  /* ---------- Journey ★ edit milestones here ---------- */
-  const JOURNEY = [
-    { stage: 'School' },
-    { yr: '2024', ico: '🥈', title: 'Where it started', sub: 'School projects: silver medal (district) and Popular Vote at Sarasas PBL' },
-    { stage: 'Games' },
-    { yr: '2025', ico: '🏅', title: 'NSC 2025 award', sub: 'Honorable Mention for Z.O.O, ChatGPT-powered NPCs' },
-    { yr: '2025', ico: '🐸', title: 'Nuutor Cup', sub: 'Dream Frogs Hunt in 48 hours' },
-    { yr: '2025', ico: '🚀', title: 'KMITL Game Jam', sub: 'Top 20 of 300+ with ECOVEST+' },
-    { yr: '2026', ico: '🥔', title: 'GameJam X', sub: 'Try not to chip! in 72 hours' },
-    { stage: 'Web & AI' },
-    { yr: '2026', ico: '🎓', title: 'Started CEDT', sub: 'Chulalongkorn University' },
-    { yr: 'AUG 2026', ico: '🧭', title: 'JUMP Thailand', sub: 'Team leader, JOBSY' },
-    { yr: 'AUG 2026', ico: '📦', title: 'UniHack 2026', sub: 'KonKlang, 48-hour hackathon' },
-    { yr: 'OCT 2026', ico: '✅', title: 'Biztania finalist', sub: 'Prakan, 80 automated tests' },
-    { stage: 'QA' },
-    { yr: 'NOV 2026', ico: '🧪', title: 'Playwright E2E + CI', sub: '12/12 runs across 3 browsers' },
-    { yr: 'NEXT', ico: '🎯', title: 'QA Automation internship', sub: 'Looking for a team to join', next: true },
-  ];
-  (function journey() {
-    const track = $('#j-track'), trail = $('#j-trail'), ship = $('#j-ship'), prog = $('#j-progress'), sec = $('#journey');
-    const GAP = 270, msItems = JOURNEY.filter(j => !j.stage);
-    let x = 0, side = 0, html = '';
-    JOURNEY.forEach(j => {
-      if (j.stage) { html += `<div class="j-stage" style="left:${x + 150}px">${esc(j.stage)}</div>`; x += 60; return; }
-      x += GAP; j.x = x; side ^= 1;
-      html += `<div class="j-ms ${side ? 'up' : 'down'}${j.next ? ' next' : ''}" style="left:${x}px"><span class="node"></span><span class="tick"></span><div class="body"><span class="ico">${j.ico}</span><span class="yr">${esc(j.yr)}</span><h4>${esc(j.title)}</h4><p>${esc(j.sub)}</p></div></div>`;
-    });
-    track.innerHTML = html; track.style.width = (x + 400) + 'px';
-    const nodes = $$('.j-ms', track);
-    $('#j-list').innerHTML = JOURNEY.map(j => j.stage ? `<li class="stage">${esc(j.stage)}</li>` : `<li><span class="yr">${esc(j.yr)}</span><h4>${j.ico} ${esc(j.title)}</h4><p>${esc(j.sub)}</p></li>`).join('');
-    const pinned = () => window.matchMedia('(min-width: 821px)').matches && !reduceMotion;
-    let shipX = 0, startX = 0, endX = 0;
-    const layout = () => {
-      if (!pinned()) { sec.style.height = ''; return; }
-      shipX = Math.round(innerWidth * 0.36);
-      startX = shipX + 220;                         // first milestone starts to the right of the ship
-      endX = msItems[msItems.length - 1].x - shipX + 40;
-      sec.style.height = (innerHeight + (endX + startX) * 0.5) + 'px';
-      ship.style.left = shipX + 'px'; trail.style.width = shipX + 'px';
-      update();
-    };
-    const update = () => {
-      if (!pinned()) return;
-      const r = sec.getBoundingClientRect(), total = sec.offsetHeight - innerHeight;
-      const p = Math.min(1, Math.max(0, -r.top / total));
-      const tx = startX - p * (startX + endX);
-      track.style.transform = `translateX(${tx}px)`;
-      let passed = 0;
-      nodes.forEach((n, i) => { const on = msItems[i].x + tx <= shipX + 2; n.classList.toggle('on', on); if (on) passed++; });
-      prog.innerHTML = `<b>${String(passed).padStart(2, '0')}</b> / ${String(msItems.length).padStart(2, '0')} milestones · keep scrolling`;
-    };
-    let ticking = false;
-    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); } }, { passive: true });
-    addEventListener('resize', layout);
-    layout();
-  })();
-
-  /* ---------- Big outlined numbers on competition cards ---------- */
-  $$('#experience .exp').forEach((card, i) => card.insertAdjacentHTML('beforeend', `<span class="exp-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>`));
-
-  /* ---------- Count-up for hero metrics ---------- */
-  const countUp = el => {
-    const m = el.textContent.trim().match(/^(\d+)(\/(\d+))?$/); if (!m || reduceMotion) return;
-    const end = +m[1], tail = m[2] || '', t0 = performance.now(), dur = 1100;
-    const tick = now => { const k = Math.min(1, (now - t0) / dur), v = Math.round(end * (1 - Math.pow(1 - k, 3))); el.textContent = v + tail; if (k < 1) requestAnimationFrame(tick); };
-    requestAnimationFrame(tick);
-  };
-  const metricObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { countUp(e.target); metricObs.unobserve(e.target); } }), { threshold: .6 });
-  $$('.metric-num').forEach(el => metricObs.observe(el));
-
-  /* ---------- 3D hover tilt (mouse/trackpad only, not touch) ---------- */
-  if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const MAX = 5;
-    $$('.proj:not(.planned), .cert, .ev, .gd, .exp').forEach(card => {
-      card.classList.add('tilt');
-      card.addEventListener('pointerenter', () => { card.style.transitionDelay = '0s'; });
-      card.addEventListener('pointermove', e => {
-        const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-        card.classList.add('tilting');
-        card.style.transform = `perspective(900px) rotateX(${(0.5 - y) * MAX}deg) rotateY(${(x - 0.5) * MAX}deg) translateY(-3px)`;
-        card.style.setProperty('--mx', `${x * 100}%`); card.style.setProperty('--my', `${y * 100}%`);
-      });
-      card.addEventListener('pointerleave', () => { card.classList.remove('tilting'); card.style.transform = ''; });
-    });
-  }
-
-  /* ---------- Scroll reveal ---------- */
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  $$('.reveal').forEach(el => revealObserver.observe(el));
-  </script>
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head"><h2 id="close-h">Email me about a QA internship</h2><p class="t-small muted">prapathomsit.work@gmail.com · <a class="link" href="tel:+66952981238">095-298-1238</a></p></div>
+      <a class="btn btn--primary btn--xl" href="mailto:prapathomsit.work@gmail.com">Email me<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-5">
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Prapathomsit</a>
+          <p class="footer__lede">QA automation, Year 1 CEDT.</p>
+        </div>
+        <div class="span-2 start-7 footer__col"><h3>Testing</h3><ul><li><a href="#pipeline">Pipeline</a></li><li><a href="#tests">Tests</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href="#work">Work</a></li><li><a href="#awards">Awards</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Elsewhere</h3><ul><li><a href="https://github.com/Prapathomsit">GitHub</a></li><li><a href="https://prapathomsit123.itch.io/">itch.io</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Prapathomsit Attapakkanon</span>
+        <span>Product names and logos are trademarks of their owners</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
 </body>
 </html>
