@@ -38,9 +38,23 @@
 .tools { display: flex; flex-wrap: wrap; gap: var(--s-5); align-items: center; margin-top: var(--s-6); }
 .tools img { height: 32px; width: auto; }
 .links-row { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-6); margin-top: var(--s-5); }
-/* Work: six tiles two-up below 1024 so the section stays two screens; the phone keeps the names and the facts */
-@media (max-width: 1023px) { #work .grid > .tile { grid-column: span 6; --tile-ratio: 16 / 9; } }
-@media (max-width: 639px) { #work .grid > .tile, #other-tests .grid > .tile { grid-column: 1 / -1; } #work .grid > .tile > p { display: none; } #work .tile--more { display: none; } }
+/* Owner's call over the kit's one-section-per-screen rule: content sections are as tall as their content, with one
+   even gap between them. The hero and the two moments keep their screen heights (their motion needs the scroll room). */
+main > section.section:not([data-moment]), main > section#approach { height: auto; min-height: 0; padding-block: var(--s-9) var(--s-9); }
+main > section.section:not([data-moment="pinned-chapters"]) + section.section:not([data-moment="pinned-chapters"]) { padding-top: 0; }
+@media (max-width: 639px) { main > section.section:not([data-moment]) { padding-block: var(--s-8); } }
+/* project cards: clip or picture, name, one line, links pinned to the card's foot; one height per row */
+.grid > .tile.card { height: 100%; grid-template-rows: auto auto 1fr auto; align-content: stretch; }
+.tile__media { --tile-ratio: 16 / 9; }
+.tile__media > video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card > .tile__links { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin: auto 0 0; padding-top: var(--s-2); font-size: var(--t-small); }
+.clip__toggle { position: absolute; right: var(--s-3); bottom: var(--s-3); width: 32px; height: 32px; border: 0; border-radius: 50%; display: grid; place-items: center; background: color-mix(in oklab, var(--p-ink) 72%, transparent); color: var(--p-bg); cursor: pointer; }
+.clip__toggle svg { width: 12px; height: 12px; fill: currentColor; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.clip__toggle .i-play, .clip__toggle[aria-pressed="true"] .i-pause { display: none; }
+.clip__toggle[aria-pressed="true"] .i-play { display: inline; }
+.clip__toggle .i-pause { fill: none; }
+@media (max-width: 1023px) { #work .grid > .tile, #other-tests .grid > .tile { grid-column: span 6; } }
+@media (max-width: 639px) { #work .grid > .tile, #other-tests .grid > .tile { grid-column: 1 / -1; } }
 </style>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
@@ -143,28 +157,31 @@
     </div>
   </section>
 
-  <section class="section" id="other-tests" style="--hm: 2" aria-labelledby="other-h">
+  <section class="section" id="other-tests" aria-labelledby="other-h">
     <div class="wrap">
       <div class="section-head">
         <h2 id="other-h">Prakan, Unity and ESP32 tests</h2>
         <p>Three projects outside the SauceDemo suite, each tested the way its subject needed.</p>
       </div>
       <div class="grid grid--top">
-        <a class="tile card span-4" href="https://github.com/Prapathomsit/promptyuen-demo" aria-labelledby="tile-1">
-          <div class="tile__media"><img src="assets/projects/prakan-cover.jpg" alt="The Prakan incident-report app on a phone" width="960" height="540" loading="lazy"></div>
-          <div class="tile__head"><h3 id="tile-1">Prakan: 80 of 80 pass</h3></div>
-          <p>Node's test runner checks that made-up AI output fails closed and that no ID or address reaches the model.</p>
-        </a>
-        <a class="tile card span-4" href="https://prapathomsit123.itch.io/try-not-to-chip" aria-labelledby="tile-2">
-          <div class="tile__media"><img src="assets/projects/try-not-to-chip-unity-test.jpg" alt="A fire-grill trap in a Unity test scene for Try not to chip!" width="960" height="520" loading="lazy"></div>
-          <div class="tile__head"><h3 id="tile-2">Unity test scenes per trap</h3></div>
-          <p>Player Test and Trap test scenes check each mechanic alone before it joins the main level.</p>
-        </a>
-        <a class="tile card span-4" href="#awards" aria-labelledby="tile-3">
-          <div class="tile__media"><img src="assets/projects/obstacle-alert-soldering.jpg" alt="Soldering the ESP32 obstacle alert for visually impaired people" width="960" height="538" loading="lazy"></div>
-          <div class="tile__head"><h3 id="tile-3">Obstacle alert: 3:02 to 2:36</h3></div>
-          <p>Our team measured detection from 25 to 100 cm, then timed a blindfolded walk with and without the device.</p>
-        </a>
+          <article class="tile card span-4" aria-labelledby="tile-1">
+            <div class="tile__media"><img src="assets/projects/prakan-cover.jpg" alt="The Prakan incident-report app on a phone" width="960" height="540" loading="lazy"></div>
+            <div class="tile__head"><h3 id="tile-1">Prakan: 80 of 80 pass</h3></div>
+            <p>Node's test runner checks that made-up AI output fails closed and that no ID or address reaches the model.</p>
+            <p class="tile__links"><a class="link" href="https://prapathomsit.github.io/promptyuen-demo/">Try the demo</a><a class="link" href="https://drive.google.com/file/d/19doSmxStgcnPgK3hnkh7f9miK41wFzp3/view?usp=sharing">Watch the pitch</a><a class="link" href="https://github.com/Prapathomsit/promptyuen-demo">Read the tests</a></p>
+          </article>
+          <article class="tile card span-4" aria-labelledby="tile-2">
+            <div class="tile__media"><img src="assets/projects/try-not-to-chip-unity-test.jpg" alt="A fire-grill trap in a Unity test scene for Try not to chip!" width="960" height="520" loading="lazy"></div>
+            <div class="tile__head"><h3 id="tile-2">Unity test scenes per trap</h3></div>
+            <p>Player Test and Trap test scenes check each mechanic alone before it joins the main level.</p>
+            <p class="tile__links"><a class="link" href="https://prapathomsit123.itch.io/try-not-to-chip">Play on itch.io</a></p>
+          </article>
+          <article class="tile card span-4" aria-labelledby="tile-3">
+            <div class="tile__media"><img src="assets/projects/obstacle-alert-soldering.jpg" alt="Soldering the ESP32 obstacle alert for visually impaired people" width="960" height="538" loading="lazy"></div>
+            <div class="tile__head"><h3 id="tile-3">Obstacle alert: 3:02 to 2:36</h3></div>
+            <p>Our team measured detection from 25 to 100 cm, then timed a blindfolded walk with and without the device.</p>
+            <p class="tile__links"></p>
+          </article>
       </div>
     </div>
   </section>
@@ -177,47 +194,49 @@
     </div>
   </section>
 
-  <section class="section g2" id="work" style="--h: 2" aria-labelledby="work-h">
+  <section class="section" id="work" aria-labelledby="work-h">
     <div class="wrap">
-      <div>
-        <div class="section-head">
-          <h2 id="work-h">Games and web apps I built</h2>
-          <p>Made at game jams, hackathons and school, and released where players could try them.</p>
-        </div>
-        <div class="grid grid--top">
-          <a class="tile card span-4" href="https://1jjjay.itch.io/zoo" aria-labelledby="tile-4">
-            <div class="tile__media"><img src="assets/projects/zoo-npc.jpg" alt="A villager in Z.O.O answering the player" width="960" height="540" loading="lazy"></div>
-            <div class="tile__head"><h3 id="tile-4">Z.O.O</h3><span class="tile__price">NSC 2025</span></div>
-            <p>A 3D investigation RPG where villagers answer through the ChatGPT API. I led the team.</p>
-          </a>
-          <a class="tile card span-4" href="https://prapathomsit123.itch.io/try-not-to-chip" aria-labelledby="tile-5">
-            <div class="tile__media"><img src="assets/projects/try-not-to-chip-cover.jpg" alt="A potato man running through the crisp factory in Try not to chip!" width="960" height="520" loading="lazy"></div>
-            <div class="tile__head"><h3 id="tile-5">Try not to chip!</h3><span class="tile__price">72 hours</span></div>
-            <p>Steer a potato man out of a crisp factory. Top committer on the team repo, 44 commits.</p>
-          </a>
-          <a class="tile card span-4" href="https://phonlakitz.itch.io/dream-frogs-hunt" aria-labelledby="tile-6">
-            <div class="tile__media"><img src="assets/projects/dream-frogs-hunt-cover.jpg" alt="Frogs and enemy waves in Dream Frogs Hunt" width="960" height="544" loading="lazy"></div>
-            <div class="tile__head"><h3 id="tile-6">Dream Frogs Hunt</h3><span class="tile__price">48 hours</span></div>
-            <p>I wrote the enemy wave spawner. Version two reworked the game from player feedback.</p>
-          </a>
-        </div>
+      <div class="section-head">
+        <h2 id="work-h">Games and web apps I built</h2>
+        <p>Made at game jams, hackathons and school. The clips are real gameplay; each card links to the full video or a build you can play.</p>
       </div>
       <div class="grid grid--top">
-        <a class="tile card span-4" href="https://drive.google.com/file/d/1DYxfeKvCrmWQcWPTIA4-sF4Qcj_UAe97/view?usp=sharing" aria-labelledby="tile-7">
-          <div class="tile__media"><img src="assets/projects/ecovest-game.jpg" alt="The Escape the Paycheck board game inside ECOVEST+" width="1280" height="720" loading="lazy"></div>
-          <div class="tile__head"><h3 id="tile-7">ECOVEST+</h3><span class="tile__price">Top 20 of 300+</span></div>
-          <p>A site for sharing investing knowledge, built in 48 hours. I built the Firebase login and profiles.</p>
-        </a>
-        <a class="tile card span-4" href="https://www.tiktok.com/@alittledeveloper/video/7584871320115006721" aria-labelledby="tile-8">
-          <div class="tile__media"><img src="assets/projects/centoris-cover.jpg" alt="The alien courier on a trap-filled planet in CENTORIS" width="960" height="540" loading="lazy"></div>
-          <div class="tile__head"><h3 id="tile-8">CENTORIS</h3><span class="tile__price">In development</span></div>
-          <p>A 2D platformer: an alien courier carries an energy core across planets full of random traps.</p>
-        </a>
-        <a class="tile tile--more card span-4" href="https://drive.google.com/file/d/1JsHIW1Hc0JSSNOM6OQNpMR0MFNuXbOE1/view?usp=sharing" aria-labelledby="tile-9">
-          <div class="tile__media"><img src="assets/projects/dice-cover.jpg" alt="Letter tiles on a board ringed with fire in DICE" width="960" height="528" loading="lazy"></div>
-          <div class="tile__head"><h3 id="tile-9">DICE</h3><span class="tile__price">Team of two</span></div>
-          <p>Roll across letter tiles to spell the target word. I built the walls, colliders and tiles.</p>
-        </a>
+          <article class="tile card span-4" aria-labelledby="tile-4">
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/zoo.jpg" aria-label="Z.O.O gameplay: walking through the 3D village"><source src="assets/clips/zoo.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__head"><h3 id="tile-4">Z.O.O</h3><span class="tile__price">NSC 2025</span></div>
+            <p>A 3D investigation RPG where villagers answer through the ChatGPT API. I led the team.</p>
+            <p class="tile__links"><a class="link" href="https://1jjjay.itch.io/zoo">Play on itch.io</a><a class="link" href="https://www.tiktok.com/@alittledeveloper/video/7584868611110571281">Watch gameplay</a></p>
+          </article>
+          <article class="tile card span-4" aria-labelledby="tile-5">
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/chip.jpg" aria-label="Try not to chip! gameplay: the potato man running along the factory conveyor"><source src="assets/clips/chip.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__head"><h3 id="tile-5">Try not to chip!</h3><span class="tile__price">72 hours</span></div>
+            <p>Steer a potato man out of a crisp factory. Top committer on the team repo, 44 commits.</p>
+            <p class="tile__links"><a class="link" href="https://prapathomsit123.itch.io/try-not-to-chip">Play on itch.io</a><a class="link" href="https://www.tiktok.com/@alittledeveloper/video/7633425075022187777">Watch gameplay</a></p>
+          </article>
+          <article class="tile card span-4" aria-labelledby="tile-6">
+            <div class="tile__media"><img src="assets/projects/dream-frogs-hunt-cover.jpg" alt="The Dream Frogs Hunt title screen" width="960" height="544" loading="lazy"></div>
+            <div class="tile__head"><h3 id="tile-6">Dream Frogs Hunt</h3><span class="tile__price">48 hours</span></div>
+            <p>I wrote the enemy wave spawner. Version two reworked the game from player feedback.</p>
+            <p class="tile__links"><a class="link" href="https://phonlakitz.itch.io/dream-frogs-hunt">Play on itch.io</a></p>
+          </article>
+          <article class="tile card span-4" aria-labelledby="tile-7">
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/ecovest.jpg" aria-label="ECOVEST+ demo: rolling the dice in the Escape the Paycheck board game"><source src="assets/clips/ecovest.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__head"><h3 id="tile-7">ECOVEST+</h3><span class="tile__price">Top 20 of 300+</span></div>
+            <p>A site for sharing investing knowledge, built in 48 hours. I built the Firebase login and profiles.</p>
+            <p class="tile__links"><a class="link" href="https://drive.google.com/file/d/1DYxfeKvCrmWQcWPTIA4-sF4Qcj_UAe97/view?usp=sharing">Watch the demo</a></p>
+          </article>
+          <article class="tile card span-4" aria-labelledby="tile-8">
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/centoris.jpg" aria-label="CENTORIS gameplay: the alien courier crossing a planet"><source src="assets/clips/centoris.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__head"><h3 id="tile-8">CENTORIS</h3><span class="tile__price">In development</span></div>
+            <p>A 2D platformer: an alien courier carries an energy core across planets full of random traps.</p>
+            <p class="tile__links"><a class="link" href="https://www.tiktok.com/@alittledeveloper/video/7584871320115006721">Watch gameplay</a></p>
+          </article>
+          <article class="tile card span-4" aria-labelledby="tile-9">
+            <div class="tile__media"><video class="clip" muted loop playsinline preload="none" poster="assets/clips/dice.jpg" aria-label="DICE gameplay: spelling a word across the letter board"><source src="assets/clips/dice.mp4" type="video/mp4"></video><button class="clip__toggle" type="button" aria-label="Pause preview" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path class="i-pause" d="M3.5 2.5v7M8.5 2.5v7"/><path class="i-play" d="M3.5 2.2v7.6L9.8 6z"/></svg></button></div>
+            <div class="tile__head"><h3 id="tile-9">DICE</h3><span class="tile__price">Team of two</span></div>
+            <p>Roll across letter tiles to spell the target word. I built the walls, colliders and tiles.</p>
+            <p class="tile__links"><a class="link" href="https://drive.google.com/file/d/1JsHIW1Hc0JSSNOM6OQNpMR0MFNuXbOE1/view?usp=sharing">Watch gameplay</a></p>
+          </article>
       </div>
     </div>
   </section>
@@ -268,6 +287,33 @@
     </div>
   </div>
 </footer>
+<script>
+/* Project preview clips: a clip plays only while most of its card is on screen, and never under reduced motion.
+   Each has a pause button (loops longer than five seconds need one), and a paused clip stays paused. */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clips = [...document.querySelectorAll('video.clip')];
+  if (reduce || !clips.length || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    for (const e of entries) {
+      const v = e.target;
+      if (e.isIntersecting && !v.dataset.userPaused) { v.preload = 'auto'; v.play().catch(() => {}); }
+      else v.pause();
+    }
+  }, { threshold: 0.6 });
+  for (const v of clips) {
+    const btn = v.parentElement.querySelector('.clip__toggle');
+    btn.hidden = false;
+    btn.addEventListener('click', () => {
+      const paused = !v.dataset.userPaused;
+      if (paused) { v.dataset.userPaused = '1'; v.pause(); } else { delete v.dataset.userPaused; v.play().catch(() => {}); }
+      btn.setAttribute('aria-pressed', String(paused));
+      btn.setAttribute('aria-label', paused ? 'Play preview' : 'Pause preview');
+    });
+    io.observe(v);
+  }
+})();
+</script>
 <script type="module" src="assets/system.js"></script>
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>
