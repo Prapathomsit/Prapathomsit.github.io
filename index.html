@@ -1601,9 +1601,18 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
         ${actions}
       </article>`;
   };
-  // One combined grid, ordered QA → Web & AI → Games → Hardware, planned work last.
-  const order = Object.keys(CATEGORIES);
-  const sorted = [...PROJECTS].sort((x, y) => (!!x.planned - !!y.planned) || (order.indexOf(x.category) - order.indexOf(y.category)));
+  // ★ Display order: test automation first, then award-winning work, other builds,
+  //   bootcamp concepts, and planned work last. Titles not listed go just before concepts.
+  const ORDER = [
+    'Playwright E2E Testing Framework', 'Prakan (ประกัน)',          // test automation
+    'Z.O.O', 'ECOVEST+',                                             // awards / top results
+    'Try not to chip!', 'Dream Frogs Hunt', 'DICE', 'CENTORIS',      // other games
+    'Obstacle alert for the visually impaired',                     // hardware
+    'JOBSY', 'KonKlang',                                             // bootcamp concepts
+    'REST API & Contract Testing Lab',                              // planned
+  ];
+  const rank = t => { const i = ORDER.indexOf(t); return i === -1 ? ORDER.indexOf('JOBSY') - 0.5 : i; };
+  const sorted = [...PROJECTS].sort((x, y) => rank(x.title) - rank(y.title));
   $('#proj-groups').innerHTML = `<div class="proj-grid">${sorted.map(cardHTML).join('')}</div>`;
 
   const counts = PROJECTS.reduce((m, p) => (m[p.category] = (m[p.category] || 0) + 1, m), {});
