@@ -415,11 +415,11 @@
     .reel-toggle { position: absolute; right: 12px; bottom: 12px; border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 600; background: rgba(255, 255, 255, .9); color: #0F172A; }
 
     .marquee { overflow: hidden; margin-top: 18px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-    .reel-grid + .marquee { margin-top: 56px; }
+    .reel-grid + .mq-label { margin-top: 64px; }
     .marquee-track { display: flex; gap: 14px; width: max-content; animation: mq 48s linear infinite; }
     .marquee.rev .marquee-track { animation-direction: reverse; animation-duration: 38s; }
     .marquee:hover .marquee-track { animation-play-state: paused; }
-    @keyframes mq { to { transform: translateX(-50%); } }
+    @keyframes mq { to { transform: translateX(-33.3333%); } }
     .mq-item { position: relative; width: 280px; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .1); flex: none; background: #111827; }
     .mq-item img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .6s var(--ease); }
     .mq-item:hover img { transform: scale(1.06); }
@@ -441,6 +441,18 @@
       .marquee-track { animation: none; }
       .js .split .w > span { transform: none; }
     }
+
+    /* ---------- grouped marquee + project groups ---------- */
+    .mq-label { display: flex; align-items: center; gap: 10px; margin: 40px 0 0; font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #CBD5E1; }
+    .mq-label i { width: 8px; height: 8px; border-radius: 50%; }
+    .mq-label + .marquee { margin-top: 14px; }
+    .proj-group + .proj-group { margin-top: 56px; }
+    .proj-group-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .proj-group-head h3 { margin: 0; font-family: var(--font-display); font-size: 22px; letter-spacing: -.01em; }
+    .proj-group-head .count { font-family: var(--font-mono); font-size: 12px; color: var(--subtle); }
+    .proj-group-head p { margin: 0 0 0 auto; font-size: 13px; color: var(--subtle); text-align: right; }
+    .proj-group.is-hidden { display: none; }
+    @media (max-width: 640px) { .proj-group-head { flex-wrap: wrap; } .proj-group-head p { margin: 0; text-align: left; width: 100%; } }
 
     /* ---------- certificates ---------- */
     .cert-grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
@@ -591,8 +603,10 @@
           <button class="reel-toggle" id="reel-toggle" type="button">Pause</button>
         </figure>
       </div>
-      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq-images"></div></div>
-      <div class="marquee rev" aria-hidden="true"><div class="marquee-track" id="mq-words"></div></div>
+      <div class="wrap mq-label"><i style="background:#34D399"></i> QA &amp; Web projects</div>
+      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq-web"></div></div>
+      <div class="wrap mq-label"><i style="background:#FB923C"></i> Games</div>
+      <div class="marquee rev" aria-hidden="true"><div class="marquee-track" id="mq-games"></div></div>
     </section>
 
     <!-- ==========================================================
@@ -811,7 +825,7 @@
           </div>
           <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
         </div>
-        <div class="proj-grid" id="proj-grid"></div>
+        <div id="proj-groups"></div>
       </div>
     </section>
 
@@ -1455,8 +1469,13 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
   lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.close(); });
 
   /* ---------- Projects + filters ---------- */
-  const grid = $('#proj-grid');
-  grid.innerHTML = PROJECTS.map((p, i) => {
+  const GROUP_NOTES = {
+    qa: 'Test automation I built and run',
+    web: 'Web apps & AI prototypes from hackathons',
+    games: 'Unity games, released on itch.io',
+    hw: 'School hardware project',
+  };
+  const cardHTML = (p, i) => {
     const cat = CATEGORIES[p.category] || { label: p.category, tag: 'tag-gray' };
     const actions = p.links.length
       ? `<div class="proj-actions">${p.links.map(l => {
@@ -1476,6 +1495,13 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
         <div class="chips">${p.tags.map(t => `<span class="chip mono">${esc(t)}</span>`).join('')}</div>
         ${actions}
       </article>`;
+  };
+  $('#proj-groups').innerHTML = Object.keys(CATEGORIES).map(k => {
+    const items = PROJECTS.filter(p => p.category === k); if (!items.length) return '';
+    return `<div class="proj-group" data-category="${k}">
+      <div class="proj-group-head reveal"><h3>${esc(CATEGORIES[k].label)}</h3><span class="count">${items.length}</span><p>${esc(GROUP_NOTES[k] || '')}</p></div>
+      <div class="proj-grid">${items.map(cardHTML).join('')}</div>
+    </div>`;
   }).join('');
 
   const counts = PROJECTS.reduce((m, p) => (m[p.category] = (m[p.category] || 0) + 1, m), {});
@@ -1488,7 +1514,7 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
     const b = e.target.closest('.filter'); if (!b) return;
     const cat = b.dataset.cat;
     $$('.filter').forEach(f => f.setAttribute('aria-pressed', f === b));
-    $$('.proj').forEach(card => card.classList.toggle('is-hidden', cat !== 'all' && card.dataset.category !== cat));
+    $$('.proj-group').forEach(g => g.classList.toggle('is-hidden', cat !== 'all' && g.dataset.category !== cat));
   });
 
   /* ---------- Copy GitHub URL ---------- */
@@ -1501,23 +1527,25 @@ console.<span class="f">log</span>(<span class="s">\`⏱️ performance_glitch_u
   });
 
   /* ---------- Showreel marquee ★ edit these lists to change what scrolls ---------- */
-  const MARQUEE_IMAGES = [
+  const MARQUEE_WEB = [
     ['assets/screens/trace-viewer.png', 'Playwright trace'],
-    ['assets/projects/zoo-cover.jpg', 'Z.O.O · NSC 2025'],
     ['assets/screens/sheets-report.png', 'Live test report'],
-    ['assets/projects/try-not-to-chip-cover.jpg', 'Try not to chip!'],
     ['assets/projects/prakan-cover.jpg', 'Prakan · Biztania'],
-    ['assets/projects/centoris-cover.jpg', 'CENTORIS'],
     ['assets/screens/checkout-bug.png', 'TC-03 bug caught'],
-    ['assets/projects/dream-frogs-hunt-cover.jpg', 'Dream Frogs Hunt'],
     ['assets/projects/konklang-flow.jpg', 'KonKlang · UniHack'],
     ['assets/projects/jobsy-story.jpg', 'JOBSY · JUMP Thailand'],
     ['assets/projects/ecovest-mockup.jpg', 'ECOVEST+ · KMITL'],
   ];
-  const MARQUEE_WORDS = ['Playwright', 'NSC 2025', 'TypeScript', '80/80 tests', 'GitHub Actions', 'Unity · C#', 'Negative testing', 'Biztania finalist', 'Page Object Model', 'Top 20 / 300+'];
-  const fill = (el, html) => { el.innerHTML = html + html; };   // doubled for a seamless loop
-  fill($('#mq-images'), MARQUEE_IMAGES.map(([src, label]) => `<div class="mq-item"><img src="${src}" alt="" loading="lazy" /><span>${esc(label)}</span></div>`).join(''));
-  fill($('#mq-words'), MARQUEE_WORDS.map((w, i) => `<span class="mq-chip${i % 2 ? ' o' : ''}">${esc(w)}</span>`).join(''));
+  const MARQUEE_GAMES = [
+    ['assets/projects/zoo-cover.jpg', 'Z.O.O · NSC 2025'],
+    ['assets/projects/try-not-to-chip-cover.jpg', 'Try not to chip!'],
+    ['assets/projects/centoris-cover.jpg', 'CENTORIS'],
+    ['assets/projects/dream-frogs-hunt-cover.jpg', 'Dream Frogs Hunt'],
+    ['assets/projects/try-not-to-chip-unity-test.jpg', 'Testing traps in Unity'],
+  ];
+  const fill = (el, items) => { const html = items.map(([src, label]) => `<div class="mq-item"><img src="${src}" alt="" loading="lazy" /><span>${esc(label)}</span></div>`).join(''); el.innerHTML = html + html + html; };   // repeated for a seamless loop
+  fill($('#mq-web'), MARQUEE_WEB);
+  fill($('#mq-games'), MARQUEE_GAMES);
 
   /* ---------- Showreel video: pause button, respects reduced motion ---------- */
   const reelVideo = $('#reel-video'), reelBtn = $('#reel-toggle');
